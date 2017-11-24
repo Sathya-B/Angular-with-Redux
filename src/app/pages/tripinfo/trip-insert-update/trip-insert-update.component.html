@@ -1,0 +1,153 @@
+<div class="">
+
+  <form #f="ngForm">
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label> Load Date</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="loadDate" #dp="bsDatepicker" bsDatepicker [(ngModel)]="tripData.loadDate" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label> Vehicle Number</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="vehicleNo" autocomplete="off" [typeahead]="vehicleData" [(ngModel)]="tripData.vehicleNo" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-12">
+        <label>Location:</label>
+      </span>
+      <span class="col-sm-3">
+        <label> Pickup place: </label>
+      </span>
+
+      <span class="col-sm-3">
+        <input type="text" name="locationFrom" [typeahead]="cityLocation" [(ngModel)]="tripData.location.from" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label> Drop place: </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="locationTo" [typeahead]="cityLocation" [(ngModel)]="tripData.location.to" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label> Thaluka: </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="thaluka" [typeahead]="cityLocation" [(ngModel)]="tripData.location.thaluka" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label> Vendor Name: </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" autocomplete="off" name="vendorName" [typeahead]="vendorData" [(ngModel)]="tripData.vendorName" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <div class="col-sm-12">
+        <label>Payment: </label>
+      </div>
+      <span class="col-sm-3">
+        <label> Ton: </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="number" name="ton" step="00.001" [(ngModel)]="tripData.ton" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label> Rate: </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="number" name="rate" class="form-control" [(ngModel)]="tripData.rate">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label> Total Amount: </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="number" name="totalAmt" class="form-control" [(ngModel)]="tripData.totalAmt">
+      </span>
+      <span class="col-sm-3">
+        <label> Crossing </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="number" name="crossing" class="form-control" [(ngModel)]="tripData.typeofPayment">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label> Vehicle Amount </label>
+      </span>
+      <span class="col-sm-3">
+        <input type="number" name="crossing" class="form-control" [(ngModel)]="tripData.vehicleAmt">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label> Type of Payment: </label>
+      </span>
+      <span class="col-sm-3">
+        <select name="typeofPayment" class="form-control" (ngModelChange)="typofPay()" [(ngModel)]="tripData.typeofPayment">
+          <option>select</option>
+          <option value="advance">Advance</option>
+          <option value="topay">Topay</option>
+        </select>
+      </span>
+    </div>
+
+    {{tripData.typeofPayment}}
+
+    <span *ngIf="tripData.typeofPayment === 'advance'">
+      <div class="row form-group">
+        <span class="col-sm-3">
+          <label> Advance Amount </label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="advanceAmt" class="form-control" [(ngModel)]="tripData.advanceAmt">
+        </span>
+      </div>
+
+      <div class="row form-group">
+        <span class="col-sm-3">
+          <label> Driver Accepted Amount </label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="driverAcceptedAmt" class="form-control" [(ngModel)]="tripData.advance.driverAccepted">
+        </span>
+        <span class="col-sm-3">
+          <label> Self Account </label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="selfAccount" class="form-control" [(ngModel)]="tripData.advance.selfAccount">
+        </span>
+      </div>
+      <div class="row form-group">
+        <span class="col-sm-3">
+          <label>Paid Amount</label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="paidAmt" class="form-control" [(ngModel)]="tripData.advance.paid">
+        </span>
+        <span class="col-sm-3">
+          <label>Balance Amount</label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="balanceAmt" class="form-control" [(ngModel)]="tripData.advance.balance">
+        </span>
+      </div>
+    </span>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <button class="editbtn btn">Update</button>
+      </span>
+      <span class="col-sm-3">
+        <button class="cancelbtn btn">Cancel</button>
+      </span>
+
+    </div>
+  </form>
+</div>
