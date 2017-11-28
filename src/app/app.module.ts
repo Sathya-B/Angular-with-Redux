@@ -27,13 +27,16 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
+import { ExpensesInsertUpdateComponent } from './pages/expenses/expenses-insert-update/expenses-insert-update.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PagesComponentBarrel,
-    SharedComponentBarrel
+    SharedComponentBarrel,
+    ExpensesInsertUpdateComponent    
   ],
   imports: [
     BrowserModule,

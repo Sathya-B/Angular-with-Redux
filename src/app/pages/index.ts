@@ -10,8 +10,9 @@ import { VehicleTripComponent } from './vehiclepayment/vehicletrip/vehicletrip.c
 import { VendorTripComponent } from './vendorpayment/vendortrip/vendortrip.component';
 import { TripInsertUpdateComponent } from './tripinfo/trip-insert-update/trip-insert-update.component';
 import { OfficeInfoComponent } from './officeinfo/office.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 export const PagesComponentBarrel = [
 PagesComponent, VehicleInfoComponent, VendorInfoComponent, VehiclePaymentComponent, VendorPaymentComponent,
 TripInfoComponent, TripInsertUpdateComponent, DashboardComponent, VehiclePendingPaymentComponent,
-VehicleTripComponent, VendorTripComponent, OfficeInfoComponent];
+VehicleTripComponent, VendorTripComponent, OfficeInfoComponent, ExpensesComponent];

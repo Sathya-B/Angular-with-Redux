@@ -8,8 +8,9 @@ import { LocationService } from './location.service';
 import { ApiService } from './api.service';
 import { TokenService } from './token.service';
 import { AppState } from '../app.service';
+import { TripExpensesService } from './tripexpenses.service';
 
 export const ServicesBarrel = [
     VehicleViewService, VendorViewService, VehicleAmountService,
     VendorAmountService, TripService, LocationService, ApiService, TokenService,
-    OfficeViewService,AppState ];
+    OfficeViewService,AppState,TripExpensesService ];

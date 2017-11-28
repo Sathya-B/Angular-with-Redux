@@ -424,5 +424,150 @@
       },
       "toPay": {}
     }
+  ],
+  "tripExpenses":[
+    {
+      "tripExpenseId": "TRE-123456",
+      "vehicleNo": "TN-38-U-9807",
+      "entryDate": "2017-11-25T08:11:00.1137492Z",
+      "advanceAmount": 87000,
+      "driver1Name": "Driver1Name",
+      "driver2Name": "Driver2Name",
+      "cleanerName": "CleanerName",
+      "startDate": "2017-11-10T08:11:00.1137492Z",
+      "endDate": "2017-11-25T08:11:00.1137492Z",
+      "averageMileage": 4,
+      "startKM": 100000,
+      "endKM": 101000,
+      "expenses": {
+        "totalIncome": 333300,
+        "totalExpenses": 175695,
+        "balanceAmount": 157605,
+        "expenseInfo": {
+          "dieselExpense": {
+            "totalQuantity": 1000,
+            "totalAmount": 60000,
+            "cmsDieselExpenses": {
+              "totalQuantity": 900,
+              "totalAmount": 54000,
+              "dieselExpenseDetails": [
+                {
+                  "date": "2017-11-10T08:11:00.1137492Z",
+                  "quantity": 480,
+                  "amount": 18208
+                },
+                {
+                  "date": "2017-11-20T08:11:00.1137492Z",
+                  "quantity": 483,
+                  "amount": 28407
+                }
+              ]
+            },
+            "cashDieselExpenses": {
+              "totalQuantity": 100,
+              "totalAmount": 6000,
+              "dieselExpenseDetails": [
+                {
+                  "date": "2017-11-15T08:11:00.1137492Z",
+                  "quantity": 280,
+                  "amount": 16353
+                }
+              ]
+            }
+          },
+          "tripWiseExpenses": {
+            "totalLoadInTon": 50,
+            "totalVehicleAmount": 333300,
+            "totalCommission": 16665,
+            "totalLoadingCharges": 1350,
+            "totalUnloadingCharges": 1400,
+            "tripWiseExpenseDetails": [
+              {
+                "tripStartDate": "2017-11-10T08:11:00.1137492Z",
+                "fromLocation": "FirstLocation",
+                "toLocation": "SecondLocation",
+                "loadInTon": 10,
+                "vehicleAmount": 130000,
+                "commission": 5000,
+                "loadingCharges": 350,
+                "unloadingCharges": 400
+              },
+              {
+                "tripStartDate": "2017-11-15T08:11:00.1137492Z",
+                "fromLocation": "SecondLocation",
+                "toLocation": "ThirdLocation",
+                "loadInTon": 10,
+                "vehicleAmount": 100000,
+                "commission": 5000,
+                "loadingCharges": 500,
+                "unloadingCharges": 500
+              },
+              {
+                "tripStartDate": "2017-11-20T08:11:00.1137492Z",
+                "fromLocation": "ThirdLocation",
+                "toLocation": "FirstLocation",
+                "loadInTon": 30,
+                "vehicleAmount": 198300,
+                "commission": 6665,
+                "loadingCharges": 500,
+                "unloadingCharges": 500
+              }
+            ]
+          },
+          "rtoExpenses": {
+            "totalExpense": 9200,
+            "expenseDetails": [
+              {
+                "place": "FirstLocation",
+                "amount": 4000
+              },
+              {
+                "place": "ThirdLocation",
+                "amount": 5200
+              }
+            ]
+          },
+          "pcExpenses": {
+            "totalExpense": 1720,
+            "expenseDetails": [
+              {
+                "place": "SecondLocation",
+                "amount": 1720
+              }
+            ]
+          },
+          "tollExpenses": 33159,
+          "driverBata": 30000,
+          "cleanerBata": 6663,
+          "driverBonus": 0,
+          "billableExpenses": {
+            "totalBillableExpenses": 710,
+            "billableExpenseDetails": [
+              {
+                "expenseName": "Tyre purchase",
+                "amount": 710
+              }
+            ]
+          },
+          "otherexpenses": {
+            "totalOtherExpenses": 1760,
+            "totalOtherExpenseDetails": [
+              {
+                "expenseName": "Pooja Expense",
+                "amount": 400
+              },
+              {
+                "expenseName": "Tube valve pin",
+                "amount": 360
+              },
+              {
+                "expenseName": "Weight",
+                "amount": 700
+              }
+            ]
+          }
+        }
+      }
+    }
   ]
 }

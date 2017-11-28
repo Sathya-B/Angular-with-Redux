@@ -11,11 +11,13 @@ import { VendorPaymentComponent } from './pages/vendorpayment/vendorpayment.comp
 import { TripInfoComponent } from './pages/tripinfo/tripinfo.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OfficeInfoComponent } from './pages/officeinfo/office.component';
+import { ExpensesComponent } from './pages/expenses/expenses.component';
 
 export const routes: Routes = [
   { path:'', component: LoginComponent },
   { path:'pages', component: PagesComponent,
     children:[
+      {path:'expenses', component: ExpensesComponent},
       {path:'vehicleinfo', component: VehicleInfoComponent},
       {path:'vendorinfo', component: VendorInfoComponent },
       {path:'officeinfo', component: OfficeInfoComponent },
