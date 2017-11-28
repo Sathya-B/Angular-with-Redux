@@ -5,6 +5,7 @@ export interface IAppState {
  vehicleInfo: Array<any>; 
  vendorInfo: Array<any>;
  officeInfo: Array<any>;
+ tripInfo: Array<any>;
  modal: string;
 }
 
@@ -12,6 +13,7 @@ export const INITIAL_STATE: IAppState = {
  vehicleInfo: [],
  vendorInfo: [],
  officeInfo: [],
+ tripInfo: [],
  modal: 'CLOSE'
 }
 
@@ -24,6 +26,10 @@ function getVendors(state, action) {
 function getOffice(state, action) {
     return tassign(state, { officeInfo: action.officeInfo});
 }
+function getTrips(state, action) {
+    return tassign(state, { tripInfo: action.tripInfo});
+}
+
 function updateVehicle(state, action) {
    var updatedItem = state.vehicleInfo.find(i => i.id === action.vehicleInfo.id);
     var index = state.vehicleInfo.indexOf(updatedItem);
@@ -50,6 +56,14 @@ function updateOffice(state, action) {
     var newarray = [...beforeItems, action.officeInfo, ...afterItems];
     return tassign(state, { officeInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
 }
+function updateTrip(state, action) {
+    var updatedItem = state.tripInfo.find(i => i.id === action.tripInfo.id);
+    var index = state.tripInfo.indexOf(updatedItem);
+    var beforeItems = state.tripInfo.slice(0, index);
+    var afterItems = state.tripInfo.slice(index + 1);    
+    var newarray = [...beforeItems, action.tripInfo, ...afterItems];
+    return tassign(state, { tripInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
+}
 
 export function appReducer(state: IAppState, action): IAppState {
 
@@ -71,8 +85,14 @@ switch(action.type) {
     var addedToList = state.officeInfo.concat(action.officeInfo);
     return tassign(state, { officeInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
     case Const.UPDATE_OFFICE_SUCCESS: return updateOffice(state, action);
-}
 
+    case Const.FETCH_ALL_TRIP_SUCCESS: return getTrips(state, action);
+    case Const.UPDATE_TRIP_SUCCESS: return updateTrip(state, action);
+    case Const.ADD_TRIP_SUCCESS:
+    var addedToList = state.tripInfo.concat(action.tripInfo);
+    return tassign(state, { tripInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
+
+}
 
 return state;
 

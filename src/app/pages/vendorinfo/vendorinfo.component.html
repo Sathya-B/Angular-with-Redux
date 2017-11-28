@@ -23,7 +23,7 @@
         <span class="col-sm-2">{{vendor.vendorName}}</span>
         <span class="col-sm-2">{{vendor.contactName}}</span>
         <span class="col-sm-2">{{vendor.contactNo}}</span>
-        <span class="col-sm-2">{{vendor.vendorAddress}}</span>
+        <span class="col-sm-2">{{vendor.address}}</span>
         <span class="col-sm-2">
             <button class="btn editbtn" (click)="openModal(template);crudType('edit',vendor);"> Edit </button>
         </span>
@@ -83,7 +83,7 @@
                             <label> Vendor Address </label>
                         </span>
                         <span class="col-sm-6">
-                            <textarea name="vendorAddress" [(ngModel)]="vendorData.vendorAddress" placeholder="" class="form-control"></textarea>
+                            <textarea name="address" [(ngModel)]="vendorData.address" placeholder="" class="form-control"></textarea>
                         </span>
 
                     </span>

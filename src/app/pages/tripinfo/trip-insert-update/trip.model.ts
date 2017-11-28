@@ -5,36 +5,39 @@ import { Injectable } from "@angular/core";
 export class Trip {
     
         id: number;
-        loadDate: string;
-        vehicleNo: string;
-        location: location;
+        tripId: string;
         vendorName: string;
+        loadDate: string;
+        dropDate: string;
+        vehicleNo: string;
+        location: Location;
+        
         ton: string;
         rate: number;
         totalAmt: number;
         crossing: number;
         vehicleAmt: number;
-        typeofPayment: string;
+        typeOfPayment: string;
         advanceAmt: number;
-        advance: advance;
-        toPay: toPay;        
+        advance: Advance;
+        toPay: ToPay;        
     
 
     constructor(
         _id?: number,
         _loadDate?: string,
         _vehicleNo?: string,
-        _location?: location,
+        _location?: Location,
         _vendorName?: string,
         _ton?: string,
         _rate?: number,
         _totalAmt?: number,
         _crossing?: number,
         _vehicleAmt?: number,
-        _typeofPayment?: string,
+        _typeOfPayment?: string,
         _advanceAmt?: number,
-        _advance?: advance,
-        _toPay?: toPay
+        _advance?: Advance,
+        _toPay?: ToPay
         
     ) {
         this.id = _id || null,
@@ -47,7 +50,7 @@ export class Trip {
         this.totalAmt = _totalAmt || null,
         this.crossing = _crossing || null,
         this.vehicleAmt = _vehicleAmt || null,
-        this.typeofPayment = _typeofPayment || null,
+        this.typeOfPayment = _typeOfPayment || null,
         this.advanceAmt = _advanceAmt || null,
         this.advance =  _advance || null ,
         this.toPay = _toPay || null
@@ -59,24 +62,27 @@ export class Trip {
 
 
 
-export class location{
-    from: string;
-    to: string;
-    thaluka: string;
+export class Location {
+    pickUpPlace: string;
+    pickUpThalukka: string;
+    dropPlace: string;
+    dropThalukka: string;
     constructor(
-        _from?:string,
-        _to?:string,
-        _thaluka?:string
+        _pickUpPlace?:string,
+        _pickUpThalukka?:string,
+        _dropPlace?:string,
+        _dropThalukka?: string
     ){
-      this.from = _from || null,
-      this.to = _to || null,
-      this.thaluka = _thaluka || null  
+      this.pickUpPlace = _pickUpPlace || null,
+      this.pickUpThalukka = _pickUpThalukka || null,
+      this.dropPlace = _dropPlace || null,
+      this.dropThalukka = _dropThalukka || null
     }
 
 
 }
 
-export class advance{
+export class Advance{
     driverAccepted: number;
     selfAccount: number;
     paid: number;
@@ -96,6 +102,6 @@ export class advance{
     }
 }
 
-export class toPay{
+export class ToPay{
 
 }

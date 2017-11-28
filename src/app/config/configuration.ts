@@ -16,17 +16,16 @@ export const tax = {
     estimatedTax: .05
 }
 // ***dev */
-if (!env.environment) {
 apiUrl.serverUrl = 'http://192.168.0.113:4000/api/';
 apiUrl.authServer = 'http://192.168.0.113:4000/api/auth';
 apiUrl.tokenServer = 'http://192.168.0.113:4001/api/';
-}
+
 // ***prod */
-if (!env.environment) {
-apiUrl.serverUrl = 'http://192.168.0.113:4000/api/';
-apiUrl.authServer = 'http://192.168.0.113:4000/api/auth';
-apiUrl.tokenServer = 'http://192.168.0.113:4001/api/';
-}
+// if (!env.environment) {
+// apiUrl.serverUrl = 'http://192.168.0.112:4000/api/';
+// apiUrl.authServer = 'http://192.168.0.112:4000/api/auth';
+// apiUrl.tokenServer = 'http://192.168.0.112:4001/api/';
+// }
 
 export class Configuration {
     public apiKey: string;
