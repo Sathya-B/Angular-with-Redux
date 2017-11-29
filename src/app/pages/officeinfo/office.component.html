@@ -11,7 +11,6 @@
 <div class="office-data-table">
     <div class="table-caption row">
         <span class="col-sm-1">#</span>
-        <span class="col-sm-1">Office ID</span>
         <span class="col-sm-1">Office Name</span>
         <span class="col-sm-2">Contact Name</span>
         <span class="col-sm-2">Contact Number</span>
@@ -21,7 +20,6 @@
 
     <div class="table-row row" *ngFor="let office of officeViewData | async; let i = index;">
         <span class="col-sm-1"> {{i + 1}}</span>
-        <span class="col-sm-1">{{office.officeId}}</span>
         <span class="col-sm-1">{{office.officeName}}</span>
         <span class="col-sm-2">{{office.contactName}}</span>
         <span class="col-sm-2">{{office.contactNo}}</span>
@@ -98,12 +96,12 @@
                             <span>Update</span>                            
                         </button>
                         </div>
-                    </span>
-                    <span class="col-sm-6 form-group text-right">
-                        <button type="reset" class="btn cancelbtn" (click)="modalRef.hide()">Cancel</button>
-                    </span>
+                    </span>                    
                 </div>
             </form>
+            <span class="col-sm-6 form-group text-right">
+            <button type="reset" class="btn cancelbtn cancelButton" (click)="modalRef.hide()">Cancel</button>
+            </span>
         </div>
     </div>
 </ng-template>

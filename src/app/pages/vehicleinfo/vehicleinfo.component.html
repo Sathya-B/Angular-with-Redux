@@ -10,24 +10,45 @@
 </div>
 <div class="vehicle-data-table">
     <div class="table-caption row">
-        <span class="col-sm-2">#</span>
-        <span class="col-sm-2">Vehicle No</span>
-        <span class="col-sm-2">Vehicle Type</span>
-        <span class="col-sm-2">Vehicle no wheels</span>
-        <span class="col-sm-2">Vehicle capacity</span>
-        <span class="col-sm-2">Action</span>
+        <span class="col-sm-1">#</span>
+        <span class="col-sm-1">Vehicle No</span>
+        <span class="col-sm-1">Vehicle Type</span>
+        <span class="col-sm-1">Vehicle no wheels</span>
+        <span class="col-sm-1">Vehicle capacity</span>
+        <span class="col-sm-1">Owner Name</span>
+        <span class="col-sm-1">Model</span>
+        <span class="col-sm-1">Model No</span>
     </div>
+    <accordion>
 
-    <div class="table-row row" *ngFor="let vehicle of vehicleViewData | async; let i = index;">
-        <span class="col-sm-2"> {{i + 1}}</span>
-        <span class="col-sm-2">{{vehicle.vehicleNo}}</span>
-        <span class="col-sm-2">{{vehicle.vehicleType}}</span>
-        <span class="col-sm-2">{{vehicle.vehicleNoWheel}}</span>
-        <span class="col-sm-2">{{vehicle.vehicleCapacity}}</span>
-        <span class="col-sm-2">
-            <button class="btn editbtn" (click)="openModal(template);crudType('edit',vehicle);"> Edit </button>
+        <div class="table-row row no-margin" *ngFor="let vehicle of vehicleViewData | async; let i = index;">
+            <accordion-group #group [isOpen]>
+                <div accordion-heading>
+                    <span class="col-sm-1"> {{i + 1}}</span>
+                    <span class="col-sm-1">{{vehicle.vehicleNo}}</span>
+                    <span class="col-sm-1">{{vehicle.vehicleType}}</span>
+                    <span class="col-sm-1">{{vehicle.noOfWheels}}</span>
+                    <span class="col-sm-1">{{vehicle.vehicleCapacity}}</span>
+                    <span class="col-sm-1">{{vehicle.ownerName}}</span>
+                    <span class="col-sm-1">{{vehicle.model}}</span>
+                    <span class="col-sm-1">{{vehicle.modelNo}}</span>
+                    <span class="col-sm-1">
+        <a class=" togglebtn" *ngIf="group?.isOpen == true">
+        <i class="fa fa-toggle-on" aria-hidden="true"></i>
+        </a>
+        <a class=" togglebtn" *ngIf="group?.isOpen == false">
+        <i class="fa fa-toggle-off" aria-hidden="true"></i>
+        </a>
         </span>
-    </div>
+                </div>
+                <div class="row no-margin">
+                    <div class="table-row row no-margin">
+                        <app-vehicle-view-update [vehicleData]="vehicle" (cancelClicked)="group.isOpen = false"></app-vehicle-view-update>
+                    </div>
+                </div>
+            </accordion-group>
+        </div>
+    </accordion>
 </div>
 
 
@@ -43,63 +64,111 @@
     <div class="modal-body">
         <div class="addForm">
             <form #f="ngForm">
-                <div class="row">
-                    <span class="col-sm-12 form-group">
-                        <span class="col-sm-6">
-                            <label> Vehicle No </label>
-                        </span>
-                        <span class="col-sm-6">
-                            <input type="text" name="vehicleNo" [(ngModel)]="vehicleData.vehicleNo" placeholder="" class="form-control">
-                        </span>
-                        <input type="hidden" name="vehicleId" [(ngModel)]="vehicleData.vehicleId" class="form-control">
-                    </span>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <label> Vehicle Number</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="vehicleNo" [(ngModel)]="vehicleData.vehicleNo" class="form-control">
+      </span>
+                    <span class="col-sm-3">
+        <label>Owner Name</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="ownerName" [(ngModel)]="vehicleData.ownerName" class="form-control">
+      </span>
                 </div>
-                <div class="row">
-                    <span class="col-sm-12 form-group">
-                        <span class="col-sm-6">
-                            <label> Vehicle Type </label>
-                        </span>
-                        <span class="col-sm-6">
-                            <input type="text" name="vehicleType" [(ngModel)]="vehicleData.vehicleType" placeholder="" class="form-control">
-                        </span>
-                    </span>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <label>Model</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="model" [(ngModel)]="vehicleData.model" class="form-control">
+      </span>
+                    <span class="col-sm-3">
+        <label>Model Number</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="modelNo" [(ngModel)]="vehicleData.modelNo" class="form-control">
+      </span>
                 </div>
-                <div class="row">
-                    <span class="col-sm-12 form-group">
-                        <span class="col-sm-6">
-                            <label>Vehicle no of Wheels </label>
-                        </span>
-                        <span class="col-sm-6">
-                            <input type="text" name="vehicleNoWheel" [(ngModel)]="vehicleData.vehicleNoWheel" placeholder="" class="form-control">
-                        </span>
-                    </span>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <label>Vehicle Type</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="vehicleType" [(ngModel)]="vehicleData.vehicleType" class="form-control">
+      </span>
+                    <span class="col-sm-3">
+        <label>Type Of Body</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="typeOfBody" [(ngModel)]="vehicleData.typeOfBody" class="form-control">
+      </span>
                 </div>
-                <div class="row">
-                    <span class="col-sm-12 form-group">
-                        <span class="col-sm-6">
-                            <label>Vehicle capacity </label>
-                        </span>
-                        <span class="col-sm-6">
-                            <input type="text" name="vehicleCapacity" [(ngModel)]="vehicleData.vehicleCapacity" placeholder="" class="form-control">
-                        </span>
-                    </span>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <label>No Of Wheels</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="noOfWheels" [(ngModel)]="vehicleData.noOfWheels" class="form-control">
+      </span>
+                    <span class="col-sm-3">
+        <label>Vehicle Capacity</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="vehicleCapacity" [(ngModel)]="vehicleData.vehicleCapacity" class="form-control">
+      </span>
                 </div>
-                <div class="row">
-                    <span class="col-sm-6 form-group">
-                        <div *ngIf="formAction === 'Add'">
-                        <button class="btn savebtn" (click)="insertVehicle(vehicleData)">
-                            <span>Save</span>                            
-                        </button>
-                        </div>
-                        <div *ngIf="formAction === 'Edit'">
-                        <button class="btn savebtn" (click)="updateVehicle(vehicleData)">
-                            <span>Update</span>                            
-                        </button>
-                        </div>
-                    </span>
-                    <span class="col-sm-6 form-group text-right">
-                        <button type="reset" class="btn cancelbtn" (click)="modalRef.hide()">Cancel</button>
-                    </span>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <label>Engine Number</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="engineNumber" [(ngModel)]="vehicleData.engineNumber" class="form-control">
+      </span>
+                    <span class="col-sm-3">
+        <label>Chasis Number</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" name="chasisNumber" [(ngModel)]="vehicleData.chasisNumber" class="form-control">
+      </span>
+                </div>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <label>Insurance Date</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" #dp="bsDatepicker" bsDatepicker name="insuranceDate" [(ngModel)]="vehicleData.insuranceDate" class="form-control">
+      </span>
+                    <span class="col-sm-3">
+        <label>FC Date</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" #dp="bsDatepicker" bsDatepicker name="fcDate" [(ngModel)]="vehicleData.fcDate" class="form-control">
+      </span>
+                </div>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <label>NP Tax Date</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" #dp="bsDatepicker" bsDatepicker name="npTaxDate" [(ngModel)]="vehicleData.npTaxDate" class="form-control">
+      </span>
+                    <span class="col-sm-3">
+        <label>Permit Date</label>
+      </span>
+                    <span class="col-sm-3">
+        <input type="text" #dp="bsDatepicker" bsDatepicker name="permitDate" [(ngModel)]="vehicleData.permitDate" class="form-control">
+      </span>
+                </div>
+                <div class="row form-group">
+                    <span class="col-sm-3">
+        <button class="editbtn btn" (click)="insertVehicle(vehicleData)">Save</button>
+      </span>
+                    <span class="col-sm-3">
+        <button class="cancelbtn btn" (click)="modalRef.hide()">Cancel</button>
+      </span>
                 </div>
             </form>
         </div>

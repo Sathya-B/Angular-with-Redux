@@ -7,52 +7,79 @@ import { HttpClient } from "@angular/common/http";
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store/store';
 import * as Const from '../store/actions';
+import * as Conf from '../config/configuration';
+import { ApiService } from "./api.service";
 
 @Injectable()
 
 
-export class VendorViewService {  
+export class VendorViewService {
   baseUrl = 'http://localhost:3001/';
   constructor(
-    
+    private apiService: ApiService,
     private httpClient: HttpClient,
     private ngRedux: NgRedux<IAppState>
   ) {
-    
+
   }
 
   getVendor() {
-    this.httpClient.get(this.baseUrl+'vendor')
-      .subscribe((res) => {
-        this.ngRedux.dispatch({ type: Const.FETCH_ALL_VENDORS_SUCCESS, vendorInfo: res});
-      }, (err) => {
-        this.ngRedux.dispatch({ type: Const.FETCH_ALL_VENDORS_ERROR});
+    this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl + 'Vendor').then(
+      (response: any) => {
+        if (response.code == '200') {
+          this.ngRedux.dispatch({ type: Const.FETCH_ALL_VENDORS_SUCCESS, vendorInfo: response.data });
+        } else {
+          throw response.error;
+        }
       })
-  }
-
-  getSingleVendor(id) {
-    return this.httpClient.get(this.baseUrl+'vendor/'+id)
-    .map((sRes)=> sRes)
-    .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => {
+        this.ngRedux.dispatch({ type: Const.FETCH_ALL_VENDORS_ERROR });
+      });
   }
 
   updateVendor(vendor) {
-    this.httpClient.put(this.baseUrl+'vendor/'+vendor.id, vendor)
-    .subscribe((updated)=> {
-      this.ngRedux.dispatch({ type: Const.UPDATE_VENDOR_SUCCESS, vendorInfo: updated});
-    }, (err) => {
-      this.ngRedux.dispatch({ type: Const.UPDATE_VENDOR_ERROR});
-    });    
+    this.apiService.put('Vendor/' + 'Sample/' + vendor.vendorId, vendor,
+      { useAuth: false }, undefined).then(
+      (response: any) => {
+        console.log(response);
+        if (response.code === '200') {
+          this.ngRedux.dispatch({ type: Const.UPDATE_VENDOR_SUCCESS, vendorInfo: vendor });
+        } else {
+          throw response.error;
+        }
+      })
+      .catch(
+      (error: any) => {
+        this.ngRedux.dispatch({ type: Const.UPDATE_VENDOR_SUCCESS });
+      }
+      );
   }
 
   addVendor(vendor) {
-    this.httpClient.post(this.baseUrl+'vendor', vendor)
-    .subscribe((updated)=> {
-      this.ngRedux.dispatch({ type: Const.ADD_VENDOR_SUCCESS, vendorInfo: updated});
-    }, (err) => {
-      this.ngRedux.dispatch({ type: Const.ADD_VENDOR_ERROR});
-    });    
+    // this.httpClient.post(this.baseUrl + 'vendor', vendor)
+    //   .subscribe((updated) => {
+    //     this.ngRedux.dispatch({ type: Const.ADD_VENDOR_SUCCESS, vendorInfo: updated });
+    //   }, (err) => {
+    //     this.ngRedux.dispatch({ type: Const.ADD_VENDOR_ERROR });
+    //   });
+      delete vendor.id;
+      delete vendor.vendorId;
+      this.apiService.post('Vendor/' + 'Sample', vendor,
+            { useAuth: false }, undefined).then(
+            (response: any) => {
+              console.log(response);
+              if (response.code === '200') {
+                this.ngRedux.dispatch({ type: Const.ADD_VENDOR_SUCCESS, vendorInfo: response.data });
+              } else {
+                throw response.error;
+              }
+            })
+            .catch(
+            (error: any) => {
+              this.ngRedux.dispatch({ type: Const.ADD_VENDOR_ERROR });
+            }
+            );
   }
 
-  
+
 }

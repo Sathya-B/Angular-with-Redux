@@ -8,45 +8,67 @@ import * as Const from '../store/actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { HttpClient } from "@angular/common/http";
+import * as Conf from '../config/configuration';
+import { ApiService } from './api.service';
 
 @Injectable()
 
 
-export class VehicleViewService {  
+export class VehicleViewService {
   baseUrl = 'http://localhost:3001/';
-  constructor(
-    
-    private httpClient: HttpClient,
-    private ngRedux: NgRedux<IAppState>
-  ) {
-    
+  constructor(private httpClient: HttpClient, private ngRedux: NgRedux<IAppState>,
+    private apiService: ApiService) {
   }
 
   getVechile() {
-
-    this.httpClient.get(this.baseUrl+'vehicle')
-      .subscribe((res) => {
-        this.ngRedux.dispatch({ type: Const.FETCH_ALL_VECHICLES_SUCCESS, vehicleInfo: res});
-      }, (err) => {
-        this.ngRedux.dispatch({ type: Const.FETCH_ALL_VECHICLES_ERROR});
+    this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl +'Vehicle').then(
+      (response: any) => {        
+        if(response.code == '200') {
+          this.ngRedux.dispatch({ type: Const.FETCH_ALL_VECHICLES_SUCCESS, vehicleInfo: response.data });
+        } else {
+          throw response.error;
+        }        
       })
+      .catch((error: any) => {
+        console.log(error);
+      });
   }
 
   updateVechile(vehicle) {
-    this.httpClient.put(this.baseUrl+'vehicle/'+vehicle.id, vehicle)
-    .subscribe((updated)=> {
-      this.ngRedux.dispatch({ type: Const.UPDATE_VECHICLE_SUCCESS, vehicleInfo: updated});
-    }, (err) => {
-      this.ngRedux.dispatch({ type: Const.UPDATE_VECHICLE_ERROR});
-    });    
+    this.apiService.put('Vehicle/' + 'Sample/' + vehicle.vehicleId, vehicle,
+            { useAuth: false }, undefined).then(
+            (response: any) => {
+              console.log(response);
+              if (response.code === '200') {
+                this.ngRedux.dispatch({ type: Const.UPDATE_VECHICLE_SUCCESS, vehicleInfo: vehicle });
+              } else {
+                throw response.error;
+              }
+            })
+            .catch(
+            (error: any) => {
+              this.ngRedux.dispatch({ type: Const.UPDATE_VECHICLE_ERROR });
+            }
+            );
   }
   addVechile(vehicle) {
-    this.httpClient.post(this.baseUrl+'vehicle', vehicle)
-    .subscribe((updated)=> {
-      this.ngRedux.dispatch({ type: Const.ADD_VECHICLE_SUCCESS, vehicleInfo: updated});
-    }, (err) => {
-      this.ngRedux.dispatch({ type: Const.ADD_VECHICLE_ERROR});
-    });    
+      delete vehicle.id;
+      delete vehicle.vehicleId;
+      this.apiService.post('Vehicle/' + 'Sample', vehicle,
+            { useAuth: false }, undefined).then(
+            (response: any) => {
+              console.log(response);
+              if (response.code === '200') {
+                this.ngRedux.dispatch({ type: Const.ADD_VECHICLE_SUCCESS, vehicleInfo: response.data });
+              } else {
+                throw response.error;
+              }
+            })
+            .catch(
+            (error: any) => {
+              this.ngRedux.dispatch({ type: Const.ADD_VECHICLE_ERROR });
+            }
+            );
   }
-  
+
 }

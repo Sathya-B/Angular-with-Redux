@@ -12,6 +12,7 @@ import { TripInfoComponent } from './pages/tripinfo/tripinfo.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OfficeInfoComponent } from './pages/officeinfo/office.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
+import { DriverInfoComponent } from "./pages/driverinfo/driverinfo.component";
 
 export const routes: Routes = [
   { path:'', component: LoginComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
       {path:'vehicleinfo', component: VehicleInfoComponent},
       {path:'vendorinfo', component: VendorInfoComponent },
       {path:'officeinfo', component: OfficeInfoComponent },
+      {path:'driverinfo', component: DriverInfoComponent },
       {path:'vehiclepayment', component: VehiclePaymentComponent },
       {path:'vendorpayment', component: VendorPaymentComponent },
       {path:'tripinfo', component: TripInfoComponent },      
