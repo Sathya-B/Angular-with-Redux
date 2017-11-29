@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Common Style */
+.cancelButton{
+margin-top: -75px;
+}
 
 .no-margin{
     margin: 0;    

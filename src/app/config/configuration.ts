@@ -16,9 +16,9 @@ export const tax = {
     estimatedTax: .05
 }
 // ***dev */
-apiUrl.serverUrl = 'http://192.168.0.113:4000/api/';
-apiUrl.authServer = 'http://192.168.0.113:4000/api/auth';
-apiUrl.tokenServer = 'http://192.168.0.113:4001/api/';
+apiUrl.serverUrl = 'http://192.168.0.112:4000/api/';
+apiUrl.authServer = 'http://192.168.0.112:4000/api/auth';
+apiUrl.tokenServer = 'http://192.168.0.112:4001/api/';
 
 // ***prod */
 // if (!env.environment) {

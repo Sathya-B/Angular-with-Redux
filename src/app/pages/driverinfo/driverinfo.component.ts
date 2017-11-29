@@ -2,58 +2,58 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
-import { Vendor } from './Vendor.model';
+import { Driver } from './driver.model';
 import { NgForm } from '@angular/forms';
-import { VendorViewService } from '../../service/vendorview.service';
+import { DriverViewService } from '../../service/driverview.service';
 import { IAppState } from '../../store/store';
 import { NgRedux, select } from 'ng2-redux';
 import * as Const from '../../store/actions';
 
 @Component({
-  selector: 'app-vendorinfo',
-  templateUrl: './vendorinfo.component.html',
-  styleUrls: ['./vendorinfo.component.css']
+  selector: 'app-driverinfo',
+  templateUrl: './driverinfo.component.html',
+  styleUrls: ['./driverinfo.component.css']
 })
-export class VendorInfoComponent implements OnInit {
-  vendorData: Vendor;  
-  editVendorinfoView = false;
+export class DriverInfoComponent implements OnInit {
+  driverData: Driver;  
+  editdriverinfoView = false;
   modalRef: BsModalRef;
   formAction: string;
-  @select('vendorInfo') vendorViewData;
+  @select('driverInfo') driverViewData;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
-    private vendor: VendorViewService,
+    private driver: DriverViewService,
     private modalService: BsModalService
   ) {
-    this.vendorData = new Vendor();
+    this.driverData = new Driver();
   }
 
   ngOnInit() {
-    this.vendor.getVendor();
+    this.driver.getDriver();
   }
 
-  crudType(action, vendor) {
+  crudType(action, driver) {
     console.log(action);
     if (action === 'add') {
       this.formAction = 'Add';
-      this.vendorData = new Vendor();
+      this.driverData = new Driver();
     } else {
       this.formAction = 'Edit';
-      this.vendorData = vendor;
+      this.driverData = driver;
     }
   }
-  insertVendor(vendor) {
-    this.vendor.addVendor(vendor);
+  insertDriver(driver) {
+    this.driver.addDriver(driver);
   }
-  updateVendor(vendor) {
-    this.vendor.updateVendor(vendor);
+  updateDriver(driver) {
+    this.driver.updateDriver(driver);
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.ngRedux.subscribe(() => {    
     if( this.ngRedux.getState().modal == Const.UPDATED_CLOSE_MODAL) {
-      this.modalRef.hide();      
+      this.modalRef.hide();
     }  
     })
   }

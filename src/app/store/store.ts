@@ -6,6 +6,7 @@ export interface IAppState {
  vendorInfo: Array<any>;
  officeInfo: Array<any>;
  tripInfo: Array<any>;
+ driverInfo: Array<any>
  modal: string;
 }
 
@@ -14,6 +15,7 @@ export const INITIAL_STATE: IAppState = {
  vendorInfo: [],
  officeInfo: [],
  tripInfo: [],
+ driverInfo: [],
  modal: 'CLOSE'
 }
 
@@ -28,6 +30,9 @@ function getOffice(state, action) {
 }
 function getTrips(state, action) {
     return tassign(state, { tripInfo: action.tripInfo});
+}
+function getDrivers(state, action) {
+    return tassign(state, { driverInfo: action.driverInfo});
 }
 
 function updateVehicle(state, action) {
@@ -56,6 +61,7 @@ function updateOffice(state, action) {
     var newarray = [...beforeItems, action.officeInfo, ...afterItems];
     return tassign(state, { officeInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
 }
+
 function updateTrip(state, action) {
     var updatedItem = state.tripInfo.find(i => i.id === action.tripInfo.id);
     var index = state.tripInfo.indexOf(updatedItem);
@@ -63,6 +69,15 @@ function updateTrip(state, action) {
     var afterItems = state.tripInfo.slice(index + 1);    
     var newarray = [...beforeItems, action.tripInfo, ...afterItems];
     return tassign(state, { tripInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
+}
+
+function updateDriver(state, action) {
+    var updatedItem = state.driverInfo.find(i => i.id === action.driverInfo.id);
+    var index = state.driverInfo.indexOf(updatedItem);
+    var beforeItems = state.driverInfo.slice(0, index);
+    var afterItems = state.driverInfo.slice(index + 1);    
+    var newarray = [...beforeItems, action.driverInfo, ...afterItems];
+    return tassign(state, { driverInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
 }
 
 export function appReducer(state: IAppState, action): IAppState {
@@ -91,6 +106,12 @@ switch(action.type) {
     case Const.ADD_TRIP_SUCCESS:
     var addedToList = state.tripInfo.concat(action.tripInfo);
     return tassign(state, { tripInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
+
+    case Const.FETCH_ALL_DRIVER_SUCCESS: return getDrivers(state, action);
+    case Const.UPDATE_DRIVER_SUCCESS: return updateDriver(state, action);
+    case Const.ADD_DRIVER_SUCCESS:
+    var addedToList = state.driverInfo.concat(action.driverInfo);
+    return tassign(state, { driverInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
 
 }
 
