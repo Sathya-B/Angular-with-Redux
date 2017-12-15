@@ -36,7 +36,7 @@
         </div>
         <div class="row no-margin">
           <div class="table-row row no-margin">
-            <app-trip-insert-update [tripData]="trip" [actionType]="updateAction" [vendorData]="vendorData" [vehicleData]="vehicleData" [cityLocation]="cityLocation" (cancelClicked)="group.isOpen = false">
+            <app-trip-insert-update [tripData]="trip" [actionType]="updateAction" [vendorData]="vendorData" [officeData]="officeData" [driverData]="driverData" [vehicleData]="vehicleData" [cityLocation]="cityLocation" (cancelClicked)="group.isOpen = false">
 
             </app-trip-insert-update>
           </div>
@@ -59,7 +59,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <app-trip-insert-update [actionType]="addAction" [vendorData]="vendorData" [vehicleData]="vehicleData" [cityLocation]="cityLocation" (cancelClicked)="modalRef.hide()">
+        <app-trip-insert-update [actionType]="addAction" [vendorData]="vendorData" [officeData]="officeData" [driverData]="driverData" [vehicleData]="vehicleData" [cityLocation]="cityLocation" (cancelClicked)="modalRef.hide()">
 
         </app-trip-insert-update>
     </div>

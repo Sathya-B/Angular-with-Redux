@@ -54,7 +54,7 @@
         <label> Driver Name </label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="driverName" [(ngModel)]="tripData.driverName" class="form-control">
+        <input type="text" name="driverName" [typeahead]="driverData" autocomplete="off" [(ngModel)]="tripData.driverName" class="form-control">
       </span>
     </div>
         <div class="row form-group">
@@ -62,7 +62,7 @@
         <label> Office Name </label>
       </span>
       <span class="col-sm-3">
-        <input type="text" autocomplete="off" name="officeName" [typeahead]="vendorData" [(ngModel)]="tripData.officeInfo.officeName" class="form-control">
+        <input type="text" autocomplete="off" name="officeName" [typeahead]="officeData" [(ngModel)]="tripData.officeInfo.officeName" class="form-control">
       </span>
       <span class="col-sm-3">
         <label> Contact Name </label>
@@ -120,12 +120,6 @@
         <span class="col-sm-3">
           <input type="number" name="unloadTon" class="form-control" [(ngModel)]="tripData.unloadTon">
         </span>
-        <span class="col-sm-3">
-          <label>Diesel Cost</label>
-        </span>
-        <span class="col-sm-3">
-          <input type="number" name="dieselCost" class="form-control" [(ngModel)]="tripData.dieselCost">
-        </span>
     </div>
      <div class="row form-group">
       <span class="col-sm-3">
@@ -151,16 +145,37 @@
 
       <div class="row form-group">
         <span class="col-sm-3">
-          <label> Driver Accepted Amount </label>
+          <label> Advance Balance </label>
         </span>
         <span class="col-sm-3">
-          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount">
+          <input type="number" name="advanceBalanceAmount" class="form-control" [(ngModel)]="tripData.advanceBalanceAmount" readonly>
+        </span>
+        <span class="col-sm-3">
+          <label>Diesel Cost</label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="dieselCost" class="form-control" [(ngModel)]="tripData.dieselCost">
+        </span>
+
+      </div>
+       <div class="row form-group">
+        <span class="col-sm-3">
+          <label> Driver Accepted Amount </label>
+        </span>
+        <span class="col-sm-3" *ngIf="actionType == 'add'">
+          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount">          
+        </span>
+        <span class="col-sm-3" *ngIf="actionType == 'update'">
+          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount" readonly>          
         </span>
         <span class="col-sm-3">
           <label> Self Account </label>
         </span>
-        <span class="col-sm-3">
+        <span class="col-sm-3" *ngIf="actionType == 'add'">          
           <input type="number" name="selfAmount" class="form-control" [(ngModel)]="tripData.selfAmount">
+        </span>
+        <span class="col-sm-3" *ngIf="actionType == 'update'">          
+          <input type="number" name="selfAmount" class="form-control" [(ngModel)]="tripData.selfAmount" readonly>
         </span>
       </div>
       <div class="row form-group">
@@ -183,14 +198,20 @@
         <span class="col-sm-3">
           <label> Driver Accepted Amount </label>
         </span>
-        <span class="col-sm-3">
-          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount">
+        <span class="col-sm-3" *ngIf="actionType == 'add'">
+          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount">          
+        </span>
+        <span class="col-sm-3" *ngIf="actionType == 'update'">
+          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount" readonly>          
         </span>
         <span class="col-sm-3">
           <label> Self Account </label>
         </span>
-        <span class="col-sm-3">
+        <span class="col-sm-3" *ngIf="actionType == 'add'">          
           <input type="number" name="selfAmount" class="form-control" [(ngModel)]="tripData.selfAmount">
+        </span>
+        <span class="col-sm-3" *ngIf="actionType == 'update'">          
+          <input type="number" name="selfAmount" class="form-control" [(ngModel)]="tripData.selfAmount" readonly>
         </span>
       </div>
       <div class="row form-group">
@@ -219,5 +240,24 @@
       </span>
 
     </div>
+       <div class="row form-group" *ngIf="actionType == 'update'">
+        <span class="col-sm-3">
+          <label>Payments Recieved:</label>
+        </span>
+        <br>
+        <table style="width:65%">
+          <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Paid To</th>
+          <th>Running Balance</th>
+          </tr>
+          <tr *ngFor="let payment of tripData.paymentInfo">
+          <td>{{payment.date | date}}</td>
+          <td>{{payment.amountReceived}}</td>
+          <td>{{payment.paidTo}}</td>
+          <td>{{payment.runningBalanceAmount}}</td>
+        </table>
+      </div>
   </form>
 </div>

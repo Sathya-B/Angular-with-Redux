@@ -19,10 +19,11 @@ import { TripService } from "../../../service/trip.service";
 export class TripInsertUpdateComponent implements OnInit, DoCheck {
 //  @select(vehicleInfo => { vehicleInfo.vehicleNo}) vehicleData;
 
-  @Input() public tripData: any = { location: {}, officeInfo: {}};
+  @Input() public tripData: any = { location: {}, officeInfo: {}, paymentInfo: []};
 
   @Input() public actionType: string;
-
+  @Input()  public officeData: any[];
+  @Input()  public driverData: any[];
   @Input()  public vendorData: any[];
   @Input() public vehicleData: any[];
   @Input() public cityLocation: any[];
@@ -34,14 +35,21 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
   //  this.tripData = new Trip();    
    }
 
-   ngOnInit(){
+   ngOnInit(){     
    }
 
    ngDoCheck() {
     this.tripData.totalAmount = this.tripData.ratePerTon * this.tripData.noOfTons;
-    this.tripData.vehicleAmount = (this.tripData.ratePerTon - this.tripData.crossing) * this.tripData.noOfTons;
+    if(this.tripData.unloadTon > 0) {
+      this.tripData.vehicleAmount = (this.tripData.ratePerTon - this.tripData.crossing) * this.tripData.unloadTon;
+    } else {
+      this.tripData.vehicleAmount = (this.tripData.ratePerTon - this.tripData.crossing) * this.tripData.noOfTons;
+    }    
+    if(this.actionType == "add") {
     this.tripData.paidAmount = this.tripData.driverAcceptedAmount + this.tripData.selfAmount;
+    this.tripData.advanceBalanceAmount = this.tripData.advanceAmount - this.tripData.paidAmount;
     this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
+    }
    }
 
    typofPay() {
@@ -50,6 +58,24 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
 
   onSubmit(form: NgForm) {
     console.log(form);
+    if(this.actionType == "add") {
+    if(this.tripData.driverAcceptedAmount > 0) {
+      let driverPayment:any = {};
+      driverPayment.amountReceived = this.tripData.driverAcceptedAmount;
+      driverPayment.runningBalanceAmount = this.tripData.balanceAmount;
+      driverPayment.paidTo = "Driver";
+      driverPayment.date = new Date();
+      this.tripData.paymentInfo.push(driverPayment);
+    }
+    if(this.tripData.selfAmount > 0) {
+      let selfPayment:any = {};
+      selfPayment.amountReceived = this.tripData.selfAmount;
+      selfPayment.runningBalanceAmount = this.tripData.balanceAmount;
+      selfPayment.paidTo = "Self";
+      selfPayment.date = new Date();      
+      this.tripData.paymentInfo.push(selfPayment);
+    }    
+    }
     this.ngRedux.subscribe(() => {
     if( this.ngRedux.getState().modal == Const.UPDATED_CLOSE_MODAL) {
       this.cancelClicked.emit(true);

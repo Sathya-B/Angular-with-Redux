@@ -4,10 +4,8 @@ import { Observable } from 'rxjs/Rx';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store/store';
 import * as Const from '../store/actions';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { HttpClient } from "@angular/common/http";
 import * as Conf from '../config/configuration';
 import { ApiService } from './api.service';
 
@@ -16,7 +14,7 @@ import { ApiService } from './api.service';
 
 export class VehicleViewService {
   baseUrl = 'http://localhost:3001/';
-  constructor(private httpClient: HttpClient, private ngRedux: NgRedux<IAppState>,
+  constructor(private ngRedux: NgRedux<IAppState>,
     private apiService: ApiService) {
   }
 
@@ -59,7 +57,7 @@ export class VehicleViewService {
             (response: any) => {
               console.log(response);
               if (response.code === '200') {
-                this.ngRedux.dispatch({ type: Const.ADD_VECHICLE_SUCCESS, vehicleInfo: response.data });
+                this.ngRedux.dispatch({ type: Const.ADD_VECHICLE_SUCCESS, vehicleInfo: response.datas });
               } else {
                 throw response.error;
               }

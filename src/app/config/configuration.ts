@@ -18,7 +18,7 @@ export const tax = {
 // ***dev */
 apiUrl.serverUrl = 'http://192.168.0.112:4000/api/';
 apiUrl.authServer = 'http://192.168.0.112:4000/api/auth';
-apiUrl.tokenServer = 'http://192.168.0.112:4001/api/';
+apiUrl.tokenServer = 'http://192.168.0.112:4000/api/';
 
 // ***prod */
 // if (!env.environment) {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { VehicleAmountService } from '../../service/vehicleamount.service';
 import * as _ from 'underscore';
-import { VendorAmountService } from '../../service/vendoramount.service';
+import { NgRedux } from "ng2-redux/lib";
+import { IAppState } from "../../store/store";
 
 @Component({
   selector: 'app-vendorpayment',
@@ -10,29 +12,36 @@ import { VendorAmountService } from '../../service/vendoramount.service';
 export class VendorPaymentComponent implements OnInit {
 
   vendorPaymentViewData: any;
-  
-  constructor(
-    private vendorAmount :  VendorAmountService
-  ) { }
 
-  ngOnInit() {
-    this.getVendorAmountList();
-  }
-  
-  getVendorAmountList(){
-    this.vendorAmount.getVendoramount()
-    .subscribe((res)=>{
-      this.vendorPaymentViewData = res;
-      _.each(this.vendorPaymentViewData,(t: any)=>{
-        t.totalAmt = 0;
-        t.pendingAmt = 0;
-        _.each(t.tripData,(amt: any)=>{
-          t.totalAmt = t.totalAmt + amt.totalAmt;
-          t.pendingAmt = t.pendingAmt + amt.pendingAmt;
-        });        
-      })
+  constructor(
+    private vendorAmount: VehicleAmountService,
+    private ngRedux: NgRedux<IAppState>
+  ) {
+    this.ngRedux.subscribe(() => {
+      let pendingPaymentData = this.ngRedux.getState().pendingInfo;
+
+      this.vendorPaymentViewData = _.chain(pendingPaymentData)
+        .groupBy("vendorName")
+        .map(function (value, key) {
+          return {
+            vendorName: key,
+            totalAmount: sum(_.pluck(value, "totalAmount")),
+            balanceAmount: sum(_.pluck(value, "balanceAmount")),
+            tripData: value
+          }
+        })
+        .value();
+      console.log(this.vendorPaymentViewData);
     })
   }
 
+  ngOnInit() {
+    this.vendorAmount.getVechileamount()
+  }
+}
 
+function sum(numbers) {
+  return _.reduce(numbers, function (result, current) {
+    return result + parseFloat(current);
+  }, 0);
 }

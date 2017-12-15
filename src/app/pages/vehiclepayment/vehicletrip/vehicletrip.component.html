@@ -1,9 +1,9 @@
 <span class="col-sm-1">{{itemIndex + 1}}</span>
 <span class="col-sm-2">{{tripData.vendorName}}</span>
-<span class="col-sm-2">{{tripData.pickupDate}}</span>
-<span class="col-sm-2">{{tripData.dropDate}}</span>
-<span class="col-sm-2">{{tripData.totalAmt}}</span>
-<span class="col-sm-2">{{tripData.pendingAmt}}</span>
+<span class="col-sm-2">{{tripData.loadDate | date}}</span>
+<span class="col-sm-2">{{tripData.dropDate | date}}</span>
+<span class="col-sm-2">{{tripData.totalAmount}}</span>
+<span class="col-sm-2">{{tripData.balanceAmount}}</span>
 <span class="col-sm-1">
   <button class="btn editbtn" data-toggle="modal" data-target="#myModal" (click)="openModal(template)"> Edit </button>
 </span>
@@ -12,34 +12,42 @@
 <!-- Bootstrap Modal -->
 
 <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Vehicle Pending Amount</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Payment Details</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div>
-    <div class="modal-body">
-        <form #f="ngForm">
-            <div class="row form-group">
-              <span class="col-sm-6">Date: </span>
-              <span class="col-sm-6">
-                <input type="date" name="vehicle-padate" class="form-control">
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="row form-group">
+        <span class="col-sm-6">Payment Date: </span>
+        <span class="col-sm-6">
+                <input type="text" #dp="bsDatepicker" bsDatepicker ngModel name="date" class="form-control">
               </span>
-            </div>
-            <div class="row form-group">
-              <span class="col-sm-6">Pending amount: </span>
-              <span class="col-sm-6">
-                <input type="text" name="vehicle-pamt" class="form-control">
+      </div>
+      <div class="row form-group">
+        <span class="col-sm-6">Amount: </span>
+        <span class="col-sm-6">
+                <input type="number" name="amountReceived" class="form-control" ngModel>
               </span>
-            </div>  
-            <div class="row form-group">
-              <span class="col-sm-6 text-left">
-                <button class="btn editbtn">Update</button>
+      </div>
+      <div class="row form-group">
+        <span class="col-sm-6">Paid To: </span>
+        <span class="col-sm-6">
+        <select name="paidTo" class="form-control" ngModel>
+          <option value="Driver">Driver</option>
+          <option value="Self">Self</option>
+        </select>
+      </span> </div>
+      <div class="row form-group">
+        <span class="col-sm-6 text-left">
+                <button class="btn editbtn" type="submit">Update</button>
               </span>
-              <span class="col-sm-6 text-right">
+        <span class="col-sm-6 text-right">
                   <button class="btn cancelbtn" (click)="modalRef.hide()">Cancel</button>
                 </span>
-            </div>
-          </form>
-    </div>
-  </ng-template>
+      </div>
+    </form>
+  </div>
+</ng-template>

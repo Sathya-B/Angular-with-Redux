@@ -55,6 +55,23 @@ export class TripService {
             }
             );
   } 
+    updatePayment(tripId, payment) {    
+    this.apiService.put('Trip/makepayment/' + 'Sample/' + tripId, payment,
+            { useAuth: false }, undefined).then(
+            (response: any) => {
+              console.log(response);
+              if (response.code === '200') {
+                this.ngRedux.dispatch({ type: Const.UPDATE_PENDING_SUCCESS, pendingInfo: response.data });
+              } else {
+                throw response.error;
+              }
+            })
+            .catch(
+            (error: any) => {
+              this.ngRedux.dispatch({ type: Const.UPDATE_PENDING_ERROR });
+            }
+            );
+  } 
   addTrip(trip) {    
     this.apiService.post('Trip/' + 'Sample', trip,
             { useAuth: false }, undefined).then(

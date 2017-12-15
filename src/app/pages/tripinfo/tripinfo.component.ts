@@ -9,6 +9,8 @@ import { LocationService } from "../../service/location.service";
 import { VendorViewService } from "../../service/vendorview.service";
 import { VehicleViewService } from "../../service/vehicleview.service";
 import * as _ from 'underscore';
+import { DriverViewService } from "../../service/driverview.service";
+import { OfficeViewService } from "../../service/officeview.service";
 
 @Component({
   selector: 'app-tripinfo',
@@ -24,6 +26,8 @@ export class TripInfoComponent implements OnInit {
   public addAction: string = 'add';
   public vendorData: any[] = [];
   public vehicleData: any[] = [];
+  public officeData: any[] = [];
+  public driverData: any[] = [];
   public cityLocation: any[] = [];
   public locationData: any;
   constructor(
@@ -32,7 +36,9 @@ export class TripInfoComponent implements OnInit {
     private ngRedux: NgRedux<IAppState>,
     private locationSer: LocationService,
     private vendorSer: VendorViewService,
-    private vehicleSer: VehicleViewService
+    private vehicleSer: VehicleViewService,
+    private officeSer: OfficeViewService,
+    private driverSer: DriverViewService
   ) { 
 //    this.tripData = new Trip();
   }
@@ -49,9 +55,12 @@ export class TripInfoComponent implements OnInit {
     this.vehicleData = _.map(this.ngRedux.getState().vehicleInfo, (v: any) => {
           return this.vehicleData = v.vehicleNo;
     });
-    console.log(this.vendorData);  
-    console.log(this.vehicleData);
-    console.log(this.cityLocation);
+    this.officeData = _.map(this.ngRedux.getState().officeInfo, (v: any) => {
+          return this.officeData = v.officeName;
+    });
+    this.driverData = _.map(this.ngRedux.getState().driverInfo, (v: any) => {
+          return this.driverData = v.driverName;
+    });
    })
 
   }

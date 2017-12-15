@@ -6,7 +6,8 @@ export interface IAppState {
  vendorInfo: Array<any>;
  officeInfo: Array<any>;
  tripInfo: Array<any>;
- driverInfo: Array<any>
+ driverInfo: Array<any>;
+ pendingInfo: Array<any>;
  modal: string;
 }
 
@@ -16,6 +17,7 @@ export const INITIAL_STATE: IAppState = {
  officeInfo: [],
  tripInfo: [],
  driverInfo: [],
+ pendingInfo: [],
  modal: 'CLOSE'
 }
 
@@ -35,8 +37,12 @@ function getDrivers(state, action) {
     return tassign(state, { driverInfo: action.driverInfo});
 }
 
+function getPending(state, action) {
+    return tassign(state, { pendingInfo: action.pendingInfo});
+}
+
 function updateVehicle(state, action) {
-   var updatedItem = state.vehicleInfo.find(i => i.id === action.vehicleInfo.id);
+   var updatedItem = state.vehicleInfo.find(i => i.vehicleId === action.vehicleInfo.vehicleId);
     var index = state.vehicleInfo.indexOf(updatedItem);
     var beforeItems = state.vehicleInfo.slice(0, index);
     var afterItems = state.vehicleInfo.slice(index + 1);    
@@ -45,7 +51,7 @@ function updateVehicle(state, action) {
 }
 
 function updateVendor(state, action) {
-    var updatedItem = state.vendorInfo.find(i => i.id === action.vendorInfo.id);
+    var updatedItem = state.vendorInfo.find(i => i.vendorId === action.vendorInfo.vendorId);
     var index = state.vendorInfo.indexOf(updatedItem);
     var beforeItems = state.vendorInfo.slice(0, index);
     var afterItems = state.vendorInfo.slice(index + 1);    
@@ -54,7 +60,7 @@ function updateVendor(state, action) {
 }
 
 function updateOffice(state, action) {
-    var updatedItem = state.officeInfo.find(i => i.id === action.officeInfo.id);
+    var updatedItem = state.officeInfo.find(i => i.officeId === action.officeInfo.officeId);
     var index = state.officeInfo.indexOf(updatedItem);
     var beforeItems = state.officeInfo.slice(0, index);
     var afterItems = state.officeInfo.slice(index + 1);    
@@ -63,7 +69,7 @@ function updateOffice(state, action) {
 }
 
 function updateTrip(state, action) {
-    var updatedItem = state.tripInfo.find(i => i.id === action.tripInfo.id);
+    var updatedItem = state.tripInfo.find(i => i.tripId === action.tripInfo.tripId);
     var index = state.tripInfo.indexOf(updatedItem);
     var beforeItems = state.tripInfo.slice(0, index);
     var afterItems = state.tripInfo.slice(index + 1);    
@@ -72,12 +78,20 @@ function updateTrip(state, action) {
 }
 
 function updateDriver(state, action) {
-    var updatedItem = state.driverInfo.find(i => i.id === action.driverInfo.id);
+    var updatedItem = state.driverInfo.find(i => i.driverId === action.driverInfo.driverId);
     var index = state.driverInfo.indexOf(updatedItem);
     var beforeItems = state.driverInfo.slice(0, index);
     var afterItems = state.driverInfo.slice(index + 1);    
     var newarray = [...beforeItems, action.driverInfo, ...afterItems];
     return tassign(state, { driverInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
+}
+function updatePending(state, action) {
+    var updatedItem = state.pendingInfo.find(i => i.tripId === action.pendingInfo.tripId);
+    var index = state.pendingInfo.indexOf(updatedItem);
+    var beforeItems = state.pendingInfo.slice(0, index);
+    var afterItems = state.pendingInfo.slice(index + 1);    
+    var newarray = [...beforeItems, action.pendingInfo, ...afterItems];
+    return tassign(state, { pendingInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
 }
 
 export function appReducer(state: IAppState, action): IAppState {
@@ -113,6 +127,8 @@ switch(action.type) {
     var addedToList = state.driverInfo.concat(action.driverInfo);
     return tassign(state, { driverInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
 
+    case Const.FETCH_ALL_PENDING_SUCCESS: return getPending(state, action);
+    case Const.UPDATE_PENDING_SUCCESS: return updatePending(state, action);
 }
 
 return state;
