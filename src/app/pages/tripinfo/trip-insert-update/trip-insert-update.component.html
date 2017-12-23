@@ -6,13 +6,13 @@
         <label> Load Date</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="loadDate" #dp="bsDatepicker" bsDatepicker [(ngModel)]="tripData.loadDate" class="form-control">
+        <input type="text" name="loadDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="tripData.loadDate" class="form-control">
       </span>
       <span class="col-sm-3">
         <label> Unload Date</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="dropDate" #dp="bsDatepicker" bsDatepicker [(ngModel)]="tripData.dropDate" class="form-control">
+        <input type="text" name="dropDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="tripData.dropDate" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -125,8 +125,15 @@
       <span class="col-sm-3">
         <label> Type of Payment: </label>
       </span>
-      <span class="col-sm-3">
+      <span class="col-sm-3" *ngIf="actionType == 'add'">
         <select name="typeOfPayment" class="form-control" (ngModelChange)="typofPay()" [(ngModel)]="tripData.typeOfPayment">
+          <option>select</option>
+          <option value="advance">Advance</option>
+          <option value="topay">Topay</option>
+        </select>
+      </span>
+      <span class="col-sm-3" *ngIf="actionType == 'update'">
+        <select name="typeOfPayment" class="form-control" (ngModelChange)="typofPay()" [(ngModel)]="tripData.typeOfPayment" readonly disabled>
           <option>select</option>
           <option value="advance">Advance</option>
           <option value="topay">Topay</option>
@@ -163,7 +170,7 @@
           <label> Driver Accepted Amount </label>
         </span>
         <span class="col-sm-3" *ngIf="actionType == 'add'">
-          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount">          
+          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount" value="{{0}}">          
         </span>
         <span class="col-sm-3" *ngIf="actionType == 'update'">
           <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount" readonly>          
@@ -196,26 +203,6 @@
       <span *ngIf="tripData.typeOfPayment != 'advance'">
       <div class="row form-group">
         <span class="col-sm-3">
-          <label> Driver Accepted Amount </label>
-        </span>
-        <span class="col-sm-3" *ngIf="actionType == 'add'">
-          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount">          
-        </span>
-        <span class="col-sm-3" *ngIf="actionType == 'update'">
-          <input type="number" name="driverAcceptedAmount" class="form-control" [(ngModel)]="tripData.driverAcceptedAmount" readonly>          
-        </span>
-        <span class="col-sm-3">
-          <label> Self Account </label>
-        </span>
-        <span class="col-sm-3" *ngIf="actionType == 'add'">          
-          <input type="number" name="selfAmount" class="form-control" [(ngModel)]="tripData.selfAmount">
-        </span>
-        <span class="col-sm-3" *ngIf="actionType == 'update'">          
-          <input type="number" name="selfAmount" class="form-control" [(ngModel)]="tripData.selfAmount" readonly>
-        </span>
-      </div>
-      <div class="row form-group">
-        <span class="col-sm-3">
           <label>Paid Amount</label>
         </span>
         <span class="col-sm-3">
@@ -236,7 +223,7 @@
         <button class="editbtn btn" *ngIf="actionType == 'add'" type="submit">Save</button>
       </span>
       <span class="col-sm-3">
-        <button class="cancelbtn btn" (click)="closeModal($event)">Cancel</button>
+        <button class="cancelbtn btn" type="button" (click)="closeModal($event)">Cancel</button>
       </span>
 
     </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginLogoutService } from "../../service/loginlogout.service";
 
 @Component({
   selector: 'app-topbar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginLogout: LoginLogoutService) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    this.loginLogout.Logout();
   }
 
 }

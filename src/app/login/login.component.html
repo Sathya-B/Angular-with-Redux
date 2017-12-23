@@ -11,11 +11,11 @@
     </div>
     <div class="row">
       <h2 class="col-sm-12">Login</h2>
-      <form>
-        <span class="col-sm-12"><input class="form-control" type="text" placeholder="Username"></span>
-        <span class="col-sm-12"><input class="form-control" type="text" placeholder="Password"></span>
+      <form (ngSubmit)="onSignin(f)" #f="ngForm">
+        <span class="col-sm-12"><input class="form-control" type="text" placeholder="Username" name="UserName" ngModel></span>
+        <span class="col-sm-12"><input class="form-control" type="password" placeholder="Password" name="Password" ngModel></span>
         <span class="col-sm-12 btn-row">
-          <span class="col-sm-6 text-left"><button class="btn loginbtn" [routerLink] = "['/pages']" >Login</button></span>
+          <span class="col-sm-6 text-left"><button class="btn loginbtn" type="submit" >Login</button></span>
           <span class="col-sm-6 text-right"><button class="btn cancelbtn">Cancel</button></span>
         </span>
       </form>

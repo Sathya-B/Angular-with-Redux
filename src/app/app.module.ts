@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import { ExpensesInsertUpdateComponent } from './pages/expenses/expenses-insert-update/expenses-insert-update.component';
+import { AuthGuard } from "./shared/authguard";
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { ExpensesInsertUpdateComponent } from './pages/expenses/expenses-insert-
   providers: [
     HttpClient,
     AccordionConfig,
-    ServicesBarrel
+    ServicesBarrel,
+    AuthGuard
 ],
   bootstrap: [AppComponent]
 })

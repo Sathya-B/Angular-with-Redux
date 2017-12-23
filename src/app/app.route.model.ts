@@ -13,6 +13,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OfficeInfoComponent } from './pages/officeinfo/office.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
 import { DriverInfoComponent } from "./pages/driverinfo/driverinfo.component";
+import { AuthGuard } from './shared/authguard';
 
 export const routes: Routes = [
   { path:'', component: LoginComponent },
@@ -28,7 +29,7 @@ export const routes: Routes = [
       {path:'tripinfo', component: TripInfoComponent },      
       {path:'dashboard', component: DashboardComponent },
       {path:'', component: DashboardComponent }
-    ]
+    ], canActivate: [AuthGuard]
    }
 ];
 

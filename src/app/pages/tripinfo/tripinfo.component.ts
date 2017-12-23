@@ -44,10 +44,12 @@ export class TripInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTriplist();
+    this.getTripList();
     this.getlocationList();
     this.getVehicleList();
     this.getVendorList();
+    this.getOfficeList();
+    this.getDriverList();
    this.ngRedux.subscribe(() => {
     this.vendorData =  _.map(this.ngRedux.getState().vendorInfo,(v: any) => {
           return this.vendorData = v.vendorName;
@@ -88,8 +90,16 @@ export class TripInfoComponent implements OnInit {
     this.vendorSer.getVendor()
   }
 
-  getTriplist(){
+  getTripList(){
     this.tripServ.getTripInfo()
+  }
+  
+  getOfficeList(){
+    this.officeSer.getOffice();
+  }
+  
+  getDriverList(){
+    this.driverSer.getDriver();
   }
 
   openModal(template: TemplateRef<any>) {

@@ -39,7 +39,7 @@ export class VehicleInfoComponent implements OnInit {
     this.data.getVechile();
   }
 
-  crudType(action, vehicle) {
+  crudType(action, vehicle?) {
     console.log(action);
     if (action === 'add') {
       this.formAction = 'Add';

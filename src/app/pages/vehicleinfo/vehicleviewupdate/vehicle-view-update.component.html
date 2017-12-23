@@ -76,13 +76,13 @@
         <label>Insurance Date</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" #dp="bsDatepicker" bsDatepicker name="insuranceDate" [(ngModel)]="vehicleData.insuranceDate" class="form-control">
+        <input type="text" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker name="insuranceDate" [(ngModel)]="vehicleData.insuranceDate" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>FC Date</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" #dp="bsDatepicker" bsDatepicker name="fcDate" [(ngModel)]="vehicleData.fcDate" class="form-control">
+        <input type="text" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker name="fcDate" [(ngModel)]="vehicleData.fcDate" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -90,13 +90,13 @@
         <label>NP Tax Date</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" #dp="bsDatepicker" bsDatepicker name="npTaxDate" [(ngModel)]="vehicleData.npTaxDate" class="form-control">
+        <input type="text" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker name="npTaxDate" [(ngModel)]="vehicleData.npTaxDate" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Permit Date</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" #dp="bsDatepicker" bsDatepicker name="permitDate" [(ngModel)]="vehicleData.permitDate" class="form-control">
+        <input type="text" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker name="permitDate" [(ngModel)]="vehicleData.permitDate" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -104,7 +104,7 @@
         <button class="editbtn btn" (click)="updateVehicle(vehicleData)">Update</button>
       </span>
       <span class="col-sm-3">
-        <button class="cancelbtn btn" (click)="closeItem($event)">Cancel</button>
+        <button class="cancelbtn btn" type="button" (click)="closeItem($event)">Cancel</button>
       </span>
     </div>
   </form>

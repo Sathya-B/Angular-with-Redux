@@ -33,7 +33,7 @@ export class VendorInfoComponent implements OnInit {
     this.vendor.getVendor();
   }
 
-  crudType(action, vendor) {
+  crudType(action, vendor?) {
     console.log(action);
     if (action === 'add') {
       this.formAction = 'Add';

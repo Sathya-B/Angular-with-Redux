@@ -11,9 +11,10 @@ import { TokenService } from './token.service';
 import { AppState } from '../app.service';
 import { TripExpensesService } from './tripexpenses.service';
 import { DriverViewService } from "./driverview.service";
+import { LoginLogoutService } from "./loginlogout.service";
 
 export const ServicesBarrel = [
     VehicleViewService, VendorViewService, VehicleAmountService,
     VendorAmountService, TripService, LocationService, ApiService, TokenService,
 
-    OfficeViewService,AppState,TripExpensesService, DriverViewService];
+    OfficeViewService,AppState,TripExpensesService, DriverViewService, LoginLogoutService];

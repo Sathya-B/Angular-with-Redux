@@ -16,7 +16,9 @@ export function checkOptions(options?: any) {
   if (options !== undefined) {
     if (options.useAuth) {
       return true;
-    }
+    } else {
+    return false;
+  }
   } else {
     return false;
   }

@@ -10,15 +10,15 @@
 </div>
 <div class="vendor-data-table">
     <div class="table-caption row">
-        <span class="col-sm-2">#</span>
+        <span class="col-sm-1">#</span>
         <span class="col-sm-2">Driver Name</span>
         <span class="col-sm-2">Contact No</span>
         <span class="col-sm-2">Address</span>
         <span class="col-sm-2">Action</span>
     </div>
 
-    <div class="table-row row" *ngFor="let driver of driverViewData | async; let i = index;">
-        <span class="col-sm-2"> {{i + 1}}</span>
+    <div class="table-row no-accordion row" *ngFor="let driver of driverViewData | async; let i = index;">
+        <span class="col-sm-1"> {{i + 1}}</span>
         <span class="col-sm-2">{{driver.driverName}}</span>
         <span class="col-sm-2">{{driver.contactNo}}</span>
         <span class="col-sm-2">{{driver.address}}</span>

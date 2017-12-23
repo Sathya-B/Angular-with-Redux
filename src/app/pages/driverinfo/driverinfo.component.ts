@@ -33,7 +33,7 @@ export class DriverInfoComponent implements OnInit {
     this.driver.getDriver();
   }
 
-  crudType(action, driver) {
+  crudType(action, driver?) {
     console.log(action);
     if (action === 'add') {
       this.formAction = 'Add';

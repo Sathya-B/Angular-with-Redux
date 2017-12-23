@@ -24,7 +24,7 @@
           <span class="col-sm-1"> {{i + 1}}</span>
           <span class="col-sm-3">{{trip.vendorName}}</span>
           <span class="col-sm-3">{{trip.vehicleNo}}</span>
-          <span class="col-sm-3">{{trip.loadDate | date: 'M/d/yy, h:mm a' }}</span>
+          <span class="col-sm-3">{{trip.loadDate | date: 'd/M/yy, h:mm a' }}</span>
           <span class="col-sm-1">
             <a class=" togglebtn" *ngIf="group?.isOpen == true">
               <i class="fa fa-toggle-on" aria-hidden="true"></i>

@@ -41,7 +41,7 @@ export class OfficeInfoComponent implements OnInit {
     this.data.getOffice();
   }
 
-  crudType(action, office) {
+  crudType(action, office?) {
     console.log(action);
     if (action === 'add') {
       this.formAction = 'Add';

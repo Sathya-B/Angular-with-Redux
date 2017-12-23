@@ -28,21 +28,21 @@ export class TokenService {
             if (JWT != null) {
                 let token = JWT;
                 let expired: boolean;
-                expired = Util.expiredJwt(token.access_token);
+                expired = Util.expiredJwt(token.accessToken);
                 if (token && !expired) {
-                    resolve(token.access_token);
+                    resolve(token.accessToken);
                 } else if (token && expired) {
                     console.log('token expired');
                     let userName = localStorage.getItem('UserName');
                     return this.http.get(apiUrl.tokenServer +
                         'token/auth?grant_type=refresh_token&client_id=' +
-                        userName + '&refresh_token=' + token.refresh_token, {}).timeout(30000)
+                        userName + '&refresh_token=' + token.refreshToken, {}).timeout(30000)
                         .toPromise()
                         .then((tokenres) => {
                             if (tokenres['value'].code === '999') {
                                 localStorage.setItem('JWT', (tokenres['value'].data));
                             }
-                            return resolve(JSON.parse(localStorage.getItem('JWT')).access_token);
+                            return resolve(JSON.parse(localStorage.getItem('JWT')).accessToken);
                         })
                         .catch((tokenerr) => {
                             reject('problem');

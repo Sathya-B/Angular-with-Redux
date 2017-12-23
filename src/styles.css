@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Common Style */
-.cancelButton{
-margin-top: -75px;
+body{
+    font-family: 'Roboto', sans-serif;
 }
+
+
 
 .no-margin{
     margin: 0;    
@@ -20,17 +22,24 @@ margin-top: -75px;
 /* Data list style */
 
 .table-caption{
-    border: solid 1px #ececec;
-    padding:10px 0;
-    background-color:#f7f7f9;
+   border: solid 1px #ececec;
+    padding: 10px;
+    background-color: #615055;
+    margin: 0;
+    color: #fff;
 }
 
 .table-row{
     border-bottom: solid 1px #ececec;
     padding:10px 0;
     vertical-align: middle;
+    margin: 0;
 }
 
+.table-row.no-accordion{
+    padding: 5px 15px;
+    line-height: 35px;
+}
 /* button style */
 
 .addbtn .fa{
@@ -54,22 +63,23 @@ margin-top: -75px;
 .editbtn:active,
 .editbtn:focus,
 .editbtn:hover{
-    background-color: #FF5630;
+    background-color: #006644;
     color: #fff;
     outline: none;  
 }
 
 .editbtn:hover{
-    background-color: #36B37E;
+    background-color:  #36B37E;
 }
 
 .savebtn{
-    background-color: #0052CC;
+    background-color:#006644;
     color: #fff;
 }
 
-.cancelbtn{
-    background-color: #36B37E;
+.cancelbtn,
+.cancelbtn:hover{
+    background-color: #BF2600;
     color: #fff;
 }
 
@@ -89,5 +99,29 @@ margin-top: -75px;
     width: 100%;
     overflow: hidden;   
     line-height: 30px;
+    background-color: #e2dfe0;
+    padding: 5px 15px;
 }
 
+
+.side-nav-section{
+    display:inline-block;
+    width:12%;
+}
+
+.content-section{
+    display:inline-block;
+    width:87%;
+    padding-bottom: 25px;
+    
+}
+
+div.addform{
+        position: relative;
+}
+
+span.form-group.text-right{
+    position: absolute;
+    bottom: 13px;
+    cursor: pointer;
+}

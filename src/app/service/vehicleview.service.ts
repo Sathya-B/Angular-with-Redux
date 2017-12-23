@@ -34,7 +34,7 @@ export class VehicleViewService {
 
   updateVechile(vehicle) {
     this.apiService.put('Vehicle/' + 'Sample/' + vehicle.vehicleId, vehicle,
-            { useAuth: false }, undefined).then(
+            { useAuth: true }, undefined).then(
             (response: any) => {
               console.log(response);
               if (response.code === '200') {
@@ -53,7 +53,7 @@ export class VehicleViewService {
       delete vehicle.id;
       delete vehicle.vehicleId;
       this.apiService.post('Vehicle/' + 'Sample', vehicle,
-            { useAuth: false }, undefined).then(
+            { useAuth: true }, undefined).then(
             (response: any) => {
               console.log(response);
               if (response.code === '200') {

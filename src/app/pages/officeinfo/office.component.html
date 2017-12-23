@@ -11,16 +11,16 @@
 <div class="office-data-table">
     <div class="table-caption row">
         <span class="col-sm-1">#</span>
-        <span class="col-sm-1">Office Name</span>
+        <span class="col-sm-2">Office Name</span>
         <span class="col-sm-2">Contact Name</span>
         <span class="col-sm-2">Contact Number</span>
         <span class="col-sm-2">Address</span>
         <span class="col-sm-1">Edit</span>
     </div>
 
-    <div class="table-row row" *ngFor="let office of officeViewData | async; let i = index;">
+    <div class="table-row no-accordion row" *ngFor="let office of officeViewData | async; let i = index;">
         <span class="col-sm-1"> {{i + 1}}</span>
-        <span class="col-sm-1">{{office.officeName}}</span>
+        <span class="col-sm-2">{{office.officeName}}</span>
         <span class="col-sm-2">{{office.contactName}}</span>
         <span class="col-sm-2">{{office.contactNo}}</span>
         <span class="col-sm-2">{{office.address}}</span>

@@ -23,7 +23,7 @@
       <div class="row form-group">
         <span class="col-sm-6">Payment Date: </span>
         <span class="col-sm-6">
-                <input type="text" #dp="bsDatepicker" bsDatepicker ngModel name="date" class="form-control">
+                <input type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" ngModel name="date" class="form-control">
               </span>
       </div>
       <div class="row form-group">

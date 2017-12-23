@@ -40,7 +40,7 @@ export class DriverViewService {
 
   updateDriver(driver) {
     this.apiService.put('Driver/' + 'Sample/' + driver.driverId, driver,
-      { useAuth: false }, undefined).then(
+      { useAuth: true }, undefined).then(
       (response: any) => {
         console.log(response);
         if (response.code === '200') {
@@ -59,7 +59,7 @@ export class DriverViewService {
       delete driver.id;
       delete driver.driverId;
       this.apiService.post('Driver/' + 'Sample', driver,
-            { useAuth: false }, undefined).then(
+            { useAuth: true }, undefined).then(
             (response: any) => {
               console.log(response);
               if (response.code === '200') {

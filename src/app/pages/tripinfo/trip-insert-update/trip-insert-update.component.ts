@@ -36,6 +36,11 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
    }
 
    ngOnInit(){     
+    if (this.actionType == "add") {
+    this.tripData.advanceBalanceAmount = 0;
+    this.tripData.driverAcceptedAmount = 0;
+    this.tripData.selfAmount = 0;
+    }  
    }
 
    ngDoCheck() {
@@ -45,10 +50,13 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
     } else {
       this.tripData.vehicleAmount = (this.tripData.ratePerTon - this.tripData.crossing) * this.tripData.noOfTons;
     }    
-    if(this.actionType == "add") {
+    if(this.actionType == "add" && this.tripData.typeOfPayment == "advance") {
     this.tripData.paidAmount = this.tripData.driverAcceptedAmount + this.tripData.selfAmount;
     this.tripData.advanceBalanceAmount = this.tripData.advanceAmount - this.tripData.paidAmount;
     this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
+    } else if (this.actionType == "add" && this.tripData.typeOfPayment != "advance") {
+          this.tripData.paidAmount = 0;
+          this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
     }
    }
 
