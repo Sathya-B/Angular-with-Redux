@@ -40,6 +40,8 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
     this.tripData.advanceBalanceAmount = 0;
     this.tripData.driverAcceptedAmount = 0;
     this.tripData.selfAmount = 0;
+    this.tripData.roundOffAmount = 0;
+    this.tripData.unloadingCharges = 0;
     }  
    }
 
@@ -57,6 +59,8 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
     } else if (this.actionType == "add" && this.tripData.typeOfPayment != "advance") {
           this.tripData.paidAmount = 0;
           this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
+    } else if(this.actionType == "update") {
+          this.tripData.balanceAmount = this.tripData.vehicleAmount - (this.tripData.paidAmount + this.tripData.unloadingCharges + this.tripData.roundOffAmount);
     }
    }
 

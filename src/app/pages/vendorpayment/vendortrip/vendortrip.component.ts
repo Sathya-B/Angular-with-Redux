@@ -16,6 +16,8 @@ export class VendorTripComponent implements OnInit, OnDestroy {
 @Input() tripData;
 @Input() itemIndex;
 modalRef: BsModalRef;
+public unloadingCharges: number = 0;
+public roundOffAmount: number = 0;
 
 log(event: boolean) {
   console.log(`Accordion has been ${event ? 'opened' : 'closed'}`);

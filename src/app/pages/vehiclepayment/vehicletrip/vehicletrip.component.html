@@ -41,11 +41,23 @@
         </select>
       </span> </div>
       <div class="row form-group">
+        <span class="col-sm-6">Unloading Charges: </span>
+        <span class="col-sm-6">
+                <input type="number" name="unloadingCharges" class="form-control" [(ngModel)]="unloadingCharges">
+              </span>
+      </div>
+      <div class="row form-group">
+        <span class="col-sm-6">RoundOff Amount: </span>
+        <span class="col-sm-6">
+                <input type="number" name="roundOffAmount" class="form-control"  [(ngModel)]="roundOffAmount">
+              </span>
+      </div>
+      <div class="row form-group">
         <span class="col-sm-6 text-left">
                 <button class="btn editbtn" type="submit">Update</button>
               </span>
         <span class="col-sm-6 text-right">
-                  <button class="btn cancelbtn" (click)="modalRef.hide()">Cancel</button>
+                  <button class="btn cancelbtn" type="button" (click)="modalRef.hide()">Cancel</button>
                 </span>
       </div>
     </form>

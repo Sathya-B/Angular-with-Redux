@@ -41,6 +41,8 @@ export class TokenService {
                         .then((tokenres) => {
                             if (tokenres['value'].code === '999') {
                                 localStorage.setItem('JWT', (tokenres['value'].data));
+                            } else if(tokenres['value'].code === '905') {
+                              this.router.navigate(['/']);
                             }
                             return resolve(JSON.parse(localStorage.getItem('JWT')).accessToken);
                         })

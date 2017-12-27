@@ -110,7 +110,7 @@
         <label>Round Off Amount </label>
       </span>
       <span class="col-sm-3">
-        <input type="number" name="roundOffAmount" class="form-control" [(ngModel)]="tripData.roundOffAmount">
+        <input type="number" name="roundOffAmount" class="form-control" [(ngModel)]="tripData.roundOffAmount" readonly>
       </span>
     </div>
     <div class="row form-group">
@@ -119,6 +119,12 @@
         </span>
         <span class="col-sm-3">
           <input type="number" name="unloadTon" class="form-control" [(ngModel)]="tripData.unloadTon">
+        </span>
+        <span class="col-sm-3">
+          <label>Unloading Charges</label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="unloadingCharges" class="form-control" [(ngModel)]="tripData.unloadingCharges" readonly>
         </span>
     </div>
      <div class="row form-group">
