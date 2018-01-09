@@ -25,11 +25,14 @@ export class TripInfoComponent implements OnInit {
   public updateAction: string = 'update';
   public addAction: string = 'add';
   public vendorData: any[] = [];
-  public vehicleData: any[] = [];
+  public vehicleData: any[any] = [{}];
   public officeData: any[] = [];
   public driverData: any[] = [];
   public cityLocation: any[] = [];
   public locationData: any;
+  public searchVehicleNo: any;
+  public searchFrom: Date;
+  public searchTo: Date;
   constructor(
     private tripServ : TripService,
     private modalService: BsModalService,
@@ -55,7 +58,7 @@ export class TripInfoComponent implements OnInit {
           return this.vendorData = v.vendorName;
         });
     this.vehicleData = _.map(this.ngRedux.getState().vehicleInfo, (v: any) => {
-          return this.vehicleData = v.vehicleNo;
+          return this.vehicleData = { 'vehicleNo': v.vehicleNo, 'driverName': v.driverName };
     });
     this.officeData = _.map(this.ngRedux.getState().officeInfo, (v: any) => {
           return this.officeData = v.officeName;
@@ -108,6 +111,19 @@ export class TripInfoComponent implements OnInit {
 
   addTrip(){
     this.tripData = new Trip();
+  }
+  searchTrips(){
+    let query:string = '?';
+    if(this.searchVehicleNo != undefined) {
+      query = query + 'vehicleno=' + this.searchVehicleNo + '&';
+    }
+    if(this.searchFrom != undefined) {
+      query = query + 'fromdate=' + this.searchFrom.toISOString() + '&';      
+    }
+    if(this.searchTo !=undefined) {
+      query = query + 'todate=' + this.searchTo.toISOString() + '&';      
+    }
+    this.tripServ.searchTripInfo(query);
   }
 
 }

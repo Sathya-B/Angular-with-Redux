@@ -35,12 +35,12 @@
                 </div>
                 <div class="row no-margin">
                     <div class="table-row row no-margin">
-                        <app-vehicle-view-update [vehicleData]="vehicle" (cancelClicked)="group.isOpen = false"></app-vehicle-view-update>
+                        <app-vehicle-view-update [vehicleData]="vehicle" [driverData]="driverData" (cancelClicked)="group.isOpen = false"></app-vehicle-view-update>
                     </div>
                 </div>
             </accordion-group>
         </div>
-    </accordion>    
+    </accordion>
 </div>
 
 
@@ -153,7 +153,16 @@
                     <span class="col-sm-3">
         <input type="text" #dp="bsDatepicker" bsDatepicker name="permitDate" [(ngModel)]="vehicleData.permitDate" class="form-control">
       </span>
-                </div>
+     </div>
+            <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Driver Name</label>
+      </span>
+      <span class="col-sm-3">
+         <input type="text" name="driverName" [typeahead]="driverData" autocomplete="off" [(ngModel)]="vehicleData.driverName" class="form-control">
+      </span>
+    </div>
+
                 <div class="row form-group">
                     <span class="col-sm-3">
         <button class="editbtn btn" (click)="insertVehicle(vehicleData)">Save</button>

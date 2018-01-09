@@ -6,8 +6,10 @@ export interface IAppState {
  vendorInfo: Array<any>;
  officeInfo: Array<any>;
  tripInfo: Array<any>;
+ tripInfoLine: Array<any>;
  driverInfo: Array<any>;
  pendingInfo: Array<any>;
+ expiryInfo: {};
  modal: string;
 }
 
@@ -16,8 +18,10 @@ export const INITIAL_STATE: IAppState = {
  vendorInfo: [],
  officeInfo: [],
  tripInfo: [],
+ tripInfoLine: [],
  driverInfo: [],
  pendingInfo: [],
+ expiryInfo: {},
  modal: 'CLOSE'
 }
 
@@ -33,12 +37,19 @@ function getOffice(state, action) {
 function getTrips(state, action) {
     return tassign(state, { tripInfo: action.tripInfo});
 }
+function getTripLine(state, action) {
+    return tassign(state, { tripInfoLine: action.tripInfoLine});
+}
 function getDrivers(state, action) {
     return tassign(state, { driverInfo: action.driverInfo});
 }
 
 function getPending(state, action) {
     return tassign(state, { pendingInfo: action.pendingInfo});
+}
+
+function getExpiry(state, action) {
+    return tassign(state, { expiryInfo: action.expiryInfo});
 }
 
 function updateVehicle(state, action) {
@@ -75,6 +86,15 @@ function updateTrip(state, action) {
     var afterItems = state.tripInfo.slice(index + 1);    
     var newarray = [...beforeItems, action.tripInfo, ...afterItems];
     return tassign(state, { tripInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
+}
+
+function updateTripLine(state, action) {
+    var updatedItem = state.tripInfoLine.find(i => i.tripId === action.tripInfoLine.tripId);
+    var index = state.tripInfoLine.indexOf(updatedItem);
+    var beforeItems = state.tripInfoLine.slice(0, index);
+    var afterItems = state.tripInfoLine.slice(index + 1);    
+    var newarray = [...beforeItems, action.tripInfoLine, ...afterItems];
+    return tassign(state, { tripInfoLine: newarray, modal: Const.UPDATED_CLOSE_MODAL});
 }
 
 function updateDriver(state, action) {
@@ -121,6 +141,13 @@ switch(action.type) {
     var addedToList = state.tripInfo.concat(action.tripInfo);
     return tassign(state, { tripInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
 
+    case Const.FETCH_ALL_TRIPLINE_SUCCESS: return getTripLine(state, action);
+    case Const.UPDATE_TRIPLINE_SUCCESS: return updateTripLine(state, action);
+    case Const.ADD_TRIPLINE_SUCCESS:
+    var addedToList = state.tripInfoLine.concat(action.tripInfoLine);
+    return tassign(state, { tripInfoLine: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
+
+
     case Const.FETCH_ALL_DRIVER_SUCCESS: return getDrivers(state, action);
     case Const.UPDATE_DRIVER_SUCCESS: return updateDriver(state, action);
     case Const.ADD_DRIVER_SUCCESS:
@@ -129,6 +156,8 @@ switch(action.type) {
 
     case Const.FETCH_ALL_PENDING_SUCCESS: return getPending(state, action);
     case Const.UPDATE_PENDING_SUCCESS: return updatePending(state, action);
+
+    case Const.FETCH_ALL_EXPIRY_SUCCESS: return getExpiry(state, action);
 }
 
 return state;

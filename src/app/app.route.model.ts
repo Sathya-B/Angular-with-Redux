@@ -9,6 +9,7 @@ import { VendorInfoComponent } from './pages/vendorinfo/vendorinfo.component';
 import { VehiclePaymentComponent } from './pages/vehiclepayment/vehiclepayment.component';
 import { VendorPaymentComponent } from './pages/vendorpayment/vendorpayment.component';
 import { TripInfoComponent } from './pages/tripinfo/tripinfo.component';
+import { TripInfoLineComponent } from './pages/tripinfoline/tripinfoline.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OfficeInfoComponent } from './pages/officeinfo/office.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
@@ -26,7 +27,8 @@ export const routes: Routes = [
       {path:'driverinfo', component: DriverInfoComponent },
       {path:'vehiclepayment', component: VehiclePaymentComponent },
       {path:'vendorpayment', component: VendorPaymentComponent },
-      {path:'tripinfo', component: TripInfoComponent },      
+      {path:'tripinfo', component: TripInfoComponent },
+      {path:'tripinfoline', component: TripInfoLineComponent },      
       {path:'dashboard', component: DashboardComponent },
       {path:'', component: DashboardComponent }
     ], canActivate: [AuthGuard]

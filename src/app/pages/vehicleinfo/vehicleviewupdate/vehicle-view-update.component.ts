@@ -12,6 +12,7 @@ import * as Const from '../../../store/actions';
 export class VehicleViewUpdateComponent {
   
   @Input() public vehicleData: any;
+  @Input()  public driverData: any[];
   @Output() cancelClicked = new EventEmitter<boolean>();
 
   constructor(private vehicleViewService: VehicleViewService, private ngRedux: NgRedux<IAppState>, ) {

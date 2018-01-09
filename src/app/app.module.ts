@@ -30,7 +30,6 @@ import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import { ExpensesInsertUpdateComponent } from './pages/expenses/expenses-insert-update/expenses-insert-update.component';
 import { AuthGuard } from "./shared/authguard";
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +49,7 @@ import { AuthGuard } from "./shared/authguard";
     BsDatepickerModule.forRoot(),
     TypeaheadModule,
     AccordionModule,    
-    NgReduxModule
+    NgReduxModule,    
   ],
   providers: [
     HttpClient,

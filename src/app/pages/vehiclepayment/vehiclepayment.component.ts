@@ -25,7 +25,7 @@ export class VehiclePaymentComponent implements OnInit {
         .map(function (value, key) {
           return {
             vehicleNo: key,
-            totalAmount: sum(_.pluck(value, "totalAmount")),
+            vehicleAmount: sum(_.pluck(value, "vehicleAmount")),
             balanceAmount: sum(_.pluck(value, "balanceAmount")),
             tripData: value
           }

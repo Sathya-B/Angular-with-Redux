@@ -1,7 +1,7 @@
 .login-container {
     height: 100vh;
     position: relative;
-    background: url(../../assets/images/login.png) no-repeat center;
+    background: url(../../assets/images/login.jpg) no-repeat center;
     background-size: cover;
 }
 .blur {

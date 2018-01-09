@@ -1,8 +1,25 @@
 <div class="page-details row">
-  <span class="col-sm-6">
+  <span class="col-sm-2">
     <h2> Vendor Payment</h2>
   </span>
-  <span class="col-sm-6 text-right">
+  <span class="col-sm-9" style="padding:25px 0">
+  <span class="col-sm-1">
+    <label>From Date</label>
+  </span>
+  <span class="col-sm-2">
+    <input type="text" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY', modelFormat: 'DD-MM-YYYY'}" bsDatepicker name="searchFrom" class="form-control" [(ngModel)]="searchFrom">
+  </span>
+  <span class="col-sm-1">
+    <label>To Date</label>
+  </span>
+  <span class="col-sm-2">
+    <input type="text" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker name="searchTo" class="form-control" [(ngModel)]="searchTo">
+  </span>
+  <span class="col-sm-2">
+  <button class="editbtn btn" (click)="searchTrips()">Search</button>
+  </span>
+  </span>
+  <span class="col-sm-1 text-right">
 
   </span>
 </div>
@@ -10,7 +27,7 @@
   <div class="table-caption row no-margin">
     <span class="col-sm-1">#</span>
     <span class="col-sm-3">Vendor Name</span>
-    <span class="col-sm-3">Total Amount</span>
+    <span class="col-sm-3">Vehicle Amount</span>
     <span class="col-sm-3">Pending Amount</span>
     <span class="col-sm-1">Action</span>
   </div>
@@ -21,7 +38,7 @@
         <div accordion-heading>
           <span class="col-sm-1"> {{i + 1}}</span>
           <span class="col-sm-3">{{vendor.vendorName}}</span>
-          <span class="col-sm-3">{{vendor.totalAmount}}</span>
+          <span class="col-sm-3">{{vendor.vehicleAmount}}</span>
           <span class="col-sm-3">{{vendor.balanceAmount}}</span>
           <span class="col-sm-1">
             <a class=" togglebtn" *ngIf="group?.isOpen == true"> 
@@ -38,7 +55,7 @@
             <span class="col-sm-2">Vehicle No</span>
             <span class="col-sm-2">Pickup Date</span>
             <span class="col-sm-2">Dorp Date</span>
-            <span class="col-sm-2">Total Amount</span>
+            <span class="col-sm-2">Vehicle Amount</span>
             <span class="col-sm-2">Pending Amount</span>
             <span class="col-sm-1">Action</span>
           </div>

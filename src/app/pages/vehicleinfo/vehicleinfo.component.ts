@@ -7,7 +7,8 @@ import * as Const from '../../store/actions';
 import { Vehicle } from './Vehicle.model';
 import { NgForm } from '@angular/forms';
 import { VehicleViewService } from '../../service/vehicleview.service';
-
+import { DriverViewService } from "../../service/driverview.service";
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-vehicleinfo',
@@ -20,19 +21,26 @@ export class VehicleInfoComponent implements OnInit {
   editVehicleinfoView = false;
   modalRef: BsModalRef;
   formAction: string;
+  public driverData: any[] = [];
   @select('vehicleInfo') vehicleViewData;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private data: VehicleViewService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private driverSer: DriverViewService
   ) {
     this.vehicleData = new Vehicle();
  }
 
   ngOnInit() {
     this.listVehicle();
-
+    this.getDriverList();
+    this.ngRedux.subscribe(() => {
+    this.driverData = _.map(this.ngRedux.getState().driverInfo, (v: any) => {
+          return this.driverData = v.driverName;
+    });
+    });
   }
 
   listVehicle() {
@@ -68,4 +76,7 @@ export class VehicleInfoComponent implements OnInit {
     })
   }
 
+  getDriverList(){
+    this.driverSer.getDriver();
+  }
 }

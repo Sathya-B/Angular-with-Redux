@@ -37,4 +37,17 @@ export class VehicleAmountService {
         this.ngRedux.dispatch({ type: Const.FETCH_ALL_PENDING_ERROR });
       });
   } 
+    getVechileamountFilter(query) {
+    this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl + 'Trip/unpaidbalance/fromdate/todate' + query).then(
+      (response: any) => {
+        if (response.code == '200') {
+          this.ngRedux.dispatch({ type: Const.FETCH_ALL_PENDING_SUCCESS, pendingInfo: response.data });
+        } else {
+          throw response.error;
+        }
+      })
+      .catch((error: any) => {
+        this.ngRedux.dispatch({ type: Const.FETCH_ALL_PENDING_ERROR });
+      });
+  } 
 }

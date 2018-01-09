@@ -101,6 +101,14 @@
     </div>
     <div class="row form-group">
       <span class="col-sm-3">
+        <label>Driver Name</label>
+      </span>
+      <span class="col-sm-3">
+         <input type="text" name="driverName" [typeahead]="driverData" autocomplete="off" [(ngModel)]="vehicleData.driverName" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
         <button class="editbtn btn" (click)="updateVehicle(vehicleData)">Update</button>
       </span>
       <span class="col-sm-3">

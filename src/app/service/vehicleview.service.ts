@@ -32,6 +32,20 @@ export class VehicleViewService {
       });
   }
 
+    getExpiry() {
+    this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl +'Vehicle/notificationforrenewal').then(
+      (response: any) => {        
+        if(response.code == '200') {
+          this.ngRedux.dispatch({ type: Const.FETCH_ALL_EXPIRY_SUCCESS, expiryInfo: response.data });
+        } else {
+          throw response.error;
+        }        
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  }
+
   updateVechile(vehicle) {
     this.apiService.put('Vehicle/' + 'Sample/' + vehicle.vehicleId, vehicle,
             { useAuth: true }, undefined).then(

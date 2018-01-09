@@ -25,7 +25,7 @@ export class TripService {
   }
 
   getTripInfo() {
-      this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl +'Trip').then(
+      this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl +'Trip/gettripwithfilter/Local/vehicleno/fromdate/todate').then(
       (response: any) => {        
         if(response.code == '200') {
           this.ngRedux.dispatch({ type: Const.FETCH_ALL_TRIP_SUCCESS, tripInfo: response.data });
@@ -38,8 +38,52 @@ export class TripService {
       });
   }
 
-  updateTrip(trip) {    
-    this.apiService.put('Trip/' + 'Sample/' + trip.tripId, trip,
+    searchTripInfo(query) {
+      this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl +'Trip/gettripwithfilter/Local/vehicleno/fromdate/todate'+ query).then(
+      (response: any) => {        
+        if(response.code == '200') {
+          this.ngRedux.dispatch({ type: Const.FETCH_ALL_TRIP_SUCCESS, tripInfo: response.data });
+        } else {
+          throw response.error;
+        }        
+      })
+      .catch((error: any) => {
+        this.ngRedux.dispatch({ type: Const.FETCH_ALL_TRIP_ERROR });
+      });
+  }
+
+  searchTripLineInfo(query) {
+      this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl +'Trip/gettripwithfilter/Line/vehicleno/fromdate/todate'+ query).then(
+      (response: any) => {        
+        if(response.code == '200') {
+          this.ngRedux.dispatch({ type: Const.FETCH_ALL_TRIPLINE_SUCCESS, tripInfoLine: response.data });
+        } else {
+          throw response.error;
+        }        
+      })
+      .catch((error: any) => {
+        this.ngRedux.dispatch({ type: Const.FETCH_ALL_TRIPLINE_ERROR });
+      });
+  }
+
+    getTripLineInfo() {
+      this.apiService.get('', { useAuth: false }, Conf.apiUrl.serverUrl +'Trip/gettripwithfilter/Line/vehicleno/fromdate/todate').then(
+      (response: any) => {        
+        if(response.code == '200') {
+          this.ngRedux.dispatch({ type: Const.FETCH_ALL_TRIPLINE_SUCCESS, tripInfoLine: response.data });
+        } else {
+          throw response.error;
+        }        
+      })
+      .catch((error: any) => {
+        this.ngRedux.dispatch({ type: Const.FETCH_ALL_TRIP_ERROR });
+      });
+  }
+
+  updateTrip(trip, updateId) {
+    delete trip.id;
+    delete trip.tripId;
+    this.apiService.put('Trip/' + 'Sample/' + updateId, trip,
             { useAuth: false }, undefined).then(
             (response: any) => {
               console.log(response);

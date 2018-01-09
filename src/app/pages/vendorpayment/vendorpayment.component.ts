@@ -12,6 +12,8 @@ import { IAppState } from "../../store/store";
 export class VendorPaymentComponent implements OnInit {
 
   vendorPaymentViewData: any;
+  searchFrom: Date;
+  searchTo: Date;
 
   constructor(
     private vendorAmount: VehicleAmountService,
@@ -25,7 +27,7 @@ export class VendorPaymentComponent implements OnInit {
         .map(function (value, key) {
           return {
             vendorName: key,
-            totalAmount: sum(_.pluck(value, "totalAmount")),
+            vehicleAmount: sum(_.pluck(value, "vehicleAmount")),
             balanceAmount: sum(_.pluck(value, "balanceAmount")),
             tripData: value
           }
@@ -37,6 +39,17 @@ export class VendorPaymentComponent implements OnInit {
 
   ngOnInit() {
     this.vendorAmount.getVechileamount()
+  }
+
+  searchTrips() {
+    let query:string = '?';    
+    if(this.searchFrom != undefined) {
+      query = query + 'fromdate=' + this.searchFrom.toISOString() + '&';      
+    }
+    if(this.searchTo !=undefined) {
+      query = query + 'todate=' + this.searchTo.toISOString() + '&';      
+    }
+    this.vendorAmount.getVechileamountFilter(query);
   }
 }
 

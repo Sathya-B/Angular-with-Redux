@@ -7,6 +7,7 @@
       </span>
       <span class="col-sm-3">
         <input type="text" name="loadDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="tripData.loadDate" class="form-control">
+        <input type="hidden" name="tripType" [(ngModel)]="tripData.tripType" class="form-control">
       </span>
       <span class="col-sm-3">
         <label> Unload Date</label>
@@ -26,7 +27,7 @@
         <label> Vehicle Number</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="vehicleNo" autocomplete="off" [typeahead]="vehicleData" [(ngModel)]="tripData.vehicleNo" class="form-control">
+        <input type="text" name="vehicleNo" autocomplete="off" [typeahead]="vehicleData" typeaheadOptionField="vehicleNo" (change)="vehicleNoUpdated(tripData.vehicleNo)" [(ngModel)]="tripData.vehicleNo" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -54,7 +55,7 @@
         <label> Driver Name </label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="driverName" [typeahead]="driverData" autocomplete="off" [(ngModel)]="tripData.driverName" class="form-control">
+        <input type="text" name="driverName" [typeahead]="vehicleData" autocomplete="off" [(ngModel)]="tripData.driverName" class="form-control">
       </span>
     </div>
         <div class="row form-group">
@@ -87,10 +88,10 @@
     </div>
     <div class="row form-group">
       <span class="col-sm-3">
-        <label> Total Amount </label>
+        <label> Total-Amount </label>
       </span>
       <span class="col-sm-3">
-        <input type="number" name="totalAmount" class="form-control" [(ngModel)]="tripData.totalAmount" readonly>
+        <input type="text" name="totalAmount" class="form-control" [(ngModel)]="tripData.totalAmount" readonly>
       </span>
       <span class="col-sm-3">
         <label> Crossing </label>
@@ -153,6 +154,15 @@
         </span>
         <span class="col-sm-3">
           <input type="number" name="advanceAmount" class="form-control" [(ngModel)]="tripData.advanceAmount">
+        </span>
+        <span class="col-sm-3">
+          <label>Loading Charges</label>
+        </span>
+        <span class="col-sm-3" *ngIf="actionType == 'add'">
+          <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges">
+        </span>
+        <span class="col-sm-3" *ngIf="actionType == 'update'">
+          <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges" readonly>
         </span>
       </div>
 

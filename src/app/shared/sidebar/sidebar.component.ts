@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  masteropened: boolean = false;
+  paymentopened: boolean = false;
+  tripopened: boolean = false;
+   
   constructor() { }
 
   ngOnInit() {

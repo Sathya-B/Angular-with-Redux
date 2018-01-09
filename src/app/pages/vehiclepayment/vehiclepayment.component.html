@@ -10,7 +10,7 @@
   <div class="table-caption row no-margin">
     <span class="col-sm-1">#</span>
     <span class="col-sm-3">Vehicle No</span>
-    <span class="col-sm-3">Total Amount</span>
+    <span class="col-sm-3">Vehicle Amount</span>
     <span class="col-sm-3">Pending Amount</span>
     <span class="col-sm-1">Action</span>
   </div>
@@ -21,7 +21,7 @@
         <div accordion-heading>
           <span class="col-sm-1"> {{i + 1}}</span>
           <span class="col-sm-3">{{vehicle.vehicleNo}}</span>
-          <span class="col-sm-3">{{vehicle.totalAmount}}</span>
+          <span class="col-sm-3">{{vehicle.vehicleAmount}}</span>
           <span class="col-sm-3">{{vehicle.balanceAmount}}</span>
           <span class="col-sm-1">
             <a class=" togglebtn" *ngIf="group?.isOpen == true"> 
@@ -38,7 +38,7 @@
             <span class="col-sm-2">Vendor Name</span>
             <span class="col-sm-2">Pickup Date</span>
             <span class="col-sm-2">Dorp Date</span>
-            <span class="col-sm-2">Total Amount</span>
+            <span class="col-sm-2">Vehicle Amount</span>
             <span class="col-sm-2">Pending Amount</span>
             <span class="col-sm-1">Action</span>
           </div>

@@ -122,6 +122,8 @@ div.addform{
 
 span.form-group.text-right{
     position: absolute;
-    bottom: 13px;
+    bottom: 15px;
     cursor: pointer;
+    width: 28%;
+    margin-left: 90px;
 }

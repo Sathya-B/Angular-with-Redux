@@ -10,6 +10,7 @@ import { NgRedux, select } from 'ng2-redux';
 import { IAppState } from '../../../store/store';
 import * as Const from '../../../store/actions';
 import { TripService } from "../../../service/trip.service";
+import { TypeaheadMatch } from "ngx-bootstrap";
 
 @Component({
   selector: 'app-trip-insert-update',
@@ -25,7 +26,7 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
   @Input()  public officeData: any[];
   @Input()  public driverData: any[];
   @Input()  public vendorData: any[];
-  @Input() public vehicleData: any[];
+  @Input() public vehicleData: any[any];
   @Input() public cityLocation: any[];
   @Output() cancelClicked = new EventEmitter<boolean>();
   constructor(
@@ -35,32 +36,34 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
   //  this.tripData = new Trip();    
    }
 
-   ngOnInit(){     
+   ngOnInit(){ 
+    this.tripData.tripType = "Local";    
     if (this.actionType == "add") {
     this.tripData.advanceBalanceAmount = 0;
     this.tripData.driverAcceptedAmount = 0;
     this.tripData.selfAmount = 0;
     this.tripData.roundOffAmount = 0;
     this.tripData.unloadingCharges = 0;
-    }  
+    this.tripData.loadingCharges = 0;
+    }     
    }
 
    ngDoCheck() {
-    this.tripData.totalAmount = this.tripData.ratePerTon * this.tripData.noOfTons;
+    this.tripData.totalAmount = Math.round(this.tripData.ratePerTon * this.tripData.noOfTons);
     if(this.tripData.unloadTon > 0) {
-      this.tripData.vehicleAmount = (this.tripData.ratePerTon - this.tripData.crossing) * this.tripData.unloadTon;
+      this.tripData.vehicleAmount = Math.round((this.tripData.ratePerTon - this.tripData.crossing) * this.tripData.unloadTon);
     } else {
       this.tripData.vehicleAmount = (this.tripData.ratePerTon - this.tripData.crossing) * this.tripData.noOfTons;
     }    
     if(this.actionType == "add" && this.tripData.typeOfPayment == "advance") {
-    this.tripData.paidAmount = this.tripData.driverAcceptedAmount + this.tripData.selfAmount;
+    this.tripData.paidAmount = this.tripData.driverAcceptedAmount + this.tripData.selfAmount + this.tripData.loadingCharges;
     this.tripData.advanceBalanceAmount = this.tripData.advanceAmount - this.tripData.paidAmount;
     this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
     } else if (this.actionType == "add" && this.tripData.typeOfPayment != "advance") {
           this.tripData.paidAmount = 0;
           this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
     } else if(this.actionType == "update") {
-          this.tripData.balanceAmount = this.tripData.vehicleAmount - (this.tripData.paidAmount + this.tripData.unloadingCharges + this.tripData.roundOffAmount);
+          this.tripData.balanceAmount = this.tripData.vehicleAmount - (this.tripData.paidAmount + this.tripData.unloadingCharges + this.tripData.roundOffAmount + this.tripData.loadingCharges);
     }
    }
 
@@ -94,12 +97,15 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
     }
     })
     if(this.actionType == 'update') {
-    this.tripService.updateTrip(form);
+    this.tripService.updateTrip(form, this.tripData.tripId);
      } else if(this.actionType == 'add')  {
     this.tripService.addTrip(form);
     }
   }
   closeModal(event: any) {
    this.cancelClicked.emit(true);
+  }
+  vehicleNoUpdated(vehicleNum: any) {
+    this.tripData.driverName = (this.vehicleData.find( v => v.vehicleNo == vehicleNum)).driverName;
   }
 }
