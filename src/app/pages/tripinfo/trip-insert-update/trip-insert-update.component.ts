@@ -29,6 +29,7 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
   @Input() public vehicleData: any[any];
   @Input() public cityLocation: any[];
   @Output() cancelClicked = new EventEmitter<boolean>();
+  public admin: boolean = false;
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private tripService: TripService
@@ -45,7 +46,10 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
     this.tripData.roundOffAmount = 0;
     this.tripData.unloadingCharges = 0;
     this.tripData.loadingCharges = 0;
-    }     
+    } 
+    if(localStorage.getItem("UserName") == "Admin") {
+      this.admin = true;
+    } 
    }
 
    ngDoCheck() {

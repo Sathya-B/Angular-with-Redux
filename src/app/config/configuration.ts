@@ -22,9 +22,9 @@ export const tax = {
 
 // ***prod */
 // if (!env.environment) {
-apiUrl.serverUrl = 'http://192.168.0.115:4000/api/';
-apiUrl.authServer = 'http://192.168.0.115:4000/api/auth';
-apiUrl.tokenServer = 'http://192.168.0.115:4000/api/';
+apiUrl.serverUrl = 'http://localhost:4000/api/';
+apiUrl.authServer = 'http://localhost:4000/api/auth';
+apiUrl.tokenServer = 'http://localhost:4000/api/';
 // }
 
 export class Configuration {

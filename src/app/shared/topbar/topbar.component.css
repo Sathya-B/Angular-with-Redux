@@ -27,3 +27,9 @@ font-size:20px;
 .user .fa{
     font-size: 25px
 }
+
+.welcome{
+    font-size: 20px;
+    color: white;
+    padding-right: 10px;
+}

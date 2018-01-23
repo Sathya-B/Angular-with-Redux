@@ -7,7 +7,7 @@
     <label>Vehicle No</label>
   </span>
   <span class="col-sm-2">
-    <input type="text" name="searchVehicleNo" autocomplete="off" [typeahead]="vehicleData" class="form-control" [(ngModel)]="searchVehicleNo">
+    <input type="text" name="searchVehicleNo" autocomplete="off" [typeahead]="vehicleData" typeaheadOptionField="vehicleNo" class="form-control" [(ngModel)]="searchVehicleNo">
   </span>
   <span class="col-sm-1">
     <label>From Date</label>

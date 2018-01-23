@@ -16,6 +16,8 @@ export class LoginLogoutService {
     }
     public Logout() {
         localStorage.removeItem('JWT');
+        localStorage.removeItem('FirstName');
+        localStorage.removeItem('UserName');
         this.appState.set('loggedIn', false);
         this.router.navigate(['/']);
     }

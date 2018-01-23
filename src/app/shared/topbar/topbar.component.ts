@@ -8,13 +8,17 @@ import { LoginLogoutService } from "../../service/loginlogout.service";
 })
 export class TopbarComponent implements OnInit {
 
+  firstName: string = "";
   constructor(private loginLogout: LoginLogoutService) { }
 
   ngOnInit() {
+    if(localStorage.getItem("FirstName") != undefined) {
+      this.firstName = "Hi " + localStorage.getItem("FirstName") + "!";
+    }
   }
 
   logout(){
-    this.loginLogout.Logout();
+    this.loginLogout.Logout();    
   }
 
 }
