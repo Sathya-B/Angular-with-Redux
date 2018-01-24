@@ -101,15 +101,15 @@ namespace JT_Transport.Helper
       {
         if (filterField1 == null & filterField2 == null)
         {
-          filter = FilterDefinition<BsonDocument>.Empty;
+          filter = Builders<BsonDocument>.Filter.Eq("IsActive", true);
         }
         else if (filterField1 != null & filterField2 == null)
         {
-          filter = Builders<BsonDocument>.Filter.Eq(filterField1, filterData1);
+          filter = Builders<BsonDocument>.Filter.Eq(filterField1, filterData1) & Builders<BsonDocument>.Filter.Eq("IsActive", true);
         }
         else if (filterField1 != null & filterField2 != null)
         {
-          filter = Builders<BsonDocument>.Filter.Eq(filterField1, filterData1) & Builders<BsonDocument>.Filter.Eq(filterField2, filterData2);
+          filter = Builders<BsonDocument>.Filter.Eq(filterField1, filterData1) & Builders<BsonDocument>.Filter.Eq(filterField2, filterData2) & Builders<BsonDocument>.Filter.Eq("IsActive", true);
         }
         IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(filter);
         return cursor.ToList();

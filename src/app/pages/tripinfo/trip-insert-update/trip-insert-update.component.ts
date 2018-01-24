@@ -49,7 +49,7 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
     } 
     if(localStorage.getItem("UserName") == "Admin") {
       this.admin = true;
-    } 
+    }
    }
 
    ngDoCheck() {
@@ -111,5 +111,8 @@ export class TripInsertUpdateComponent implements OnInit, DoCheck {
   }
   vehicleNoUpdated(vehicleNum: any) {
     this.tripData.driverName = (this.vehicleData.find( v => v.vehicleNo == vehicleNum)).driverName;
+  }
+  deleteTrip(tripId: any) {
+    this.tripService.deleteTrip(tripId);
   }
 }

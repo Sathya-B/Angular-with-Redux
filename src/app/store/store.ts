@@ -88,6 +88,12 @@ function updateTrip(state, action) {
     return tassign(state, { tripInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
 }
 
+function deleteTrip(state, action) {
+    var newarray = state.tripInfo.filter(t => t.tripId != action.tripId);
+    var newlinearray = state.tripInfoLine.filter(t => t.tripId != action.tripId);
+    return tassign(state, { tripInfo: newarray, tripInfoLine: newlinearray, modal: Const.UPDATED_CLOSE_MODAL});
+}
+
 function updateTripLine(state, action) {
     var updatedItem = state.tripInfoLine.find(i => i.tripId === action.tripInfoLine.tripId);
     var index = state.tripInfoLine.indexOf(updatedItem);
@@ -140,6 +146,7 @@ switch(action.type) {
     case Const.ADD_TRIP_SUCCESS:
     var addedToList = state.tripInfo.concat(action.tripInfo);
     return tassign(state, { tripInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
+    case Const.DELETE_TRIP_SUCCESS: return deleteTrip(state, action);
 
     case Const.FETCH_ALL_TRIPLINE_SUCCESS: return getTripLine(state, action);
     case Const.UPDATE_TRIPLINE_SUCCESS: return updateTripLine(state, action);

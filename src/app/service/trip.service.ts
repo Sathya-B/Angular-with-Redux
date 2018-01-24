@@ -81,9 +81,10 @@ export class TripService {
   }
 
   updateTrip(trip, updateId) {
+    let userName = localStorage.getItem("UserName");
     delete trip.id;
     delete trip.tripId;
-    this.apiService.put('Trip/' + 'Sample/' + updateId, trip,
+    this.apiService.put('Trip/' + userName + "/" + updateId, trip,
             { useAuth: false }, undefined).then(
             (response: any) => {
               console.log(response);
@@ -99,8 +100,9 @@ export class TripService {
             }
             );
   } 
-    updatePayment(tripId, payment) {    
-    this.apiService.put('Trip/makepayment/' + 'Sample/' + tripId, payment,
+    updatePayment(tripId, payment) {
+    let userName = localStorage.getItem("UserName"); 
+    this.apiService.put('Trip/makepayment/' + userName + "/" + tripId, payment,
             { useAuth: false }, undefined).then(
             (response: any) => {
               console.log(response);
@@ -116,8 +118,9 @@ export class TripService {
             }
             );
   } 
-  addTrip(trip) {    
-    this.apiService.post('Trip/' + 'Sample', trip,
+  addTrip(trip) {
+    let userName = localStorage.getItem("UserName");
+    this.apiService.post('Trip/' + userName, trip,
             { useAuth: false }, undefined).then(
             (response: any) => {
               console.log(response);
@@ -130,6 +133,24 @@ export class TripService {
             .catch(
             (error: any) => {
               this.ngRedux.dispatch({ type: Const.ADD_TRIP_ERROR });
+            }
+            );
+  }
+  deleteTrip(tripId) {
+        let userName = localStorage.getItem("UserName");
+        this.apiService.delete('Trip/' + userName + "/" + tripId,
+            { useAuth: false }, undefined).then(
+            (response: any) => {
+              console.log(response);
+              if (response.code === '200') {
+                this.ngRedux.dispatch({ type: Const.DELETE_TRIP_SUCCESS, tripId: tripId });
+              } else {
+                throw response.error;
+              }
+            })
+            .catch(
+            (error: any) => {
+              this.ngRedux.dispatch({ type: Const.DELETE_TRIP_ERROR });
             }
             );
   }

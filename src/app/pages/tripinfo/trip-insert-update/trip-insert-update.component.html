@@ -237,7 +237,7 @@
         <input type="text" name="tripId" [(ngModel)]="tripData.tripId" [hidden]="true">
         <button class="editbtn btn" *ngIf="actionType == 'update'" type="submit">Update</button>
         <button class="editbtn btn" *ngIf="actionType == 'add'" type="submit">Save</button>
-        <button class="cancelbtn btn" *ngIf="admin" type="submit">Delete</button>
+        <button class="cancelbtn btn" *ngIf="admin" type="button" (click)="deleteTrip(tripData.tripId)">Delete</button>
       </span>
       <span class="col-sm-3">
         <button class="cancelbtn btn" type="button" (click)="closeModal($event)">Cancel</button>

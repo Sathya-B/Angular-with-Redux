@@ -27,6 +27,7 @@ export class TripLineInsertUpdateComponent implements OnInit, DoCheck {
   @Input() public vehicleData: any[any];
   @Input() public cityLocation: any[];
   @Output() cancelClicked = new EventEmitter<boolean>();
+  public admin: boolean = false;
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private tripService: TripService
@@ -47,6 +48,9 @@ export class TripLineInsertUpdateComponent implements OnInit, DoCheck {
     this.tripData.totalAmount = Math.round(this.tripData.totalAmount);
     this.tripData.vehicleAmount = Math.round(this.tripData.vehicleAmount);
     this.tripData.balanceAmount = Math.round(this.tripData.balanceAmount);    
+    if(localStorage.getItem("UserName") == "Admin") {
+      this.admin = true;
+    }
    }
 
    ngDoCheck() {
@@ -102,5 +106,8 @@ export class TripLineInsertUpdateComponent implements OnInit, DoCheck {
   }
     vehicleNoUpdated(vehicleNum: any) {
     this.tripData.driverName = (this.vehicleData.find( v => v.vehicleNo == vehicleNum)).driverName;
+  }
+    deleteTrip(tripId: any) {
+    this.tripService.deleteTrip(tripId);
   }
 }
