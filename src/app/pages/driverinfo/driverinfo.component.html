@@ -25,6 +25,9 @@
         <span class="col-sm-1">
             <button class="btn editbtn" (click)="openModal(template);crudType('edit',driver);"> Edit </button>
         </span>
+        <span class="col-sm-1">
+            <a href="{{'https://s3.ap-south-1.amazonaws.com/jttdriver/' + driver.driverName + '.jpg'}}">License</a>
+        </span>
     </div>
 </div>
 
@@ -71,6 +74,18 @@
                         </span>
                         <span class="col-sm-6">
                             <textarea name="address" [(ngModel)]="driverData.address" placeholder="" class="form-control"></textarea>
+                        </span>
+
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="col-sm-12 form-group">
+                        <span class="col-sm-6">
+                            <label> License </label>
+                        </span>
+                        <span class="col-sm-6">
+                        <image-upload url="http://localhost:4000/api/admin/uploadimage" [headers]="authHeader" [beforeUpload]="onBeforeUpload(f)" (uploadFinished)="onUploadFinished($event)">
+                        </image-upload>
                         </span>
 
                     </span>

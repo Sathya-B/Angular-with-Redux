@@ -8,6 +8,8 @@ import { DriverViewService } from '../../service/driverview.service';
 import { IAppState } from '../../store/store';
 import { NgRedux, select } from 'ng2-redux';
 import * as Const from '../../store/actions';
+import { FileHolder, UploadMetadata } from "angular2-image-upload";
+import { TokenService } from "../../service/token.service";
 
 @Component({
   selector: 'app-driverinfo',
@@ -15,22 +17,31 @@ import * as Const from '../../store/actions';
   styleUrls: ['./driverinfo.component.css']
 })
 export class DriverInfoComponent implements OnInit {
-  driverData: Driver;  
+  driverData: Driver;
   editdriverinfoView = false;
   modalRef: BsModalRef;
   formAction: string;
+  authHeader: any = { Authorization: ""};
   @select('driverInfo') driverViewData;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private driver: DriverViewService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private tokenService: TokenService
   ) {
     this.driverData = new Driver();
   }
 
   ngOnInit() {
     this.driver.getDriver();
+    this.tokenService.getAuthToken().then((token)=> {
+        this.authHeader.Authorization = "Bearer " + token;;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    ;
   }
 
   crudType(action, driver?) {
@@ -51,10 +62,24 @@ export class DriverInfoComponent implements OnInit {
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-    this.ngRedux.subscribe(() => {    
-    if( this.ngRedux.getState().modal == Const.UPDATED_CLOSE_MODAL) {
-      this.modalRef.hide();
-    }  
+    this.ngRedux.subscribe(() => {
+      if (this.ngRedux.getState().modal == Const.UPDATED_CLOSE_MODAL) {
+        this.modalRef.hide();
+      }
     })
+  }
+  onUploadFinished(file: FileHolder) {
+    console.log(JSON.parse(file.serverResponse['_body']).data);
+  }
+
+  onBeforeUpload(form: NgForm) {
+    return (metadata: UploadMetadata) => {
+        metadata.formData = {
+          'objectName': form.value.driverName,
+          'bucketName': 'jttdriver'
+        }
+        console.log(metadata);
+        return metadata;
+    }
   }
 }

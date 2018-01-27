@@ -30,6 +30,9 @@ import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import { ExpensesInsertUpdateComponent } from './pages/expenses/expenses-insert-update/expenses-insert-update.component';
 import { AuthGuard } from "./shared/authguard";
 
+import { ImageUploadModule } from 'angular2-image-upload';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +50,7 @@ import { AuthGuard } from "./shared/authguard";
     FormsModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ImageUploadModule.forRoot(),
     TypeaheadModule,
     AccordionModule,    
     NgReduxModule,    
