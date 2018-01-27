@@ -125,7 +125,7 @@ export class TripService {
             (response: any) => {
               console.log(response);
               if (response.code === '200') {
-                this.ngRedux.dispatch({ type: Const.ADD_TRIP_SUCCESS, tripInfo: trip });
+                this.ngRedux.dispatch({ type: Const.ADD_TRIP_SUCCESS, tripInfo: response.data });
               } else {
                 throw response.error;
               }

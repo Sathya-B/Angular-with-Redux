@@ -675,7 +675,7 @@ namespace JT_Transport.Controllers
             else
             {
               #region Calculate trip id
-              var getTrips = MH.GetListOfObjects(tripinfo_collection, null, null, null, null).Result;
+              var getTrips = MH.GetListOfObjects(tripinfo_collection, null, null, null, null, true).Result;
               if (getTrips.Count == 0)
               {
                 data.TripId = "TP-1";

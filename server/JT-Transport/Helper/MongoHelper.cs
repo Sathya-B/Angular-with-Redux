@@ -120,6 +120,38 @@ namespace JT_Transport.Helper
         return null;
       }
     }
+    /// <param name="collection"></param>
+    /// <param name="filterField1"></param>
+    /// <param name="filterData1"></param>
+    /// <param name="filterField2"></param>
+    /// <param name="filterData2"></param>
+    /// <param name="findcount"></param>
+    /// <returns></returns>
+    public static async Task<List<BsonDocument>> GetListOfObjects(IMongoCollection<BsonDocument> collection, string filterField1, dynamic filterData1, string filterField2, dynamic filterData2, bool findcount)
+    {
+      try
+      {
+        if (filterField1 == null & filterField2 == null)
+        {
+          filter = FilterDefinition<BsonDocument>.Empty;
+        }
+        else if (filterField1 != null & filterField2 == null)
+        {
+          filter = Builders<BsonDocument>.Filter.Eq(filterField1, filterData1);
+        }
+        else if (filterField1 != null & filterField2 != null)
+        {
+          filter = Builders<BsonDocument>.Filter.Eq(filterField1, filterData1) & Builders<BsonDocument>.Filter.Eq(filterField2, filterData2);
+        }
+        IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(filter);
+        return cursor.ToList();
+      }
+      catch (Exception ex)
+      {
+        SL.CreateLog("MongoHelper", "GetListOfObjects", ex.Message);
+        return null;
+      }
+    }
 
     /// <summary>
     /// 
