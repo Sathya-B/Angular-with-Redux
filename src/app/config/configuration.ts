@@ -6,6 +6,7 @@ export const apiUrl = {
     tokenServer: ''
 };
 
+export const imgurl = "http://13.126.13.23:4000/api/admin/uploadimage";
 export const relatedLogic = {
     productFor: true, 
     productType: true,

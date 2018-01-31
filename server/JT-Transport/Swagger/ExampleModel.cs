@@ -109,6 +109,83 @@ namespace JT_Transport.Swagger
   }
 
   /// <summary>
+  /// Details of vechicle maintenance
+  /// </summary>
+  public class ExampleModel_InsertVehicleMaintenanceInfo
+  {
+
+    /// <summary>
+    /// Registration number of vehicle
+    /// </summary>
+    public string VehicleNo { get; set; }
+    /// <summary>
+    /// Vehicle Running KM
+    /// </summary>
+    public int RunKm { get; set; }
+    /// <summary>
+    /// Km at which Oil Service Done
+    /// </summary>
+
+    public int OilService { get; set; }
+    /// <summary>
+    /// Km at which Wheel Greace Done
+    /// </summary>    
+    public int WheelGrease { get; set; }
+    /// <summary>
+    /// Km at which Air Filter Changed
+    /// </summary>
+
+    public int AirFilter { get; set; }
+    /// <summary>
+    /// Km at which Clutch Plate Changed
+    /// </summary>
+
+    public int ClutchPlate { get; set; }
+    /// <summary>
+    /// Km at which Gear Oil Changed
+    /// </summary>
+
+    public int GearOil { get; set; }
+    /// <summary>
+    /// Km at which Crown Oil Changed
+    /// </summary>
+
+    public int CrownOil { get; set; }
+    /// <summary>
+    /// Km at which Self Motor Changed
+    /// </summary>
+
+    public int SelfMotor { get; set; }
+    /// <summary>
+    /// Km at which Dyname Changed
+    /// </summary>
+
+    public int Dynamo { get; set; }
+    /// <summary>
+    /// Km at which Radiator Changed
+    /// </summary>
+
+    public int Radiator { get; set; }
+    /// <summary>
+    /// Km at which Pin Push Changed
+    /// </summary>
+
+    public int PinPush { get; set; }
+    /// <summary>
+    /// Km at which Steering Oil Changed
+    /// </summary>
+
+    public int SteeringOil { get; set; }    
+    /// <summary>
+    /// Defines if the vehicle is active or not
+    /// </summary>
+
+    public bool? IsActive { get; set; }
+
+  }
+
+
+  /// <summary>
   /// Details of role
   /// </summary>
   public class ExampleModel_Roles

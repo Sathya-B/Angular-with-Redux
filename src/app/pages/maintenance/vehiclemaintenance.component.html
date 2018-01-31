@@ -1,0 +1,161 @@
+<div class="page-details row">
+    <span class="col-sm-6">
+        <h2> Vehicle Maintenance</h2>
+    </span>
+    <span class="col-sm-6 text-right">
+        <a class="addbtn" data-toggle="modal" data-target="#myModal" (click)="crudType('add');openModal(template)">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </a>
+    </span>
+</div>
+<div class="vehicle-data-table">
+    <div class="table-caption row">
+        <span class="col-sm-1">#</span>
+        <span class="col-sm-2">Vehicle No</span>
+        <span class="col-sm-2">Run Km</span>
+    </div>
+    <accordion>
+
+        <div class="table-row row no-margin" *ngFor="let vehicle of vehicleMaintenanceInfo | async; let i = index;">
+            <accordion-group #group [isOpen]>
+                <div accordion-heading>
+                    <span class="col-sm-1"> {{i + 1}}</span>
+                    <span class="col-sm-2">{{vehicle.vehicleNo}}</span>
+                    <span class="col-sm-2">{{vehicle.runKm}}</span>
+                    <span class="col-sm-1">
+        <a class=" togglebtn" *ngIf="group?.isOpen == true">
+        <i class="fa fa-toggle-on" aria-hidden="true"></i>
+        </a>
+        <a class=" togglebtn" *ngIf="group?.isOpen == false">
+        <i class="fa fa-toggle-off" aria-hidden="true"></i>
+        </a>
+        </span>
+                </div>
+                <div class="row no-margin">
+                    <div class="table-row row no-margin">
+                        <app-vehicle-maintenance-update [vehicleMaintenanceData]="vehicle" (cancelClicked)="group.isOpen = false"></app-vehicle-maintenance-update>
+                    </div>
+                </div>
+            </accordion-group>
+        </div>
+    </accordion>
+</div>
+
+
+<!-- Bootstrap Modal -->
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{formAction}} Vehicle Maintenance</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="addForm">
+     <form #f="ngForm">
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label> Vehicle Number</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="vehicleNo" [(ngModel)]="maintenanceData.vehicleNo" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Run Km</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="runKm" [(ngModel)]="maintenanceData.runKm" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Oil Service</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="oilService" [(ngModel)]="maintenanceData.oilService" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Wheel Grease</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="wheelGrease" [(ngModel)]="maintenanceData.wheelGrease" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Air Filter</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="vehicleType" [(ngModel)]="maintenanceData.airFilter" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Clutch Plate</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="clutchPlate" [(ngModel)]="maintenanceData.clutchPlate" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Gear Oil</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="gearOil" [(ngModel)]="maintenanceData.gearOil" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Crown Oil</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="crownOil" [(ngModel)]="maintenanceData.crownOil" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Self Motor</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="selfMotor" [(ngModel)]="maintenanceData.selfMotor" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Dynamo</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="dynamo" [(ngModel)]="maintenanceData.dynamo" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Radiator</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="radiator" [(ngModel)]="maintenanceData.radiator" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Pin Push</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="pinPush" [(ngModel)]="maintenanceData.pinPush" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Steering Oil</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="steeringOil" [(ngModel)]="maintenanceData.steeringOil" class="form-control">
+      </span>
+    </div>
+
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <button class="editbtn btn" (click)="insertVehicle(maintenanceData)">Save</button>
+      </span>
+      <span class="col-sm-3">
+        <button class="cancelbtn btn" type="button" (click)="closeItem($event)">Cancel</button>
+      </span>
+    </div>
+  </form>
+    </div>
+    </div>
+</ng-template>

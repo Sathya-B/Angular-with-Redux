@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { PagesComponent } from './pages/pages.component';
 // import { AuthGuard } from './shared';
 import { VehicleInfoComponent } from './pages/vehicleinfo/vehicleinfo.component';
+import { VehicleMaintenanceComponent } from './pages/maintenance/vehiclemaintenance.component';
 import { VendorInfoComponent } from './pages/vendorinfo/vendorinfo.component';
 import { VehiclePaymentComponent } from './pages/vehiclepayment/vehiclepayment.component';
 import { VendorPaymentComponent } from './pages/vendorpayment/vendorpayment.component';
@@ -22,6 +23,7 @@ export const routes: Routes = [
     children:[
       {path:'expenses', component: ExpensesComponent},
       {path:'vehicleinfo', component: VehicleInfoComponent},
+      {path:'maintenance', component: VehicleMaintenanceComponent},
       {path:'vendorinfo', component: VendorInfoComponent },
       {path:'officeinfo', component: OfficeInfoComponent },
       {path:'driverinfo', component: DriverInfoComponent },

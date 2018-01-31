@@ -2,7 +2,8 @@ import { tassign } from 'tassign';
 import * as Const from './actions';
 
 export interface IAppState {
- vehicleInfo: Array<any>; 
+ vehicleInfo: Array<any>;
+ vehicleMaintenanceInfo: Array<any>; 
  vendorInfo: Array<any>;
  officeInfo: Array<any>;
  tripInfo: Array<any>;
@@ -15,6 +16,7 @@ export interface IAppState {
 
 export const INITIAL_STATE: IAppState = {
  vehicleInfo: [],
+ vehicleMaintenanceInfo: [],
  vendorInfo: [],
  officeInfo: [],
  tripInfo: [],
@@ -27,6 +29,10 @@ export const INITIAL_STATE: IAppState = {
 
 function getVehicles(state, action) {
     return tassign(state, { vehicleInfo: action.vehicleInfo});
+}
+function getVehicleMaintenance(state, action) {
+    console.log(action.vehicleMaintenanceInfo);
+    return tassign(state, { vehicleMaintenanceInfo: action.vehicleMaintenanceInfo});
 }
 function getVendors(state, action) {
     return tassign(state, { vendorInfo: action.vendorInfo});
@@ -59,6 +65,14 @@ function updateVehicle(state, action) {
     var afterItems = state.vehicleInfo.slice(index + 1);    
     var newarray = [...beforeItems, action.vehicleInfo, ...afterItems];
     return tassign(state, { vehicleInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
+}
+function updateVehicleMaintenance(state, action) {
+   var updatedItem = state.vehicleMaintenanceInfo.find(i => i.vehicleId === action.vehicleMaintenanceInfo.vehicleId);
+    var index = state.vehicleMaintenanceInfo.indexOf(updatedItem);
+    var beforeItems = state.vehicleMaintenanceInfo.slice(0, index);
+    var afterItems = state.vehicleMaintenanceInfo.slice(index + 1);    
+    var newarray = [...beforeItems, action.vehicleMaintenanceInfo, ...afterItems];
+    return tassign(state, { vehicleMaintenanceInfo: newarray, modal: Const.UPDATED_CLOSE_MODAL});
 }
 
 function updateVendor(state, action) {
@@ -129,6 +143,12 @@ switch(action.type) {
     return tassign(state, { vehicleInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
     case Const.UPDATE_VECHICLE_SUCCESS: return updateVehicle(state, action);
  
+    case Const.FETCH_ALL_MAINTENANCE_SUCCESS: return getVehicleMaintenance(state, action);
+    case Const.ADD_MAINTENANCE_SUCCESS:
+    var addedToList = state.vehicleMaintenanceInfo.concat(action.vehicleMaintenanceInfo);
+    return tassign(state, { vehicleMaintenanceInfo: addedToList, modal: Const.UPDATED_CLOSE_MODAL});
+    case Const.UPDATE_MAINTENANCE_SUCCESS: return updateVehicleMaintenance(state, action);
+
     case Const.FETCH_ALL_VENDORS_SUCCESS: return getVendors(state, action);
     case Const.ADD_VENDOR_SUCCESS:
     var addedToList = state.vendorInfo.concat(action.vendorInfo);

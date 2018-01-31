@@ -78,6 +78,60 @@ namespace JT_Transport.Swagger
   /// <summary>
   /// 
   /// </summary>
+  public class Example_InsertVehicleMaintenanceInfo : IExamplesProvider
+  {
+    /// <summary></summary>
+    public object GetExamples()
+    {
+      return new
+      {
+        VehicleNo = "TN-38-U-9807",
+        RunKm = 20000,
+        OilService = 10000,
+        WheelGrease = 10000,
+        AirFilter = 10000,
+        ClutchPlate = 10000,
+        GearOil = 10000,
+        CrownOil = 10000,
+        SelfMotor = 10000,
+        Dynamo = 10000,
+        Radiator = 10000,
+        PinPush = 10000,
+        SteeringOil = 10000
+      };
+    }
+  }
+
+    /// <summary>
+  /// 
+  /// </summary>
+  public class Example_UpdateVehicleMaintenanceInfo : IExamplesProvider
+  {
+    /// <summary></summary>
+    public object GetExamples()
+    {
+      return new
+      {
+        VehicleNo = "TN-38-U-9807",
+        RunKm = 20000,
+        OilService = 10000,
+        WheelGrease = 10000,
+        AirFilter = 10000,
+        ClutchPlate = 10000,
+        GearOil = 10000,
+        CrownOil = 10000,
+        SelfMotor = 10000,
+        Dynamo = 10000,
+        Radiator = 10000,
+        PinPush = 10000,
+        SteeringOil = 10000
+      };
+    }
+  }
+
+  /// <summary>
+  /// 
+  /// </summary>
   public class Example_UpdateVehicleInfo : IExamplesProvider
   {
     /// <summary></summary>

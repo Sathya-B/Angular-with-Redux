@@ -38,7 +38,15 @@ namespace JT_Transport.Controllers
     /// <summary>
     /// 
     /// </summary>
+    public IMongoCollection<BsonDocument> vehiclemaintenanceinfo_collection;
+    /// <summary>
+    /// 
+    /// </summary>
     public IMongoCollection<VehicleInfo> vehicleinfoCollection;
+    /// <summary>
+    /// 
+    /// </summary>
+    public IMongoCollection<VehicleMaintenanceInfo> vehiclemaintenanceinfoCollection;
     /// <summary></summary>
     public IMongoDatabase log_db;
     /// <summary>
@@ -58,9 +66,11 @@ namespace JT_Transport.Controllers
       _client = MH.GetClient();
       vehicle_db = _client.GetDatabase("VehicleDB");
       vehicleinfo_collection = vehicle_db.GetCollection<BsonDocument>("VehicleInfo");
+      vehiclemaintenanceinfo_collection = vehicle_db.GetCollection<BsonDocument>("VehicleMaintenanceInfo");
       log_db = _client.GetDatabase("LogDB");
       activitylog_collection = log_db.GetCollection<ActivityLoggerModel>("ActivityLog");
       vehicleinfoCollection = vehicle_db.GetCollection<VehicleInfo>("VehicleInfo");
+      vehiclemaintenanceinfoCollection = vehicle_db.GetCollection<VehicleMaintenanceInfo>("VehicleMaintenanceInfo");
     }
 
     /// <summary>
@@ -104,6 +114,56 @@ namespace JT_Transport.Controllers
       catch (Exception ex)
       {
         SL.CreateLog("VehicleController", "GetAllVehicle", ex.Message);
+        return BadRequest(new ResponseData
+        {
+          Code = "400",
+          Message = "Failed",
+          Data = ex.Message
+        });
+      }
+    }
+
+        /// <summary>
+    /// Get all the vehicles maintenance info
+    /// </summary>
+    /// <response code="200">Returns all the vehicles maintenance info</response>
+    /// <response code="404">No vehicles found</response>
+    /// <response code="400">Process ran into an exception</response>
+    /// <returns></returns>
+    [HttpGet("Maintenance")]
+    [ProducesResponseType(typeof(ResponseData), 200)]
+    public ActionResult GetAllVehicleMaintenanceInfo()
+    {
+      try
+      {
+        var getVehicles = MH.GetListOfObjects(vehiclemaintenanceinfo_collection, null, null, null, null).Result;
+        if (getVehicles != null)
+        {
+          List<VehicleMaintenanceInfo> vehicleInfo = new List<VehicleMaintenanceInfo>();
+          foreach (var vehicle in getVehicles)
+          {
+            vehicleInfo.Add(BsonSerializer.Deserialize<VehicleMaintenanceInfo>(vehicle));
+          }
+          var sortedList = vehicleInfo.OrderBy(o => o.VehicleNo).ToList();
+          return Ok(new ResponseData
+          {
+            Code = "200",
+            Message = "Success",
+            Data = sortedList
+          });
+        }
+        else
+        {
+          return BadRequest(new ResponseData
+          {
+            Code = "404",
+            Message = "No Vehicle Maintenance Info found"
+          });
+        }
+      }
+      catch (Exception ex)
+      {
+        SL.CreateLog("VehicleController", "GetAllVehicleMaintenance", ex.Message);
         return BadRequest(new ResponseData
         {
           Code = "400",
@@ -244,6 +304,99 @@ namespace JT_Transport.Controllers
       catch (Exception ex)
       {
         SL.CreateLog("VehicleController", "InsertVehicleInfo", ex.Message);
+        return BadRequest(new ResponseData
+        {
+          Code = "400",
+          Message = "Failed",
+          Data = ex.Message
+        });
+      }
+    }
+
+    /// <summary>
+    /// Insert new vehicle maintenance info
+    /// </summary>
+    /// <param name="data">Info of vehicle maintenance</param>
+    /// <param name="username">UserName of user</param>
+    /// <response code="200">Vehicle maintenance info inserted successfully</response>
+    /// <response code="401">Vehicle maintenance info with same id is already added</response>
+    /// <response code="402">Vehicle maintenance with same reg number is found</response>
+    /// <response code="403">Bad Request</response>
+    /// <response code="400">Process ran into an exception</response>
+    /// <returns></returns>
+    [Authorize("Level1Access")]
+    [HttpPost("Maintenance/{username}")]
+    [SwaggerRequestExample(typeof(VehicleMaintenanceInfo), typeof(Example_InsertVehicleMaintenanceInfo))]
+    [ProducesResponseType(typeof(ResponseData), 200)]
+    public ActionResult InsertVehicleMaintenanceInfo([FromBody]VehicleMaintenanceInfo data, string username)
+    {
+      try
+      {
+        if (data != null && username != null)
+        {
+          var check = MH.CheckForData(vehiclemaintenanceinfo_collection, "VehicleNo", data.VehicleNo, null, null).Result;
+          if (check == false)
+          {
+            #region Calculate Vehicle id
+            var getVehicles = MH.GetListOfObjects(vehiclemaintenanceinfo_collection, null, null, null, null).Result;
+            if (getVehicles.Count == 0)
+            {
+              data.VehicleId = "VC-1";
+            }
+            else
+            {
+              List<long> idList = new List<long>();
+              foreach (var vehicle in getVehicles)
+              {
+                VehicleMaintenanceInfo vehicleInfo = BsonSerializer.Deserialize<VehicleMaintenanceInfo>(vehicle);
+                long seperatedId = Convert.ToInt64(vehicleInfo.VehicleId.Substring(vehicleInfo.VehicleId.LastIndexOf('-') + 1));
+                idList.Add(seperatedId);
+              }
+              var maxId = idList.Max();
+              data.VehicleId = "VC-" + (maxId + 1);
+            }
+            #endregion
+            data.IsActive = true;
+            var insert = MH.InsertNewVehicleMaintenanceInfo(data, vehiclemaintenanceinfoCollection);
+            if (insert == true)
+            {
+              return Ok(new ResponseData
+              {
+                Code = "200",
+                Message = "Inserted",
+                Data = data
+              });
+            }
+            else
+            {
+              return BadRequest(new ResponseData
+              {
+                Code = "401",
+                Message = "Vehicle maintenance info with same id is already added"
+              });
+            }
+          }
+          else
+          {
+            return BadRequest(new ResponseData
+            {
+              Code = "402",
+              Message = "Vehicle with same reg number is found"
+            });
+          }
+        }
+        else
+        {
+          return BadRequest(new ResponseData
+          {
+            Code = "403",
+            Message = "Bad Request"
+          });
+        }
+      }
+      catch (Exception ex)
+      {
+        SL.CreateLog("VehicleController", "InsertVehicleMaintenanceInfo", ex.Message);
         return BadRequest(new ResponseData
         {
           Code = "400",
@@ -397,6 +550,149 @@ namespace JT_Transport.Controllers
       catch (Exception ex)
       {
         SL.CreateLog("VehicleController", "UpdateVehicleInfo", ex.Message);
+        return BadRequest(new ResponseData
+        {
+          Code = "400",
+          Message = "Failed",
+          Data = ex.Message
+        });
+      }
+    }
+
+        /// <summary>
+    /// Update vehicle maintenance info
+    /// </summary>
+    /// <param name="data">Data to be updated</param>
+    /// <param name="username">UserName of user</param>
+    /// <param name="vehicleId">Id of vehicle</param>
+    /// <returns></returns>
+    /// <response code="200">Vehicle maintenance info updated successfully </response>
+    /// <response code="401">Update failed</response>
+    /// <response code="402">Bad Request</response>
+    /// <response code="404">Vehicle not found</response>
+    /// <response code="400">Process ran into an exception</response>
+    [Authorize("Level1Access")]
+    [HttpPut("Maintenance/{username}/{vehicleId}")]
+    [SwaggerRequestExample(typeof(ExampleModel_InsertVehicleMaintenanceInfo), typeof(Example_UpdateVehicleMaintenanceInfo))]
+    [ProducesResponseType(typeof(ResponseData), 200)]
+    public ActionResult UpdateVehicleMaintenanceInfo([FromBody]ExampleModel_InsertVehicleMaintenanceInfo data, string username, string vehicleId)
+    {
+      try
+      {
+        if (data != null && username != null && vehicleId != null)
+        {
+          var getVehicle = MH.GetSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null).Result;
+          if (getVehicle != null)
+          {
+            if (data.VehicleNo != null)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("VehicleNo", data.VehicleNo);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.RunKm != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("RunKm", data.RunKm);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+           if (data.OilService != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("OilService", data.OilService);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.WheelGrease != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("WheelGrease", data.WheelGrease);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.AirFilter != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("AirFilter", data.AirFilter);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.ClutchPlate != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("ClutchPlate", data.ClutchPlate);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.GearOil != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("GearOil", data.GearOil);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.CrownOil != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("CrownOil", data.CrownOil);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.SelfMotor != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("SelfMotor", data.SelfMotor);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.Dynamo != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("Dynamo", data.Dynamo);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.Radiator != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("Radiator", data.Radiator);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.PinPush != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("PinPush", data.PinPush);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.SteeringOil != 0)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("SteeringOil", data.SteeringOil);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (data.IsActive != null)
+            {
+              var updateDefinition = Builders<BsonDocument>.Update.Set("IsActive", data.IsActive);
+              update = MH.UpdateSingleObject(vehiclemaintenanceinfo_collection, "VehicleId", vehicleId, null, null, updateDefinition);
+            }
+            if (update != null)
+            {
+              AL.CreateLog(username, "UpdateVehicleMaintenanceInfo", BsonSerializer.Deserialize<VehicleMaintenanceInfo>(getVehicle), data, activitylog_collection);
+              return Ok(new ResponseData
+              {
+                Code = "200",
+                Message = "Updated"
+              });
+            }
+            else
+            {
+              return BadRequest(new ResponseData
+              {
+                Code = "401",
+                Message = "Update failed"
+              });
+            }
+          }
+          else
+          {
+            return BadRequest(new ResponseData
+            {
+              Code = "404",
+              Message = "Vehicle maintenance info not found"
+            });
+          }
+        }
+        else
+        {
+          return BadRequest(new ResponseData
+          {
+            Code = "402",
+            Message = "Bad request"
+          });
+        }
+      }
+      catch (Exception ex)
+      {
+        SL.CreateLog("VehicleController", "UpdateVehicleMaintenanceInfo", ex.Message);
         return BadRequest(new ResponseData
         {
           Code = "400",

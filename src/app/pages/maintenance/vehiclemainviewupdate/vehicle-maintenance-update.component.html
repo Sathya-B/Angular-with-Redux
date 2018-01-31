@@ -1,0 +1,174 @@
+<div class="">
+
+  <form #f="ngForm">
+    <div class="row form-group">
+      <span class="col-sm-2">
+        <label> Vehicle Number</label>
+      </span>
+      <span class="col-sm-2">
+        <input type="text" name="vehicleNo" [(ngModel)]="vehicleMaintenanceData.vehicleNo" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <label>Run Km</label>
+      </span>
+      <span class="col-sm-2">
+        <input type="text" name="runKm" [(ngModel)]="vehicleMaintenanceData.runKm" class="form-control">
+      </span>
+    </div>
+    <br>
+    <br>
+    <div class="row form-group">
+      <span class="col-sm-1">
+        <label>Oil Service</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="oilService" [(ngModel)]="vehicleMaintenanceData.oilService" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="oilServiceRange" [(ngModel)]="oilServiceRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.oilService + oilServiceRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="oilServiceValid" ng-style="" [ngModel]="vehicleMaintenanceData.oilService + oilServiceRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <label>Wheel Grease</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="wheelGrease" [(ngModel)]="vehicleMaintenanceData.wheelGrease" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="wheelGreaseRange" [(ngModel)]="wheelGreaseRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.wheelGrease + wheelGreaseRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="wheelGreaseValid" ng-style="" [ngModel]="vehicleMaintenanceData.wheelGrease + wheelGreaseRange" class="form-control" readonly>
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-1">
+        <label>Air Filter</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="vehicleType" [(ngModel)]="vehicleMaintenanceData.airFilter" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="airFilterRange" [(ngModel)]="airFilterRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.airFilter + airFilterRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="airFilterValid" ng-style="" [ngModel]="vehicleMaintenanceData.airFilter + airFilterRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <label>Clutch Plate</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="clutchPlate" [(ngModel)]="vehicleMaintenanceData.clutchPlate" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="clutchPlateRange" [(ngModel)]="clutchPlateRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.clutchPlate + clutchPlateRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="clutchPlateValid" ng-style="" [ngModel]="vehicleMaintenanceData.clutchPlate + clutchPlateRange" class="form-control" readonly>
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-1">
+        <label>Gear Oil</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="gearOil" [(ngModel)]="vehicleMaintenanceData.gearOil" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="gearOilRange" [(ngModel)]="gearOilRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.gearOil + gearOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="gearOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.gearOil + gearOilRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <label>Crown Oil</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="crownOil" [(ngModel)]="vehicleMaintenanceData.crownOil" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="crownOilRange" [(ngModel)]="crownOilRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.crownOil + crownOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="crownOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.crownOil + crownOilRange" class="form-control" readonly>
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-1">
+        <label>Self Motor</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="selfMotor" [(ngModel)]="vehicleMaintenanceData.selfMotor" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="selfMotorRange" [(ngModel)]="selfMotorRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.selfMotor + selfMotorRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="selfMotorValid" ng-style="" [ngModel]="vehicleMaintenanceData.selfMotor + selfMotorRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <label>Dynamo</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="dynamo" [(ngModel)]="vehicleMaintenanceData.dynamo" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="dynamoRange" [(ngModel)]="dynamoRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.dynamo + dynamoRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="dynamoValid" ng-style="" [ngModel]="vehicleMaintenanceData.dynamo + dynamoRange" class="form-control" readonly>
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-1">
+        <label>Radiator</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="radiator" [(ngModel)]="vehicleMaintenanceData.radiator" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="radiatorRange" [(ngModel)]="radiatorRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.radiator + radiatorRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="radiatorValid" ng-style="" [ngModel]="vehicleMaintenanceData.radiator + radiatorRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <label>Pin Push</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="pinPush" [(ngModel)]="vehicleMaintenanceData.pinPush" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="pinPushRange" [(ngModel)]="pinPushRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.pinPush + pinPushRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="pinPushValid" ng-style="" [ngModel]="vehicleMaintenanceData.pinPush + pinPushRange" class="form-control" readonly>
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-1">
+        <label>Steering Oil</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="steeringOil" [(ngModel)]="vehicleMaintenanceData.steeringOil" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="steeringOilRange" [(ngModel)]="steeringOilRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.steeringOil + steeringOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="steeringOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.steeringOil + steeringOilRange" class="form-control" readonly>
+      </span>
+    </div>
+
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <button class="editbtn btn" (click)="updateVehicleMaintenance(vehicleMaintenanceData)">Update</button>
+      </span>
+      <span class="col-sm-3">
+        <button class="cancelbtn btn" type="button" (click)="closeItem($event)">Cancel</button>
+      </span>
+    </div>
+  </form>
+</div>

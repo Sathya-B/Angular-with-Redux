@@ -439,6 +439,36 @@ namespace JT_Transport.Helper
       }
     }
 
+        /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="collection"></param>
+    /// <returns></returns>
+    public static dynamic InsertNewVehicleMaintenanceInfo(VehicleMaintenanceInfo data, IMongoCollection<VehicleMaintenanceInfo> collection)
+    {
+      try
+      {
+        #region Create index
+        //collection.Indexes.CreateOne("{ VehicleId: " + data.VehicleId + " }");
+        #endregion
+        collection.InsertOne(data);
+        return true;
+      }
+      catch (Exception ex)
+      {
+        if (ex.Message.Contains("duplicate key error"))
+        {
+          return ex.Message;
+        }
+        else
+        {
+          SL.CreateLog("MongoHelper", "InsertNewVehicleMaintenanceInfo", ex.Message);
+          return false;
+        }
+      }
+    }
+
     /// <summary>
     /// 
     /// </summary>

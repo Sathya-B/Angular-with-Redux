@@ -107,6 +107,88 @@
          <input type="text" name="driverName" [typeahead]="driverData" autocomplete="off" [(ngModel)]="vehicleData.driverName" class="form-control">
       </span>
     </div>
+    <div class="row">
+      <span class="col-sm-12 form-group">
+          <span class="col-sm-1">
+            <label> Insurance </label>
+          </span>
+      <span class="col-sm-3">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'ins1.jpg'}}">Page 1</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'ins1.jpg']" [beforeUpload]="onBeforeUpload(f, 'ins1')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      <span class="col-sm-3">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'ins2.jpg'}}">Page 2</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'ins2.jpg']" [beforeUpload]="onBeforeUpload(f, 'ins2')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-sm-12 form-group">
+          <span class="col-sm-1">
+            <label> RC </label>
+          </span>
+      <span class="col-sm-2">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'rc1.jpg'}}">Page 1</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'rc1.jpg']" [beforeUpload]="onBeforeUpload(f, 'rc1')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      <span class="col-sm-2">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'rc2.jpg'}}">Page 2</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'rc2.jpg']" [beforeUpload]="onBeforeUpload(f, 'rc2')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      <span class="col-sm-2">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'rc3.jpg'}}">Page 3</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'rc3.jpg']" [beforeUpload]="onBeforeUpload(f, 'rc3')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      <span class="col-sm-2">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'rc4.jpg'}}">Page 4</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'rc4.jpg']" [beforeUpload]="onBeforeUpload(f, 'rc4')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+        <span class="col-sm-2">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'rc5.jpg'}}">Page 5</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'rc5.jpg']" [beforeUpload]="onBeforeUpload(f, 'rc5')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-sm-12 form-group">
+          <span class="col-sm-1">
+            <label> Np Tax </label>
+          </span>
+      <span class="col-sm-3">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'np1.jpg'}}">Page 1</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'np1.jpg']" [beforeUpload]="onBeforeUpload(f, 'np1')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-sm-12 form-group">
+          <span class="col-sm-1">
+            <label> Permit </label>
+          </span>
+      <span class="col-sm-3">
+        <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'perm1.jpg'}}">Page 1</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'perm1.jpg']" [beforeUpload]="onBeforeUpload(f, 'perm1')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      <span class="col-sm-3">
+                <p><a href="{{'https://s3.ap-south-1.amazonaws.com/jttvehicle/' + vehicleNum + 'perm2.jpg'}}">Page 2</a></p>
+        <image-upload url="{{imgupload}}" [headers]="authHeader" [uploadedFiles]="[imgs3url + 'perm2.jpg']" [beforeUpload]="onBeforeUpload(f, 'perm2')" (uploadFinished)="onUploadFinished($event)">
+        </image-upload>
+        </span>
+      </span>
+    </div>
+
     <div class="row form-group">
       <span class="col-sm-3">
         <button class="editbtn btn" (click)="updateVehicle(vehicleData)">Update</button>

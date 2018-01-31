@@ -1,5 +1,7 @@
 import { PagesComponent } from './pages.component';
 import { VehicleInfoComponent } from './vehicleinfo/vehicleinfo.component';
+import { VehicleMaintenanceComponent } from './maintenance/vehiclemaintenance.component';
+import { VehicleMaintenanceUpdateComponent } from './maintenance/vehiclemainviewupdate/vehicle-maintenance-update.component';
 import { VendorInfoComponent } from './vendorinfo/vendorinfo.component';
 import { VehiclePaymentComponent } from './vehiclepayment/vehiclepayment.component';
 import { VendorPaymentComponent } from './vendorpayment/vendorpayment.component';
@@ -16,9 +18,9 @@ import { VehicleViewUpdateComponent } from "./vehicleinfo/vehicleviewupdate/vehi
 import { DriverInfoComponent } from "./driverinfo/driverinfo.component";
 
 export const PagesComponentBarrel = [
-PagesComponent, VehicleInfoComponent, VendorInfoComponent, VehiclePaymentComponent,
+PagesComponent, VehicleInfoComponent, VehicleMaintenanceComponent, VendorInfoComponent, VehiclePaymentComponent,
 VendorPaymentComponent, TripInfoComponent, TripInsertUpdateComponent, DashboardComponent,
-VehicleTripComponent, VendorTripComponent, OfficeInfoComponent,
+VehicleTripComponent, VendorTripComponent, OfficeInfoComponent, VehicleMaintenanceUpdateComponent,
 VehicleViewUpdateComponent, ExpensesComponent, DriverInfoComponent,
 TripInfoLineComponent, TripLineInsertUpdateComponent,];
 
