@@ -1,0 +1,13 @@
+input[type=text] {
+    width: 135%;
+}
+
+label {
+    width: 125%;
+    max-width: 125%;
+    padding-left: 15px;
+}
+
+datefield {
+    width: 80%;
+}

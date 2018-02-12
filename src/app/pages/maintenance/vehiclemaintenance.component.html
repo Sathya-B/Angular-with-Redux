@@ -59,7 +59,7 @@
         <label> Vehicle Number</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="vehicleNo" [(ngModel)]="maintenanceData.vehicleNo" class="form-control">
+        <input type="text" name="vehicleNo"  [(ngModel)]="maintenanceData.vehicleNo" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Run Km</label>
@@ -73,13 +73,13 @@
         <label>Oil Service</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="oilService" [(ngModel)]="maintenanceData.oilService" class="form-control">
+        <input type="text" name="oilService" [(ngModel)]="maintenanceData.oilService['runKilometer']" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Wheel Grease</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="wheelGrease" [(ngModel)]="maintenanceData.wheelGrease" class="form-control">
+        <input type="text" name="wheelGrease" [(ngModel)]="maintenanceData.wheelGrease['runKilometer']" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -87,13 +87,13 @@
         <label>Air Filter</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="vehicleType" [(ngModel)]="maintenanceData.airFilter" class="form-control">
+        <input type="text" name="vehicleType" [(ngModel)]="maintenanceData.airFilter['runKilometer']" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Clutch Plate</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="clutchPlate" [(ngModel)]="maintenanceData.clutchPlate" class="form-control">
+        <input type="text" name="clutchPlate" [(ngModel)]="maintenanceData.clutchPlate.runKilometer" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -101,13 +101,13 @@
         <label>Gear Oil</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="gearOil" [(ngModel)]="maintenanceData.gearOil" class="form-control">
+        <input type="text" name="gearOil" [(ngModel)]="maintenanceData.gearOil.runKilometer" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Crown Oil</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="crownOil" [(ngModel)]="maintenanceData.crownOil" class="form-control">
+        <input type="text" name="crownOil" [(ngModel)]="maintenanceData.crownOil.runKilometer" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -115,13 +115,13 @@
         <label>Self Motor</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="selfMotor" [(ngModel)]="maintenanceData.selfMotor" class="form-control">
+        <input type="text" name="selfMotor" [(ngModel)]="maintenanceData.selfMotor.runKilometer" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Dynamo</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="dynamo" [(ngModel)]="maintenanceData.dynamo" class="form-control">
+        <input type="text" name="dynamo" [(ngModel)]="maintenanceData.dynamo.runKilometer" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -129,13 +129,13 @@
         <label>Radiator</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="radiator" [(ngModel)]="maintenanceData.radiator" class="form-control">
+        <input type="text" name="radiator" [(ngModel)]="maintenanceData.radiator.runKilometer" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Pin Push</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="pinPush" [(ngModel)]="maintenanceData.pinPush" class="form-control">
+        <input type="text" name="pinPush" [(ngModel)]="maintenanceData.pinPush.runKilometer" class="form-control">
       </span>
     </div>
     <div class="row form-group">
@@ -143,10 +143,51 @@
         <label>Steering Oil</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="steeringOil" [(ngModel)]="maintenanceData.steeringOil" class="form-control">
+        <input type="text" name="steeringOil" [(ngModel)]="maintenanceData.steeringOil.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Nozzle Service</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="nozzleService" [(ngModel)]="maintenanceData.nozzleService.runKilometer" class="form-control">
       </span>
     </div>
-
+  <div class="row form-group">
+      <span class="col-sm-3">
+        <label>SpeedoMeter</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="speedoMeter" [(ngModel)]="maintenanceData.steeringOil.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Diesel Filter</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="dieselFilter" [(ngModel)]="maintenanceData.dieselFilter.runKilometer" class="form-control">
+      </span>
+    </div>
+  <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Stainner</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="stainner" [(ngModel)]="maintenanceData.stainner.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>Tyre Powder</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="tyrePowder" [(ngModel)]="maintenanceData.tyrePowder.runKilometer" class="form-control">
+      </span>
+    </div>
+  <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Valve Checker</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="valveChecker" [(ngModel)]="maintenanceData.valveChecker.runKilometer" class="form-control">
+      </span>
+    </div>
     <div class="row form-group">
       <span class="col-sm-3">
         <button class="editbtn btn" (click)="insertVehicle(maintenanceData)">Save</button>

@@ -28,6 +28,12 @@ export class VehicleMaintenanceUpdateComponent implements OnInit {
   radiatorRange: number = 120000;
   pinPushRange: number = 120000;
   steeringOilRange: number = 120000;
+  nozzleServiceRange: number = 120000;
+  speedoMeterRange: number = 120000;
+  dieselFilterRange: number = 120000;
+  stainnerRange: number = 120000;
+  tyrePowderRange: number = 120000;
+  valveCheckerRange: number = 120000;
 
   constructor(private vehicleMaintenanceService: VehicleMaintenanceService, private ngRedux: NgRedux<IAppState>) {
     

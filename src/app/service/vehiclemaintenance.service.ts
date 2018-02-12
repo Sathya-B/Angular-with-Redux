@@ -56,9 +56,9 @@ export class VehicleMaintenanceService {
       this.apiService.post('Vehicle/Maintenance/' + userName, vehicle,
             { useAuth: true }, undefined).then(
             (response: any) => {
-              console.log(response);
+              console.log(response.data);
               if (response.code === '200') {
-                this.ngRedux.dispatch({ type: Const.ADD_MAINTENANCE_SUCCESS, vehicleInfo: response.datas });
+                this.ngRedux.dispatch({ type: Const.ADD_MAINTENANCE_SUCCESS, vehicleMaintenanceInfo: response.data });
               } else {
                 throw response.error;
               }

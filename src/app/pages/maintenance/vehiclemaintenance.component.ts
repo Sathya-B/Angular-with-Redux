@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { VehicleMaintenanceService } from '../../service/vehiclemaintenance.service';
 import { DriverViewService } from "../../service/driverview.service";
 import * as _ from 'underscore';
+import { VehicleViewService } from "../../service/vehicleview.service";
 
 @Component({
   selector: 'app-vehiclemaintenance',
@@ -21,12 +22,13 @@ export class VehicleMaintenanceComponent implements OnInit {
   editVehicleinfoView = false;
   modalRef: BsModalRef;
   formAction: string;
-
+  vehicleData: any;
   @select('vehicleMaintenanceInfo') vehicleMaintenanceInfo;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private data: VehicleMaintenanceService,
+    private vehicleService: VehicleViewService,
     private modalService: BsModalService
   ) {
     this.maintenanceData = new VehicleMaintenance();
@@ -34,7 +36,12 @@ export class VehicleMaintenanceComponent implements OnInit {
 
   ngOnInit() {
     this.getMaintenanceInfo();
-  }
+    this.vehicleService.getVechile();
+    this.ngRedux.subscribe(() => {
+    this.vehicleData = _.map(this.ngRedux.getState().vehicleInfo, (v: any) => {
+          return this.vehicleData = v.vehicleNo; }
+    )}
+    )}
 
   getMaintenanceInfo() {
     this.data.getVechileMaintenance();
