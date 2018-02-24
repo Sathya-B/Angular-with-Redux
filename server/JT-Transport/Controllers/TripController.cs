@@ -849,7 +849,7 @@ namespace JT_Transport.Controllers
                     paymentList.Add(payment);
                   }
                 }
-                if (tripDetails.BalanceAmount < (data.AmountReceived + data.UnloadingCharges + data.RoundOffAmount))
+                if (tripDetails.BalanceAmount < (data.AmountReceived + data.UnloadingCharges + data.RoundOffAmount + data.ShortageAmount + data.LoadingCharges))
                 {
                   return BadRequest(new ResponseData
                   {
@@ -857,15 +857,17 @@ namespace JT_Transport.Controllers
                     Message = "Paid amount is higher than the balance amount"
                   });
                 }
-                var paidAmount = tripDetails.PaidAmount + data.AmountReceived;
+                var paidAmount = tripDetails.PaidAmount + data.AmountReceived + data.UnloadingCharges + data.RoundOffAmount + data.ShortageAmount + data.LoadingCharges;
                 var updatePaidAmount = MH.UpdateSingleObject(tripinfo_collection, "TripId", tripId, null, null, Builders<BsonDocument>.Update.Set("PaidAmount", paidAmount));
                 var updatedTripDetails = BsonSerializer.Deserialize<TripInfo>(MH.GetSingleObject(tripinfo_collection, "TripId", tripId, null, null).Result);
-                var balanceAmount = updatedTripDetails.VehicleAmount - (updatedTripDetails.PaidAmount + data.UnloadingCharges + data.RoundOffAmount);
+                var balanceAmount = updatedTripDetails.VehicleAmount - updatedTripDetails.PaidAmount;
                 data.RunningBalanceAmount = balanceAmount;
                 paymentList.Add(data);
                 var updateBalanceAmount = MH.UpdateSingleObject(tripinfo_collection, "TripId", tripId, null, null, Builders<BsonDocument>.Update.Set("BalanceAmount", balanceAmount));
                 var updateUnloadingCharges = MH.UpdateSingleObject(tripinfo_collection, "TripId", tripId, null, null, Builders<BsonDocument>.Update.Set("UnloadingCharges", data.UnloadingCharges));
                 var updateRoundOffAmount = MH.UpdateSingleObject(tripinfo_collection, "TripId", tripId, null, null, Builders<BsonDocument>.Update.Set("RoundOffAmount", data.RoundOffAmount));
+                var updateShortageAmount = MH.UpdateSingleObject(tripinfo_collection, "TripId", tripId, null, null, Builders<BsonDocument>.Update.Set("ShortageAmount", data.ShortageAmount));
+                var updateLoadingCharges = MH.UpdateSingleObject(tripinfo_collection, "TripId", tripId, null, null, Builders<BsonDocument>.Update.Set("LoadingCharges", data.LoadingCharges));                
                 var updatePaymentInfo = MH.UpdateSingleObject(tripinfo_collection, "TripId", tripId, null, null, Builders<BsonDocument>.Update.Set("PaymentInfo", paymentList));
                 if (updateBalanceAmount != null && updatePaidAmount != null && updatePaymentInfo != null)
                 {

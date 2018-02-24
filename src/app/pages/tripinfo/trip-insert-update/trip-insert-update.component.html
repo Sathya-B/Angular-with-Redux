@@ -128,6 +128,14 @@
           <input type="number" name="unloadingCharges" class="form-control" [(ngModel)]="tripData.unloadingCharges" readonly>
         </span>
     </div>
+    <div class="row form-group">
+        <span class="col-sm-3">
+          <label>Shortage Amount</label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="shortageAmount" class="form-control" [(ngModel)]="tripData.shortageAmount" readonly>
+        </span>
+    </div>
      <div class="row form-group">
       <span class="col-sm-3">
         <label> Type of Payment: </label>
@@ -159,7 +167,7 @@
           <label>Loading Charges</label>
         </span>
         <span class="col-sm-3" *ngIf="actionType == 'add'">
-          <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges">
+          <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges" readonly>
         </span>
         <span class="col-sm-3" *ngIf="actionType == 'update'">
           <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges" readonly>

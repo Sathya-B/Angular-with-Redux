@@ -106,6 +106,10 @@ namespace JT_Transport.Model
     /// Valve checker
     /// </summary>
     public RegularServiceData ValveChecker { get; set; }
+    /// <summary>
+    /// Coolant Oil
+    /// </summary>
+    public RegularServiceData CoolantOil { get; set; }
 
     /// <summary>
     /// New battery details
@@ -267,6 +271,49 @@ namespace JT_Transport.Model
     /// SlackAdjuster Left Dummy
     /// </summary>
     public ServiceData SlackAdjusterLeftDummy { get; set; } = new ServiceData();
+
+    /// <summary>
+    /// Front Main Axle Bend Checkup
+    /// </summary>
+    public ServiceData FrontMainAxleBendCheckup { get; set; } = new ServiceData();
+
+    /// <summary>
+    /// Second Main Axle Bend Checkup
+    /// </summary>
+    public ServiceData SecondMainAxleBendCheckup { get; set; } = new ServiceData();
+
+    /// <summary>
+    /// Housing Bend Checkup
+    /// </summary>
+    public ServiceData HousingBendCheckup { get; set; } = new ServiceData();
+
+    /// <summary>
+    /// Dummy Bend Checkup
+    /// </summary>
+    public ServiceData DummyBendCheckup { get; set; } = new ServiceData();
+
+    /// <summary>
+    /// Steering Star
+    /// </summary>
+    public ServiceData SteeringStar { get; set; } = new ServiceData();
+
+    /// <summary>
+    /// King Pin Right FI
+    /// </summary>
+    public ServiceData KingPinRightFI { get; set; } = new ServiceData();
+
+    /// <summary>
+    /// King Pin Right FII
+    /// </summary>
+    public ServiceData KingPinRightFII { get; set; } = new ServiceData();
+    /// <summary>
+    /// King Pin Left FI
+    /// </summary>
+    public ServiceData KingPinLeftFI { get; set; } = new ServiceData();
+        /// <summary>
+    /// King Pin Left FII
+    /// </summary>
+    public ServiceData KingPinLeftFII { get; set; } = new ServiceData();
 
     /// <summary>
     /// Defines if the vehicle is active or not

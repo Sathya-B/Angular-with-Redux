@@ -101,6 +101,12 @@
         <span class="col-sm-3">
           <input type="number" name="unloadingCharges" class="form-control" [(ngModel)]="tripData.unloadingCharges" readonly>
         </span>
+        <span class="col-sm-3">
+          <label>Shortage Amount</label>
+        </span>
+        <span class="col-sm-3">
+          <input type="number" name="shortageAmount" class="form-control" [(ngModel)]="tripData.shortageAmount" readonly>
+        </span>
     </div>
      <div class="row form-group">
       <span class="col-sm-3">
@@ -133,7 +139,7 @@
           <label>Loading Charges</label>
         </span>
         <span class="col-sm-3" *ngIf="actionType == 'add'">
-          <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges">
+          <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges" readonly>
         </span>
         <span class="col-sm-3" *ngIf="actionType == 'update'">
           <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="tripData.loadingCharges" readonly>
@@ -211,7 +217,7 @@
         <input type="text" name="tripId" [(ngModel)]="tripData.tripId" [hidden]="true">
         <button class="editbtn btn" *ngIf="actionType == 'update'" type="submit">Update</button>
         <button class="editbtn btn" *ngIf="actionType == 'add'" type="submit">Save</button>
-        <button class="cancelbtn btn" *ngIf="admin" type="button" (click)="deleteTrip(tripData.tripId)">Delete</button>
+        <button class="cancelbtn btn" *ngIf="admin && actionType == 'update'" type="button" (click)="deleteTrip(tripData.tripId)">Delete</button>
       </span>
       <span class="col-sm-3">
         <button class="cancelbtn btn" type="button" (click)="closeModal($event)">Cancel</button>

@@ -104,6 +104,7 @@ namespace JT_Transport.Swagger
         Stainner = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
         TyrePowder = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
         ValveChecker = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
+        CoolantOil = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
         NewBattery = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         GearBoxOH = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         GearBoxTop = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
@@ -143,7 +144,12 @@ namespace JT_Transport.Swagger
         SlackAdjusterRightHousing = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         SlackAdjusterLeftHousing = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         SlackAdjusterRightDummy = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
-        SlackAdjusterLeftDummy = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow }
+        SlackAdjusterLeftDummy = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        SteeringStar = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinRightFI = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinRightFII = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinLeftFI = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinLeftFII = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow }        
       };
     }
   }
@@ -177,6 +183,7 @@ namespace JT_Transport.Swagger
         Stainner = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
         TyrePowder = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
         ValveChecker = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
+        CoolantOil = new RegularServiceData { RunKilometer = 2000, AvgKilometer = 4000, ChangedDate = DateTime.UtcNow },
         NewBattery = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         GearBoxOH = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         GearBoxTop = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
@@ -216,7 +223,16 @@ namespace JT_Transport.Swagger
         SlackAdjusterRightHousing = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         SlackAdjusterLeftHousing = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
         SlackAdjusterRightDummy = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
-        SlackAdjusterLeftDummy = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow }
+        SlackAdjusterLeftDummy = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        FrontMainAxleBendCheckup = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        SecondMainAxleBendCheckup = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        HousingBendCheckup = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        DummyBendCheckup = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        SteeringStar = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinRightFI = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinRightFII = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinLeftFI = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow },
+        KingPinLeftFII = new ServiceData { RunKilometer = 2000, ChangedDate = DateTime.UtcNow }
       };
     }
   }
@@ -319,7 +335,9 @@ namespace JT_Transport.Swagger
         AmountReceived = 1000,
         PaidTo = "Driver",
         RoundOffAmount = 0,
+        ShortageAmount = 0,
         UnloadingCharges = 0,
+        LoadingCharges = 0,
         Date = DateTime.UtcNow
       };
     }

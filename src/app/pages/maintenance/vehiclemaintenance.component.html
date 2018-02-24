@@ -59,7 +59,7 @@
         <label> Vehicle Number</label>
       </span>
       <span class="col-sm-3">
-        <input type="text" name="vehicleNo"  [(ngModel)]="maintenanceData.vehicleNo" class="form-control">
+        <input type="text" name="vehicleNo" [typeahead]="vehicleData" autocomplete="off" [(ngModel)]="maintenanceData.vehicleNo" class="form-control">
       </span>
       <span class="col-sm-3">
         <label>Run Km</label>
@@ -187,13 +187,19 @@
       <span class="col-sm-3">
         <input type="text" name="valveChecker" [(ngModel)]="maintenanceData.valveChecker.runKilometer" class="form-control">
       </span>
+      <span class="col-sm-3">
+        <label>Coolant Oil</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="coolantOil" [(ngModel)]="maintenanceData.coolantOil.runKilometer" class="form-control">
+      </span>
     </div>
     <div class="row form-group">
       <span class="col-sm-3">
         <button class="editbtn btn" (click)="insertVehicle(maintenanceData)">Save</button>
       </span>
       <span class="col-sm-3">
-        <button class="cancelbtn btn" type="button" (click)="closeItem($event)">Cancel</button>
+        <button class="cancelbtn btn" type="button" (click)="modalRef.hide()">Cancel</button>
       </span>
     </div>
   </form>

@@ -7,7 +7,7 @@
         <label> Vehicle Number</label>
       </span>
       <span class="col-sm-6">
-        <input type="text" name="vehicleNo" [(ngModel)]="vehicleMaintenanceData.vehicleNo" class="form-control">
+        <input type="text" name="vehicleNo" [ngStyle]="{'width': '100%' }" [(ngModel)]="vehicleMaintenanceData.vehicleNo" class="form-control">
       </span>
       </span>
       <span class="col-sm-4">
@@ -15,8 +15,11 @@
         <label>Run Km</label>
       </span>
       <span class="col-sm-6">
-        <input type="text" name="runKm" [(ngModel)]="vehicleMaintenanceData.runKm" class="form-control">
+        <input type="text" name="runKm" [ngStyle]="{'width': '100%' }" [(ngModel)]="vehicleMaintenanceData.runKm" class="form-control">
       </span>
+    </span>
+    <span class="col-sm-4">
+          <button class="editbtn btn" (click)="openModal(template)">Change Speedo</button>
     </span>
     </div>
     <br>
@@ -28,10 +31,10 @@
         <input type="text" name="oilService" [(ngModel)]="vehicleMaintenanceData.oilService.runKilometer" class="form-control">
       </span>
       <span class="col-sm-1">
-        <input type="text" name="oilServiceRange" [(ngModel)]="oilServiceRange" class="form-control" readonly>
+        <input type="text" name="oilServiceRange" [(ngModel)]="vehicleMaintenanceData.oilService.avgKilometer" class="form-control">
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.oilService.runKilometer + oilServiceRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red'}" name="oilServiceValid" ng-style="" [ngModel]="vehicleMaintenanceData.oilService.runKilometer + oilServiceRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.oilService.runKilometer + vehicleMaintenanceData.oilService.avgKilometer) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red'}" name="oilServiceValid" ng-style="" [ngModel]="vehicleMaintenanceData.oilService.runKilometer * 1 + vehicleMaintenanceData.oilService.avgKilometer * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="oilServiceDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.oilService.changedDate" class="form-control">
@@ -46,7 +49,7 @@
         <input type="text" name="wheelGreaseRange" [(ngModel)]="wheelGreaseRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.wheelGrease.runKilometer + wheelGreaseRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red'}" name="wheelGreaseValid" ng-style="" [ngModel]="vehicleMaintenanceData.wheelGrease.runKilometer + wheelGreaseRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.wheelGrease.runKilometer + wheelGreaseRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red'}" name="wheelGreaseValid" ng-style="" [ngModel]="vehicleMaintenanceData.wheelGrease.runKilometer * 1 + wheelGreaseRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="wheenGreaseDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.wheelGrease.changedDate" class="form-control">
@@ -63,7 +66,7 @@
         <input type="text" name="airFilterRange" [(ngModel)]="airFilterRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.airFilter.runKilometer + airFilterRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="airFilterValid" ng-style="" [ngModel]="vehicleMaintenanceData.airFilter.runKilometer + airFilterRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.airFilter.runKilometer + airFilterRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="airFilterValid" ng-style="" [ngModel]="vehicleMaintenanceData.airFilter.runKilometer * 1 + airFilterRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="airFilterDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.airFilter.changedDate" class="form-control">
@@ -78,7 +81,7 @@
         <input type="text" name="clutchPlateRange" [(ngModel)]="clutchPlateRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.clutchPlate.runKilometer + clutchPlateRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="clutchPlateValid" ng-style="" [ngModel]="vehicleMaintenanceData.clutchPlate.runKilometer + clutchPlateRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.clutchPlate.runKilometer + clutchPlateRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="clutchPlateValid" ng-style="" [ngModel]="vehicleMaintenanceData.clutchPlate.runKilometer * 1 + clutchPlateRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="clutchPlateDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.clutchPlate.changedDate" class="form-control">
@@ -95,7 +98,7 @@
         <input type="text" name="gearOilRange" [(ngModel)]="gearOilRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.gearOil.runKilometer + gearOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="gearOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.gearOil.runKilometer + gearOilRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.gearOil.runKilometer + gearOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="gearOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.gearOil.runKilometer * 1 + gearOilRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="gearOilDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.gearOil.changedDate" class="form-control">
@@ -110,7 +113,7 @@
         <input type="text" name="crownOilRange" [(ngModel)]="crownOilRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.crownOil.runKilometer + crownOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="crownOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.crownOil.runKilometer + crownOilRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.crownOil.runKilometer + crownOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="crownOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.crownOil.runKilometer * 1 + crownOilRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="crownOilDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.crownOil.changedDate" class="form-control">
@@ -127,7 +130,7 @@
         <input type="text" name="selfMotorRange" [(ngModel)]="selfMotorRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.selfMotor.runKilometer + selfMotorRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="selfMotorValid" ng-style="" [ngModel]="vehicleMaintenanceData.selfMotor.runKilometer + selfMotorRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.selfMotor.runKilometer + selfMotorRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="selfMotorValid" ng-style="" [ngModel]="vehicleMaintenanceData.selfMotor.runKilometer * 1 + selfMotorRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="selfMotorDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.selfMotor.changedDate" class="form-control">
@@ -142,7 +145,7 @@
         <input type="text" name="dynamoRange" [(ngModel)]="dynamoRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.dynamo.runKilometer + dynamoRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="dynamoValid" ng-style="" [ngModel]="vehicleMaintenanceData.dynamo.runKilometer + dynamoRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.dynamo.runKilometer + dynamoRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="dynamoValid" ng-style="" [ngModel]="vehicleMaintenanceData.dynamo.runKilometer * 1 + dynamoRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="dynamoDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.dynamo.changedDate" class="form-control">
@@ -159,7 +162,7 @@
         <input type="text" name="radiatorRange" [(ngModel)]="radiatorRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.radiator.runKilometer + radiatorRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="radiatorValid" ng-style="" [ngModel]="vehicleMaintenanceData.radiator.runKilometer + radiatorRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.radiator.runKilometer + radiatorRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="radiatorValid" ng-style="" [ngModel]="vehicleMaintenanceData.radiator.runKilometer * 1 + radiatorRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="radiatorDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.radiator.changedDate" class="form-control">
@@ -174,7 +177,7 @@
         <input type="text" name="pinPushRange" [(ngModel)]="pinPushRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.pinPush.runKilometer + pinPushRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="pinPushValid" ng-style="" [ngModel]="vehicleMaintenanceData.pinPush.runKilometer + pinPushRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.pinPush.runKilometer + pinPushRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="pinPushValid" ng-style="" [ngModel]="vehicleMaintenanceData.pinPush.runKilometer * 1 + pinPushRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="pinPushDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.pinPush.changedDate" class="form-control">
@@ -191,7 +194,7 @@
         <input type="text" name="steeringOilRange" [(ngModel)]="steeringOilRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.steeringOil.runKilometer + steeringOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="steeringOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.steeringOil.runKilometer + steeringOilRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.steeringOil.runKilometer + steeringOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="steeringOilValid" ng-style="" [ngModel]="vehicleMaintenanceData.steeringOil.runKilometer * 1 + steeringOilRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="steeringOilDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.steeringOil.changedDate" class="form-control">
@@ -206,7 +209,7 @@
         <input type="text" name="nozzleServiceRange" [(ngModel)]="nozzleServiceRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.nozzleService.runKilometer + nozzleServiceRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="nozzleServiceValid" ng-style="" [ngModel]="vehicleMaintenanceData.nozzleService.runKilometer + nozzleServiceRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.nozzleService.runKilometer + nozzleServiceRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="nozzleServiceValid" ng-style="" [ngModel]="vehicleMaintenanceData.nozzleService.runKilometer * 1 + nozzleServiceRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="nozzleServiceDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.nozzleService.changedDate" class="form-control">
@@ -217,16 +220,16 @@
         <label>Speedo Meter</label>
       </span>
       <span class="col-sm-1">
-        <input type="text" name="speedoMeter" [(ngModel)]="vehicleMaintenanceData.speedoMeter.runKilometer" class="form-control">
+        <input type="text" name="speedoMeter" [(ngModel)]="vehicleMaintenanceData.speedoMeter.runKilometer" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text" name="speedoMeterRange" [(ngModel)]="speedoMeterRange" class="form-control" readonly>
+        <input type="text" name="speedoMeterRange" [(ngModel)]="vehicleMaintenanceData.speedoMeter.avgKilometer" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.speedoMeter.runKilometer + speedoMeterRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="speedoMeterValid" ng-style="" [ngModel]="vehicleMaintenanceData.speedoMeter.runKilometer + speedoMeterRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color': '#36b37e' }" name="speedoMeterValid" ng-style="" [ngModel]="0" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
-        <input type="text" [ngStyle]="{'width': '80%' }" name="speedoMeterDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.speedoMeter.changedDate" class="form-control">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="speedoMeterDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.speedoMeter.changedDate" class="form-control" readonly disabled>
       </span>
       <span class="col-sm-1">
         <label>Diesel Filter</label>
@@ -238,7 +241,7 @@
         <input type="text" name="dieselFilterRange" [(ngModel)]="dieselFilterRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.dieselFilter.runKilometer + dieselFilterRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="dieselFilterValid" ng-style="" [ngModel]="vehicleMaintenanceData.dieselFilter.runKilometer + dieselFilterRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.dieselFilter.runKilometer + dieselFilterRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="dieselFilterValid" ng-style="" [ngModel]="vehicleMaintenanceData.dieselFilter.runKilometer * 1 + dieselFilterRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="dieselFilterDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.dieselFilter.changedDate" class="form-control">
@@ -255,7 +258,7 @@
         <input type="text" name="stainnerRange" [(ngModel)]="stainnerRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.stainner.runKilometer + stainnerRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="stainnerValid" ng-style="" [ngModel]="vehicleMaintenanceData.stainner.runKilometer + stainnerRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.stainner.runKilometer + stainnerRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="stainnerValid" ng-style="" [ngModel]="vehicleMaintenanceData.stainner.runKilometer * 1 + stainnerRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="stainnerDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.stainner.changedDate" class="form-control">
@@ -270,7 +273,7 @@
         <input type="text" name="tyrePowderRange" [(ngModel)]="tyrePowderRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.tyrePowder.runKilometer + tyrePowderRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="tyrePowderValid" ng-style="" [ngModel]="vehicleMaintenanceData.tyrePowder.runKilometer + tyrePowderRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.tyrePowder.runKilometer + tyrePowderRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="tyrePowderValid" ng-style="" [ngModel]="vehicleMaintenanceData.tyrePowder.runKilometer * 1 + tyrePowderRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="tyrePowderDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.tyrePowder.changedDate" class="form-control">
@@ -284,13 +287,28 @@
         <input type="text" name="valveChecker" [(ngModel)]="vehicleMaintenanceData.valveChecker.runKilometer" class="form-control">
       </span>
       <span class="col-sm-1">
-        <input type="text" name="valveChecker" [(ngModel)]="valveCheckerRange" class="form-control" readonly>
+        <input type="text" name="valveCheckerRange" [(ngModel)]="valveCheckerRange" class="form-control" readonly>
       </span>
       <span class="col-sm-1">
-        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.valveChecker.runKilometer + valveCheckerRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="valveCheckerValid" ng-style="" [ngModel]="vehicleMaintenanceData.valveChecker.runKilometer + valveCheckerRange" class="form-control" readonly>
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.valveChecker.runKilometer + valveCheckerRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="valveCheckerValid" ng-style="" [ngModel]="vehicleMaintenanceData.valveChecker.runKilometer * 1 + valveCheckerRange * 1" class="form-control" readonly>
       </span>
       <span class="col-sm-2">
         <input type="text" [ngStyle]="{'width': '80%' }" name="valveCheckerDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.valveChecker.changedDate" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <label>Coolant Oil</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="coolantOil" [(ngModel)]="vehicleMaintenanceData.coolantOil.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="coolantOilRange" [(ngModel)]="coolantOilRange" class="form-control" readonly>
+      </span>
+      <span class="col-sm-1">
+        <input type="text"  [ngStyle]="{'background-color':(vehicleMaintenanceData.coolantOil.runKilometer + coolantOilRange) > vehicleMaintenanceData.runKm ? '#36b37e' : 'red' }" name="valveCheckerValid" ng-style="" [ngModel]="vehicleMaintenanceData.coolantOil.runKilometer * 1 + coolantOilRange * 1" class="form-control" readonly>
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="coolantOilDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.coolantOil.changedDate" class="form-control">
       </span>
     </div>
 
@@ -694,6 +712,97 @@
         <input type="text" [ngStyle]="{'width': '80%' }" name="slackAdjusterLeftDummyDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.slackAdjusterLeftDummy.changedDate" class="form-control">
       </span>
     </div>
+    <div class="row form-group col-sm-12">
+      <span class="col-sm-2">
+        <label>Front Main Axle Bend Checkup</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="frontMainAxleBendCheckup" [(ngModel)]="vehicleMaintenanceData.frontMainAxleBendCheckup.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="frontMainAxleBendCheckupDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.frontMainAxleBendCheckup.changedDate" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <label>Second Main Axle Bend Checkup</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="secondMainAxleBendCheckup" [(ngModel)]="vehicleMaintenanceData.secondMainAxleBendCheckup.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="secondMainAxleBendCheckupDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.secondMainAxleBendCheckup.changedDate" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group col-sm-12">
+      <span class="col-sm-2">
+        <label>Housing Bend Checkup</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="housingBendCheckup" [(ngModel)]="vehicleMaintenanceData.housingBendCheckup.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="housingBendCheckupDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.housingBendCheckup.changedDate" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <label>Dummy Bend Checkup</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="dummyBendCheckup" [(ngModel)]="vehicleMaintenanceData.dummyBendCheckup.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="dummyBendCheckupDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.dummyBendCheckup.changedDate" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group col-sm-12">
+      <span class="col-sm-2">
+        <label>KingPin Right FI</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="kingPinRightFI" [(ngModel)]="vehicleMaintenanceData.kingPinRightFI.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="kingPinRightFIDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.kingPinRightFI.changedDate" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <label>KingPin Right FII</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="kingPinRightFII" [(ngModel)]="vehicleMaintenanceData.kingPinRightFII.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="kingPinRightFIIDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.kingPinRightFII.changedDate" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group col-sm-12">
+      <span class="col-sm-2">
+        <label>KingPin Left FI</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="kingPinLeftFI" [(ngModel)]="vehicleMaintenanceData.kingPinLeftFI.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="kingPinLeftFIDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.kingPinLeftFI.changedDate" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <label>KingPin Left FII</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="kingPinLeftFII" [(ngModel)]="vehicleMaintenanceData.kingPinLeftFII.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="kingPinLeftFIIDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.kingPinLeftFII.changedDate" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group col-sm-12">
+      <span class="col-sm-2">
+        <label>Steering Star</label>
+      </span>
+      <span class="col-sm-1">
+        <input type="text" name="steeringStar" [(ngModel)]="vehicleMaintenanceData.steeringStar.runKilometer" class="form-control">
+      </span>
+      <span class="col-sm-2">
+        <input type="text" [ngStyle]="{'width': '80%' }" name="steeringStarDate" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="vehicleMaintenanceData.steeringStar.changedDate" class="form-control">
+      </span>
+    </div>
     <div class="row form-group">
       <span class="col-sm-3">
         <button class="editbtn btn" (click)="updateVehicleMaintenance(vehicleMaintenanceData)">Update</button>
@@ -704,3 +813,49 @@
     </div>
   </form>
 </div>
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Change Speedometer</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="addForm">
+     <form #f="ngForm">
+     <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Old Meter Reading</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="oldMeterReading" [ngStyle]="{'width': '100%' }" [(ngModel)]="oldMeterReading" class="form-control">
+      </span>
+      <span class="col-sm-3">
+        <label>New Meter Reading</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="newMeterReading" [ngStyle]="{'width': '100%' }" [(ngModel)]="newMeterReading" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <label>Meter Change Date</label>
+      </span>
+      <span class="col-sm-3">
+        <input type="text" name="meterChangedDate" [ngStyle]="{'width': '100%' }" #dp="bsDatepicker" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" bsDatepicker [(ngModel)]="meterChangedDate" class="form-control">
+      </span>
+    </div>
+    <div class="row form-group">
+      <span class="col-sm-3">
+        <button class="editbtn btn" (click)="updateMeter()">Update</button>
+      </span>
+      <span class="col-sm-3">
+        <button class="cancelbtn btn" type="button" (click)="modalRef.hide()">Cancel</button>
+      </span>
+    </div>
+     </form>
+        </div>
+    </div>
+</ng-template> 

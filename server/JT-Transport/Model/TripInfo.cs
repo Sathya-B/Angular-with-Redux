@@ -152,6 +152,11 @@ namespace JT_Transport.Model
     [Required]
     public long? RoundOffAmount { get; set; }
     /// <summary>
+    /// Shortage amount
+    /// </summary>
+    [Required]
+    public long? ShortageAmount { get; set; }
+    /// <summary>
     /// Defines if the trip info is active or not
     /// </summary>
     [Required]
@@ -233,9 +238,19 @@ namespace JT_Transport.Model
     [Required]
     public long? UnloadingCharges { get; set; }
     /// <summary>
-    /// Rounf off amount
+    /// Loading charges
+    /// </summary>
+    [Required]
+    public long? LoadingCharges { get; set; }
+    /// <summary>
+    /// Round off amount
     /// </summary>
     [Required]
     public long? RoundOffAmount { get; set; }
+    /// <summary>
+    /// Shortage amount
+    /// </summary>
+    [Required]
+    public long? ShortageAmount { get; set; }
   }
 }

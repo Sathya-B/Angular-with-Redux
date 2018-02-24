@@ -42,8 +42,10 @@ export class TripLineInsertUpdateComponent implements OnInit, DoCheck {
     this.tripData.driverAcceptedAmount = 0;
     this.tripData.selfAmount = 0;
     this.tripData.roundOffAmount = 0;
+    this.tripData.shortageAmount = 0;
     this.tripData.unloadingCharges = 0;
     this.tripData.loadingCharges = 0;
+    this.tripData.dieselCost = 0;
      }
     this.tripData.totalAmount = Math.round(this.tripData.totalAmount);
     this.tripData.vehicleAmount = Math.round(this.tripData.vehicleAmount);
@@ -55,14 +57,14 @@ export class TripLineInsertUpdateComponent implements OnInit, DoCheck {
 
    ngDoCheck() {
     if(this.actionType == "add" && this.tripData.typeOfPayment == "advance") {
-    this.tripData.paidAmount = this.tripData.driverAcceptedAmount + this.tripData.selfAmount;
+    this.tripData.paidAmount = this.tripData.driverAcceptedAmount + this.tripData.selfAmount + this.tripData.dieselCost;
     this.tripData.advanceBalanceAmount = this.tripData.advanceAmount - this.tripData.paidAmount;
     this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
     } else if (this.actionType == "add" && this.tripData.typeOfPayment != "advance") {
           this.tripData.paidAmount = 0;
           this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
     } else if(this.actionType == "update") {
-          this.tripData.balanceAmount = this.tripData.vehicleAmount - (this.tripData.paidAmount + this.tripData.unloadingCharges + this.tripData.roundOffAmount);
+          this.tripData.balanceAmount = this.tripData.vehicleAmount - this.tripData.paidAmount;
     }
    }
 

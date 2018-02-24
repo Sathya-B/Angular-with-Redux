@@ -66,7 +66,8 @@ import { ImageUploadModule } from 'angular2-image-upload';
 export class AppModule { 
   
   constructor(ngRedux: NgRedux<IAppState>, private devTools: DevToolsExtension){
-  var enhancers = isDevMode() ? [devTools.enhancer()] : []; 
+//  var enhancers = isDevMode() ? [devTools.enhancer()] : []; 
+    var enhancers = isDevMode() ? [] : []; 
   ngRedux.configureStore(appReducer, INITIAL_STATE, [], enhancers);  
 }
 

@@ -24,6 +24,7 @@ export class VehicleMaintenance{
   stainner: ServiceData;
   tyrePowder: ServiceData;
   valveChecker: ServiceData;
+  coolantOil: ServiceData;
   isActive: boolean;
 
   constructor() {
@@ -48,8 +49,8 @@ export class VehicleMaintenance{
     this.stainner = new ServiceData();
     this.tyrePowder = new ServiceData();
     this.valveChecker = new ServiceData();
+    this.coolantOil = new ServiceData();
     this.isActive = null;
-
   }
 }
 

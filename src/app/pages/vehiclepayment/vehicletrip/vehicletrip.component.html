@@ -41,9 +41,21 @@
         </select>
       </span> </div>
       <div class="row form-group">
+        <span class="col-sm-6">Loading Charges: </span>
+        <span class="col-sm-6">
+                <input type="number" name="loadingCharges" class="form-control" [(ngModel)]="loadingCharges">
+              </span>
+      </div>
+      <div class="row form-group">
         <span class="col-sm-6">Unloading Charges: </span>
         <span class="col-sm-6">
                 <input type="number" name="unloadingCharges" class="form-control" [(ngModel)]="unloadingCharges">
+              </span>
+      </div>
+      <div class="row form-group">
+        <span class="col-sm-6">Shortage Amount</span>
+        <span class="col-sm-6">
+                <input type="number" name="shortageAmount" class="form-control" [(ngModel)]="shortageAmount">
               </span>
       </div>
       <div class="row form-group">
