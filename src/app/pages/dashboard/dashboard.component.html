@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <div class="row">
-      <div class="col-sm-6 minheight">
+      <div class="col-sm-3 minheight">
         <h3>
           <span>Insurance</span>
         </h3>
@@ -22,7 +22,7 @@
           </table>
         </div>
       </div>
-      <div class="col-sm-6 minheight">
+      <div class="col-sm-3 minheight">
         <h3>
           <span>FC</span>
         </h3>
@@ -43,9 +43,9 @@
           </table>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 minheight">
+    <!--</div>
+    <div class="row">-->
+      <div class="col-sm-3 minheight">
         <h3>
           <span>Permit</span>
         </h3>
@@ -66,7 +66,7 @@
           </table>
         </div>
       </div>
-      <div class="col-sm-6 minheight">
+      <div class="col-sm-3 minheight">
         <h3>
           <span>NP Tax</span>
         </h3>
@@ -91,5 +91,138 @@
   </div>
   <div class="col-sm-6">
 
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-3 minheight">
+        <h3>
+          <span>Oil Service</span>
+        </h3>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <td class="col-sm-6">Vechile No</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let oilService of serviceData.oilService">
+                <td class="col-sm-6">{{oilService}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-3 minheight">
+        <h3>
+          <span>Wheel Grease</span>
+        </h3>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <td class="col-sm-6">Vechile No</td>
+              </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let wheelGrease of serviceData.wheelGrease">
+                <td class="col-sm-6">{{wheelGrease}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <!--</div>
+    <div class="row">-->
+      <div class="col-sm-3 minheight">
+        <h3>
+          <span>Air Filter</span>
+        </h3>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <td class="col-sm-6">Vechile No</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let airFilter of serviceData.airFilter">
+                <td class="col-sm-6">{{airFilter}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-3 minheight">
+        <h3>
+          <span>Tyre Powder</span>
+        </h3>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <td class="col-sm-6">Vechile No</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tyrePowder of serviceData.tyrePowder">
+                <td class="col-sm-6">{{tyrePowder}}</td>
+              </tr>
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-3 minheight">
+        <h3>
+          <span>Diesel Filter</span>
+        </h3>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <td class="col-sm-6">Vechile No</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dieselFilter of serviceData.dieselFilter">
+                <td class="col-sm-6">{{dieselFilter}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-3 minheight">
+        <h3>
+          <span>Stainner</span>
+        </h3>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <td class="col-sm-6">Vechile No</td>
+              </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let stainner of serviceData.stainner">
+                <td class="col-sm-6">{{stainner}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
   </div>
 </div>

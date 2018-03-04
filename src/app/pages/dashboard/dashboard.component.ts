@@ -11,13 +11,15 @@ import { IAppState } from "../../store/store";
 export class DashboardComponent implements OnInit {
 
 public expiryData: any = { insuranceRenewalList:[], fcRenewalList:[], npTaxRenewalList:[], permitRenewlList:[]};
-
+public serviceData: any = { oilService:[], wheelGrease:[], airFilter:[], tyrePowder:[]};
   constructor(private data: VehicleViewService, private ngRedux: NgRedux<IAppState>) { }
 
   ngOnInit() {
     this.data.getExpiry();
+    this.data.getService();
     this.ngRedux.subscribe(()=> {
-      this.expiryData = this.ngRedux.getState().expiryInfo;     
+      this.expiryData = this.ngRedux.getState().expiryInfo;
+      this.serviceData = this.ngRedux.getState().serviceInfo;     
     })
   }
 

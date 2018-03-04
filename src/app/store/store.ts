@@ -11,6 +11,7 @@ export interface IAppState {
  driverInfo: Array<any>;
  pendingInfo: Array<any>;
  expiryInfo: {};
+ serviceInfo: {};
  modal: string;
 }
 
@@ -24,6 +25,7 @@ export const INITIAL_STATE: IAppState = {
  driverInfo: [],
  pendingInfo: [],
  expiryInfo: {},
+ serviceInfo: {},
  modal: 'CLOSE'
 }
 
@@ -56,6 +58,10 @@ function getPending(state, action) {
 
 function getExpiry(state, action) {
     return tassign(state, { expiryInfo: action.expiryInfo});
+}
+
+function getService(state, action) {
+    return tassign(state, { serviceInfo: action.serviceInfo});
 }
 
 function updateVehicle(state, action) {
@@ -185,6 +191,8 @@ switch(action.type) {
     case Const.UPDATE_PENDING_SUCCESS: return updatePending(state, action);
 
     case Const.FETCH_ALL_EXPIRY_SUCCESS: return getExpiry(state, action);
+
+    case Const.FETCH_ALL_SERVICE_SUCCESS: return getService(state, action);
 }
 
 return state;

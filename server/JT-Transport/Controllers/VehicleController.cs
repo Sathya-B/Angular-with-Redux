@@ -874,5 +874,111 @@ namespace JT_Transport.Controllers
                 });
             }
         }
+
+        /// <summary>
+        /// Shows list of vehicles where service is due 
+        /// </summary>
+        /// <response code="200">Returns Vehicle Numbers</response>
+        /// <response code="401">Bad Request</response>
+        /// <response code="404">Vehicle not found</response>
+        /// <response code="400">Process ran into an exception</response>
+        /// <returns></returns>
+        [HttpGet("notificationforservice")]
+        [ProducesResponseType(typeof(ResponseData), 200)]
+        public ActionResult NotificationForService()
+        {
+            try
+            {
+                var getVehicles = MH.GetListOfObjects(vehiclemaintenanceinfo_collection, null, null, null, null).Result;
+                if (getVehicles != null)
+                {
+                    List<string> oilService = new List<string>();
+                    List<string> wheelGrease = new List<string>();
+                    List<string> airFilter = new List<string>();
+                    List<string> tyrePowder = new List<string>();
+                    List<string> dieselFilter = new List<string>();
+                    List<string> stainner = new List<string>();
+                    foreach (var vehicle in getVehicles)
+                    {
+                        var vehicleData = BsonSerializer.Deserialize<VehicleMaintenanceInfo>(vehicle);
+                        if (vehicleData.OilService.RunKilometer != null)
+                        {
+                            if (vehicleData.RunKm > vehicleData.OilService.RunKilometer + vehicleData.OilService.AvgKilometer)
+                            {
+                                oilService.Add(vehicleData.VehicleNo);
+                            }
+                        }
+                        if (vehicleData.WheelGrease.RunKilometer != null)
+                        {
+                            if (vehicleData.RunKm > vehicleData.WheelGrease.RunKilometer + 40000)
+                            {
+                                wheelGrease.Add(vehicleData.VehicleNo);
+                            }
+                        }
+                        if (vehicleData.AirFilter.RunKilometer != null)
+                        {
+                            if (vehicleData.RunKm > vehicleData.AirFilter.RunKilometer + 60000)
+                            {
+                                airFilter.Add(vehicleData.VehicleNo);
+                            }
+                        }
+                        if (vehicleData.TyrePowder.RunKilometer != null)
+                        {
+                            if (vehicleData.RunKm > vehicleData.TyrePowder.RunKilometer + 10000)
+                            {
+                                tyrePowder.Add(vehicleData.VehicleNo);
+                            }
+                        }
+                        if (vehicleData.DieselFilter.RunKilometer != null)
+                        {
+                            if (vehicleData.RunKm > vehicleData.DieselFilter.RunKilometer + 25000)
+                            {
+                                dieselFilter.Add(vehicleData.VehicleNo);
+                            }
+                        }
+                        if (vehicleData.Stainner.RunKilometer != null)
+                        {
+                            if (vehicleData.RunKm > vehicleData.Stainner.RunKilometer + 10000)
+                            {
+                                stainner.Add(vehicleData.VehicleNo);
+                            }
+                        }
+                    }
+                    ServiceList serviceDetails = new ServiceList
+                    {
+                        OilService = oilService,
+                        WheelGrease = wheelGrease,
+                        AirFilter = airFilter,
+                        TyrePowder = tyrePowder,
+                        DieselFilter = dieselFilter,
+                        Stainner = stainner
+                    };
+                    return Ok(new ResponseData
+                    {
+                        Code = "200",
+                        Message = "Success",
+                        Data = serviceDetails
+                    });
+                }
+                else
+                {
+                    return BadRequest(new ResponseData
+                    {
+                        Code = "404",
+                        Message = "No vehicles found"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                SL.CreateLog("VehicleController", "GetServiceInfo", ex.Message);
+                return BadRequest(new ResponseData
+                {
+                    Code = "400",
+                    Message = "Failed",
+                    Data = ex.Message
+                });
+            }
+        }
     }
 }
